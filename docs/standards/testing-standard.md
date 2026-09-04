@@ -63,7 +63,7 @@ Use layered tests so failures identify the broken contract:
 | `standards` | Authoring, output, source, and freshness standards contain required controls. | `scripts/validate-standards.py` |
 | `scenario_catalog` | Required AI-06 test classes have executable scenario definitions. | `tests/validation-scenarios.json` |
 | `evaluation_rubric` | Before/after evaluation uses stable dimensions and score rules. | `tests/evaluation-rubric.json` |
-| `skill_package` | Future skills meet package, frontmatter, section, reference, source, and output contracts. | future `scripts/validate-skills.py` |
+| `skill_package` | Skills meet package, frontmatter, section, reference, source, and output contracts. | `scripts/validate-skills.py` |
 | `behavioral` | Future skills respond correctly to representative and adversarial prompts. | future fixtures and evaluation reports |
 
 ## Scenario Schema
@@ -168,4 +168,4 @@ A skill is test-ready only when:
 
 ## Validation Notes
 
-AI-06 adds the framework and initial fixture catalogs. Later waves must add skill-specific tests when skills are implemented.
+AI-06 adds the framework and initial fixture catalogs. AI-08 adds reference-skill package validation and reference-skill scenario fixtures. Later waves must add skill-specific tests when skills are implemented.

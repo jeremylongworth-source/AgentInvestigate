@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Observation Proportionality"
+  short_description: "Gate observation scope before intrusive work"
+  default_prompt: "Use $assess-observation-proportionality to review whether a proposed observation scope is proportionate."
+policy:
+  allow_implicit_invocation: true

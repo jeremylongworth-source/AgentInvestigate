@@ -49,6 +49,8 @@ REQUIRED_FILES = (
     "docs/foundations/report-structure-contracts.md",
     "docs/foundations/foundation-consumer-map.json",
     "docs/development/handoffs/AI-07-final-handoff.md",
+    "tests/reference-skills/AI-08-reference-scenarios.json",
+    "docs/development/handoffs/AI-08-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
@@ -57,6 +59,7 @@ REQUIRED_FILES = (
     "scripts/validate-standards.py",
     "scripts/validate-tests.py",
     "scripts/validate-foundations.py",
+    "scripts/validate-skills.py",
 )
 
 REQUIRED_TOKENS = {
@@ -229,6 +232,14 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-07-final-handoff.md": (
         "AGENTINVESTIGATE_AI_07_SHARED_FOUNDATIONS_READY",
         "AI-08: Four-Class Reference Implementation.",
+    ),
+    "docs/development/handoffs/AI-08-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_08_REFERENCE_SKILLS_READY",
+        "build-evidence-matrix",
+        "identify-licensing-requirement",
+        "assess-observation-proportionality",
+        "determine-emergency-escalation",
+        "AI-09: Professional Core & Ethics.",
     ),
 }
 

@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, and shared professional foundations.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, and the four-class reference implementation.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-07 Shared Professional Foundations`
-- Recommended next wave: `AI-08 Four-Class Reference Implementation`
+- Latest completed wave: `AI-08 Four-Class Reference Implementation`
+- Recommended next wave: `AI-09 Professional Core & Ethics`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -44,13 +44,16 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Shared schemas: `docs/foundations/shared-schemas.md`
 - Report structure contracts: `docs/foundations/report-structure-contracts.md`
 - Foundation consumer map: `docs/foundations/foundation-consumer-map.json`
-- Latest handoff: `docs/development/handoffs/AI-07-final-handoff.md`
+- Reference skill scenarios: `tests/reference-skills/AI-08-reference-scenarios.json`
+- Latest handoff: `docs/development/handoffs/AI-08-final-handoff.md`
 
 ## Development Approach
 
 The repository is roadmap-wave driven. Early waves establish domain boundaries, taxonomy, sensitivity routing, source handling, testing, shared foundations, and four reference skill classes before bulk skill authoring.
 
 Do not create placeholder skill folders or broad directory structures without active content and validation. Skills should remain atomic; professional roles belong in the skillset layer.
+
+Mass skill authoring is authorized only after the AI-08 reference implementation validates. Future waves should continue with roadmap-scoped family implementation.
 
 ## Safety Boundaries
 

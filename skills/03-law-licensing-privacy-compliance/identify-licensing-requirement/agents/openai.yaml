@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Licensing Requirement"
+  short_description: "Spot licensing issues with current sources"
+  default_prompt: "Use $identify-licensing-requirement to prepare a source-backed licensing issue-spotting brief."
+policy:
+  allow_implicit_invocation: true

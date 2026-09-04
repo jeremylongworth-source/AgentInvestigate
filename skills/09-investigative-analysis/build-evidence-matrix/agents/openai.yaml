@@ -1,0 +1,6 @@
+interface:
+  display_name: "Build Evidence Matrix"
+  short_description: "Map evidence to issues with clear boundaries"
+  default_prompt: "Use $build-evidence-matrix to organize supplied case notes into a fact-bound evidence matrix."
+policy:
+  allow_implicit_invocation: true

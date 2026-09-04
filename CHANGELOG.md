@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-08 Four-Class Reference Implementation`.
+- Added the first routine, regulated, intrusive, and certification-boundary reference skills.
+- Added reference-skill scenarios and package validation.
 - Completed `AI-07 Shared Professional Foundations`.
 - Added foundation vocabulary, schemas, report-structure contracts, and consumer map.
 - Added foundation validation and wired it into full validation.

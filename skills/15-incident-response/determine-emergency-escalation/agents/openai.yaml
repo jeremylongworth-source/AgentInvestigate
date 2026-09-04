@@ -1,0 +1,6 @@
+interface:
+  display_name: "Determine Emergency Escalation"
+  short_description: "Route incidents to safe escalation paths"
+  default_prompt: "Use $determine-emergency-escalation to decide whether an incident needs emergency or qualified escalation."
+policy:
+  allow_implicit_invocation: true
