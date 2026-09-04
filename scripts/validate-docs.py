@@ -18,6 +18,10 @@ REQUIRED_FILES = (
     ".gitignore",
     "docs/development/AI-00-baseline-audit.md",
     "docs/development/handoffs/AI-00-final-handoff.md",
+    "docs/architecture/domain-contract.md",
+    "docs/architecture/scope-boundaries.md",
+    "docs/architecture/prohibited-capabilities.md",
+    "docs/development/handoffs/AI-01-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
 )
@@ -36,6 +40,30 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-00-final-handoff.md": (
         "AGENTINVESTIGATE_AI_00_BASELINE_READY",
         "AI-01: Domain & Scope Contract.",
+    ),
+    "docs/architecture/domain-contract.md": (
+        "AGENTINVESTIGATE_AI_01_DOMAIN_CONTRACT_READY",
+        "Private Investigation",
+        "Private Security",
+        "Taxonomy Family Mapping",
+        "Every roadmap taxonomy family maps cleanly to the domain contract.",
+    ),
+    "docs/architecture/scope-boundaries.md": (
+        "AGENTINVESTIGATE_AI_01_DOMAIN_CONTRACT_READY",
+        "In Scope",
+        "Out Of Scope",
+        "Required Gates",
+        "Acceptance Criteria",
+    ),
+    "docs/architecture/prohibited-capabilities.md": (
+        "AGENTINVESTIGATE_AI_01_DOMAIN_CONTRACT_READY",
+        "Absolute Exclusions",
+        "Response And Routing Rules",
+        "Design Constraints For Future Skills",
+    ),
+    "docs/development/handoffs/AI-01-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_01_DOMAIN_CONTRACT_READY",
+        "AI-02: Master Taxonomy Integration.",
     ),
 }
 
