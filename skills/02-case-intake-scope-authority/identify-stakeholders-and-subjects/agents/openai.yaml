@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Stakeholders And Subjects"
+  short_description: "Map parties and affected roles"
+  default_prompt: "Use $identify-stakeholders-and-subjects to map parties and affected roles for this matter."
+policy:
+  allow_implicit_invocation: true

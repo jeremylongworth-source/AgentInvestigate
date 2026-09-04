@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-10 Intake, Authority, Law & Privacy`.
+- Added the Family 02 and Family 03 control-layer skills.
+- Added AI-10 authority/compliance scenarios and taxonomy-derived validation for the control layer.
 - Completed `AI-09 Professional Core & Ethics`.
 - Added all nine Family 01 professional-core skill packages.
 - Added professional-core scenario fixtures and extended skill validation for AI-09.

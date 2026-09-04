@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Lawful Purpose"
+  short_description: "Issue-spot purpose legitimacy"
+  default_prompt: "Use $assess-lawful-purpose to issue-spot the lawful purpose and review needs for this matter."
+policy:
+  allow_implicit_invocation: true

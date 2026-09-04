@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Data Minimization Requirement"
+  short_description: "Issue-spot minimization needs"
+  default_prompt: "Use $assess-data-minimization-requirement to issue-spot data minimization needs for this matter."
+policy:
+  allow_implicit_invocation: true

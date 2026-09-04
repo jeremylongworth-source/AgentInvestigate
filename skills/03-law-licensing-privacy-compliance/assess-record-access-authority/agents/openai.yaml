@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Record Access Authority"
+  short_description: "Issue-spot record access authority"
+  default_prompt: "Use $assess-record-access-authority to issue-spot claimed authority to access these records."
+policy:
+  allow_implicit_invocation: true

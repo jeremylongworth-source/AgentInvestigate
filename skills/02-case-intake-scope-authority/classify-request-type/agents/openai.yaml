@@ -1,0 +1,6 @@
+interface:
+  display_name: "Classify Request Type"
+  short_description: "Classify requests before routing"
+  default_prompt: "Use $classify-request-type to classify this investigation or security request before routing it."
+policy:
+  allow_implicit_invocation: true

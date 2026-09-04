@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Consent Requirement"
+  short_description: "Issue-spot consent needs"
+  default_prompt: "Use $assess-consent-requirement to issue-spot consent or notice questions for this matter."
+policy:
+  allow_implicit_invocation: true

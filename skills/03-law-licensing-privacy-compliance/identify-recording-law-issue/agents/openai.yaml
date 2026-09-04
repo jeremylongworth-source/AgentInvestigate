@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Recording Law Issue"
+  short_description: "Issue-spot recording law issues"
+  default_prompt: "Use $identify-recording-law-issue to issue-spot recording or monitoring law questions for this matter."
+policy:
+  allow_implicit_invocation: true

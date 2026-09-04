@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Jurisdiction"
+  short_description: "Identify jurisdiction and gaps"
+  default_prompt: "Use $identify-jurisdiction to identify relevant jurisdictions and jurisdiction gaps for this matter."
+policy:
+  allow_implicit_invocation: true

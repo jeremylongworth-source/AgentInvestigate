@@ -1,0 +1,6 @@
+interface:
+  display_name: "Validate Investigative Authority"
+  short_description: "Issue-spot investigative authority"
+  default_prompt: "Use $validate-investigative-authority to issue-spot investigative authority for this matter."
+policy:
+  allow_implicit_invocation: true

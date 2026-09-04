@@ -12,6 +12,26 @@ from typing import Any
 TOKENS = {
     "AI-08": "AGENTINVESTIGATE_AI_08_REFERENCE_SKILLS_READY",
     "AI-09": "AGENTINVESTIGATE_AI_09_PROFESSIONAL_CORE_READY",
+    "AI-10": "AGENTINVESTIGATE_AI_10_AUTHORITY_COMPLIANCE_READY",
+}
+
+AI10_FAMILIES = {
+    "02-case-intake-scope-authority",
+    "03-law-licensing-privacy-compliance",
+}
+
+AI10_REFERENCE_OVERRIDES = {
+    "identify-licensing-requirement": "references/licensing-source-checklist.md",
+}
+
+AI10_CRITICAL_INTEGRATION_TESTS = {
+    "ordinary research",
+    "workplace investigation",
+    "surveillance",
+    "personal background screening",
+    "unknown jurisdiction",
+    "prohibited request",
+    "conflicting client authority",
 }
 
 REFERENCE_SKILLS = {
@@ -85,28 +105,6 @@ PROFESSIONAL_CORE_SKILLS = {
     },
 }
 
-REQUIRED_SKILLS = {
-    **REFERENCE_SKILLS,
-    **PROFESSIONAL_CORE_SKILLS,
-}
-
-SCENARIO_SUITES = (
-    {
-        "label": "AI-08-reference-scenarios.json",
-        "relative_path": "tests/reference-skills/AI-08-reference-scenarios.json",
-        "token": TOKENS["AI-08"],
-        "skills": REFERENCE_SKILLS,
-        "skill_list_key": "reference_skills",
-    },
-    {
-        "label": "AI-09-professional-core-scenarios.json",
-        "relative_path": "tests/reference-skills/AI-09-professional-core-scenarios.json",
-        "token": TOKENS["AI-09"],
-        "skills": PROFESSIONAL_CORE_SKILLS,
-        "skill_list_key": "skills",
-    },
-)
-
 REQUIRED_SECTIONS = (
     "Overview",
     "Triggers",
@@ -177,19 +175,69 @@ def taxonomy(repo_root: Path) -> dict[str, dict[str, Any]]:
     return {skill["name"]: skill for skill in index["skills"]}
 
 
-def skill_path(repo_root: Path, name: str) -> Path:
-    family = REQUIRED_SKILLS[name]["family"]
+def authority_compliance_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family not in AI10_FAMILIES:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": AI10_REFERENCE_OVERRIDES.get(name, f"references/{name}-reference.md"),
+        }
+    return skills
+
+
+def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    return {
+        **REFERENCE_SKILLS,
+        **PROFESSIONAL_CORE_SKILLS,
+        **authority_compliance_skills(taxonomy_by_name),
+    }
+
+
+def scenario_suites(ai10_skills: dict[str, dict[str, str]]) -> tuple[dict[str, Any], ...]:
+    return (
+        {
+            "label": "AI-08-reference-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-08-reference-scenarios.json",
+            "token": TOKENS["AI-08"],
+            "skills": REFERENCE_SKILLS,
+            "skill_list_key": "reference_skills",
+        },
+        {
+            "label": "AI-09-professional-core-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-09-professional-core-scenarios.json",
+            "token": TOKENS["AI-09"],
+            "skills": PROFESSIONAL_CORE_SKILLS,
+            "skill_list_key": "skills",
+        },
+        {
+            "label": "AI-10-authority-compliance-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-10-authority-compliance-scenarios.json",
+            "token": TOKENS["AI-10"],
+            "skills": ai10_skills,
+            "skill_list_key": "skills",
+            "critical_integration_tests": AI10_CRITICAL_INTEGRATION_TESTS,
+        },
+    )
+
+
+def skill_path(repo_root: Path, name: str, expected_skills: dict[str, dict[str, str]]) -> Path:
+    family = expected_skills[name]["family"]
     return repo_root / "skills" / family / name
 
 
 def validate_skill_package(
     repo_root: Path,
     name: str,
+    expected_skills: dict[str, dict[str, str]],
     taxonomy_by_name: dict[str, dict[str, Any]],
     errors: list[str],
 ) -> None:
-    expected_package = REQUIRED_SKILLS[name]
-    base = skill_path(repo_root, name)
+    expected_package = expected_skills[name]
+    base = skill_path(repo_root, name, expected_skills)
     skill_md = base / "SKILL.md"
     agents_yaml = base / "agents" / "openai.yaml"
     reference_path = base / expected_package["reference"]
@@ -278,6 +326,10 @@ def validate_scenario_suite(
         errors.append(f"{label}: missing completion token")
     if set(data.get(skill_list_key, [])) != set(expected_skills):
         errors.append(f"{label}: {skill_list_key} mismatch")
+    expected_critical_tests = suite.get("critical_integration_tests")
+    if expected_critical_tests is not None:
+        if set(data.get("critical_integration_tests", [])) != set(expected_critical_tests):
+            errors.append(f"{label}: critical_integration_tests mismatch")
 
     scenarios = data.get("scenarios")
     if not isinstance(scenarios, list):
@@ -319,9 +371,11 @@ def validate_scenario_suite(
 def validate(repo_root: Path) -> list[str]:
     errors: list[str] = []
     taxonomy_by_name = taxonomy(repo_root)
-    for name in REQUIRED_SKILLS:
-        validate_skill_package(repo_root, name, taxonomy_by_name, errors)
-    for suite in SCENARIO_SUITES:
+    ai10_skills = authority_compliance_skills(taxonomy_by_name)
+    expected_skills = required_skills(taxonomy_by_name)
+    for name in expected_skills:
+        validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
+    for suite in scenario_suites(ai10_skills):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
 
@@ -338,7 +392,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference and AI-09 professional core skills.")
+    print("Validated AgentInvestigate AI-08 reference, AI-09 professional core, and AI-10 authority compliance skills.")
     return 0
 
 

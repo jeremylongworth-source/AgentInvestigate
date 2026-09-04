@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Privacy Obligation"
+  short_description: "Issue-spot privacy obligations"
+  default_prompt: "Use $identify-privacy-obligation to issue-spot privacy obligations and gaps for this matter."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Retention Obligation"
+  short_description: "Issue-spot retention questions"
+  default_prompt: "Use $review-retention-obligation to issue-spot retention and preservation questions for these records."
+policy:
+  allow_implicit_invocation: true

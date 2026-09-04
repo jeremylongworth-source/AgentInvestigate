@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Case Scope"
+  short_description: "Define bounded case scope"
+  default_prompt: "Use $define-case-scope to define bounded scope for this investigation or security matter."
+policy:
+  allow_implicit_invocation: true

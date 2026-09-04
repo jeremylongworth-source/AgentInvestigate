@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Information Collection Basis"
+  short_description: "Issue-spot collection basis"
+  default_prompt: "Use $assess-information-collection-basis to issue-spot the information collection basis for this matter."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Client Role"
+  short_description: "Identify requester role and authority"
+  default_prompt: "Use $identify-client-role to identify the requester's role and claimed authority from this intake."
+policy:
+  allow_implicit_invocation: true

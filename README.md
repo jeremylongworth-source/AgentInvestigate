@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, and the Professional Core & Ethics skill family.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, and the intake, authority, law, licensing, privacy, and compliance control layer.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-09 Professional Core & Ethics`
-- Recommended next wave: `AI-10 Intake, Authority, Law & Privacy`
+- Latest completed wave: `AI-10 Intake, Authority, Law & Privacy`
+- Recommended next wave: `AI-11 Investigation Planning & Case Management`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -46,7 +46,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Foundation consumer map: `docs/foundations/foundation-consumer-map.json`
 - Reference skill scenarios: `tests/reference-skills/AI-08-reference-scenarios.json`
 - Professional core scenarios: `tests/reference-skills/AI-09-professional-core-scenarios.json`
-- Latest handoff: `docs/development/handoffs/AI-09-final-handoff.md`
+- Authority and compliance scenarios: `tests/reference-skills/AI-10-authority-compliance-scenarios.json`
+- Latest handoff: `docs/development/handoffs/AI-10-final-handoff.md`
 
 ## Development Approach
 

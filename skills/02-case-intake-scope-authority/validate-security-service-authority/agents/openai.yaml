@@ -1,0 +1,6 @@
+interface:
+  display_name: "Validate Security Service Authority"
+  short_description: "Issue-spot security authority"
+  default_prompt: "Use $validate-security-service-authority to issue-spot security service authority for this matter."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Reporting Obligation"
+  short_description: "Issue-spot reporting obligations"
+  default_prompt: "Use $identify-reporting-obligation to issue-spot reporting or notification obligations for this matter."
+policy:
+  allow_implicit_invocation: true

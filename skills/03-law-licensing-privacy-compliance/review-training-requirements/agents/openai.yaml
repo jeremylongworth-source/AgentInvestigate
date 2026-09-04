@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Training Requirements"
+  short_description: "Issue-spot training requirements"
+  default_prompt: "Use $review-training-requirements to issue-spot training or qualification requirements for this work."
+policy:
+  allow_implicit_invocation: true

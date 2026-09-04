@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Regulated Activity"
+  short_description: "Issue-spot regulated activity"
+  default_prompt: "Use $identify-regulated-activity to issue-spot regulated activity indicators for this matter."
+policy:
+  allow_implicit_invocation: true

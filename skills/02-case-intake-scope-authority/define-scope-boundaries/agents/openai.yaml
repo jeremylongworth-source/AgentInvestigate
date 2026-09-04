@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Scope Boundaries"
+  short_description: "Define scope boundaries"
+  default_prompt: "Use $define-scope-boundaries to define permitted, excluded, and gated work for this matter."
+policy:
+  allow_implicit_invocation: true
