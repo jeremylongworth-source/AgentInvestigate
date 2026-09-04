@@ -1,0 +1,6 @@
+interface:
+  display_name: "Separate Fact From Inference"
+  short_description: "Label facts, allegations, and inferences"
+  default_prompt: "Use $separate-fact-from-inference to classify this material into facts, allegations, inferences, and unknowns."
+policy:
+  allow_implicit_invocation: true

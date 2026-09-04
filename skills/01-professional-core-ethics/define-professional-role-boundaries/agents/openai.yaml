@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Professional Role Boundaries"
+  short_description: "Clarify role limits before investigation work"
+  default_prompt: "Use $define-professional-role-boundaries to define the professional boundary for this investigation or security task."
+policy:
+  allow_implicit_invocation: true

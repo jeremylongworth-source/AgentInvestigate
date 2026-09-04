@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, and the four-class reference implementation.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, and the Professional Core & Ethics skill family.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-08 Four-Class Reference Implementation`
-- Recommended next wave: `AI-09 Professional Core & Ethics`
+- Latest completed wave: `AI-09 Professional Core & Ethics`
+- Recommended next wave: `AI-10 Intake, Authority, Law & Privacy`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -45,7 +45,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Report structure contracts: `docs/foundations/report-structure-contracts.md`
 - Foundation consumer map: `docs/foundations/foundation-consumer-map.json`
 - Reference skill scenarios: `tests/reference-skills/AI-08-reference-scenarios.json`
-- Latest handoff: `docs/development/handoffs/AI-08-final-handoff.md`
+- Professional core scenarios: `tests/reference-skills/AI-09-professional-core-scenarios.json`
+- Latest handoff: `docs/development/handoffs/AI-09-final-handoff.md`
 
 ## Development Approach
 
@@ -53,7 +54,7 @@ The repository is roadmap-wave driven. Early waves establish domain boundaries, 
 
 Do not create placeholder skill folders or broad directory structures without active content and validation. Skills should remain atomic; professional roles belong in the skillset layer.
 
-Mass skill authoring is authorized only after the AI-08 reference implementation validates. Future waves should continue with roadmap-scoped family implementation.
+Family skill authoring should continue only in roadmap-scoped waves with validation updated alongside each wave.
 
 ## Safety Boundaries
 

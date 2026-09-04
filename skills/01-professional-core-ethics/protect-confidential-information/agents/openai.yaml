@@ -1,0 +1,6 @@
+interface:
+  display_name: "Protect Confidential Information"
+  short_description: "Flag confidentiality handling needs"
+  default_prompt: "Use $protect-confidential-information to identify confidentiality handling needs for this material."
+policy:
+  allow_implicit_invocation: true

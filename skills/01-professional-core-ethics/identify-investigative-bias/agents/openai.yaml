@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Investigative Bias"
+  short_description: "Find bias risks in investigative work"
+  default_prompt: "Use $identify-investigative-bias to review this investigation material for bias risks."
+policy:
+  allow_implicit_invocation: true

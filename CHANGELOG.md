@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-09 Professional Core & Ethics`.
+- Added all nine Family 01 professional-core skill packages.
+- Added professional-core scenario fixtures and extended skill validation for AI-09.
 - Completed `AI-08 Four-Class Reference Implementation`.
 - Added the first routine, regulated, intrusive, and certification-boundary reference skills.
 - Added reference-skill scenarios and package validation.

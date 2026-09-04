@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Escalation Requirement"
+  short_description: "Route work to the right reviewer"
+  default_prompt: "Use $identify-escalation-requirement to decide whether this matter needs escalation."
+policy:
+  allow_implicit_invocation: true

@@ -9,7 +9,10 @@ from pathlib import Path
 from typing import Any
 
 
-TOKEN = "AGENTINVESTIGATE_AI_08_REFERENCE_SKILLS_READY"
+TOKENS = {
+    "AI-08": "AGENTINVESTIGATE_AI_08_REFERENCE_SKILLS_READY",
+    "AI-09": "AGENTINVESTIGATE_AI_09_PROFESSIONAL_CORE_READY",
+}
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -33,6 +36,76 @@ REFERENCE_SKILLS = {
         "reference": "references/emergency-escalation-checklist.md",
     },
 }
+
+PROFESSIONAL_CORE_SKILLS = {
+    "define-professional-role-boundaries": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/role-boundary-checklist.md",
+    },
+    "assess-conflict-of-interest": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/conflict-check-reference.md",
+    },
+    "apply-ethical-decision-framework": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/ethical-decision-reference.md",
+    },
+    "identify-investigative-bias": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/bias-review-reference.md",
+    },
+    "separate-fact-from-inference": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/fact-inference-reference.md",
+    },
+    "assess-duty-of-care": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/duty-of-care-reference.md",
+    },
+    "protect-confidential-information": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/confidentiality-handling-reference.md",
+    },
+    "identify-escalation-requirement": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/escalation-routing-reference.md",
+    },
+    "document-professional-decision": {
+        "family": "01-professional-core-ethics",
+        "sensitivity": "ROUTINE",
+        "reference": "references/professional-decision-record-reference.md",
+    },
+}
+
+REQUIRED_SKILLS = {
+    **REFERENCE_SKILLS,
+    **PROFESSIONAL_CORE_SKILLS,
+}
+
+SCENARIO_SUITES = (
+    {
+        "label": "AI-08-reference-scenarios.json",
+        "relative_path": "tests/reference-skills/AI-08-reference-scenarios.json",
+        "token": TOKENS["AI-08"],
+        "skills": REFERENCE_SKILLS,
+        "skill_list_key": "reference_skills",
+    },
+    {
+        "label": "AI-09-professional-core-scenarios.json",
+        "relative_path": "tests/reference-skills/AI-09-professional-core-scenarios.json",
+        "token": TOKENS["AI-09"],
+        "skills": PROFESSIONAL_CORE_SKILLS,
+        "skill_list_key": "skills",
+    },
+)
 
 REQUIRED_SECTIONS = (
     "Overview",
@@ -105,15 +178,21 @@ def taxonomy(repo_root: Path) -> dict[str, dict[str, Any]]:
 
 
 def skill_path(repo_root: Path, name: str) -> Path:
-    family = REFERENCE_SKILLS[name]["family"]
+    family = REQUIRED_SKILLS[name]["family"]
     return repo_root / "skills" / family / name
 
 
-def validate_skill_package(repo_root: Path, name: str, taxonomy_by_name: dict[str, dict[str, Any]], errors: list[str]) -> None:
+def validate_skill_package(
+    repo_root: Path,
+    name: str,
+    taxonomy_by_name: dict[str, dict[str, Any]],
+    errors: list[str],
+) -> None:
+    expected_package = REQUIRED_SKILLS[name]
     base = skill_path(repo_root, name)
     skill_md = base / "SKILL.md"
     agents_yaml = base / "agents" / "openai.yaml"
-    reference_path = base / REFERENCE_SKILLS[name]["reference"]
+    reference_path = base / expected_package["reference"]
 
     for path in (skill_md, agents_yaml, reference_path):
         if not path.is_file():
@@ -124,9 +203,9 @@ def validate_skill_package(repo_root: Path, name: str, taxonomy_by_name: dict[st
         return
 
     taxonomy_row = taxonomy_by_name[name]
-    if taxonomy_row.get("family") != REFERENCE_SKILLS[name]["family"]:
+    if taxonomy_row.get("family") != expected_package["family"]:
         errors.append(f"{name}: family does not match taxonomy")
-    if taxonomy_row.get("sensitivity") != REFERENCE_SKILLS[name]["sensitivity"]:
+    if taxonomy_row.get("sensitivity") != expected_package["sensitivity"]:
         errors.append(f"{name}: sensitivity does not match taxonomy")
 
     if not skill_md.is_file():
@@ -148,7 +227,7 @@ def validate_skill_package(repo_root: Path, name: str, taxonomy_by_name: dict[st
     if sections != REQUIRED_SECTIONS:
         errors.append(f"{name}: required sections are not in AI-04 order")
 
-    if REFERENCE_SKILLS[name]["sensitivity"] not in text:
+    if expected_package["sensitivity"] not in text:
         errors.append(f"{name}: missing sensitivity class in SKILL.md")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
@@ -174,43 +253,52 @@ def validate_skill_package(repo_root: Path, name: str, taxonomy_by_name: dict[st
             errors.append(f"{name}: reference file must include When To Read")
 
 
-def validate_reference_scenarios(repo_root: Path, errors: list[str]) -> None:
-    path = repo_root / "tests" / "reference-skills" / "AI-08-reference-scenarios.json"
+def validate_scenario_suite(
+    repo_root: Path,
+    suite: dict[str, Any],
+    errors: list[str],
+) -> None:
+    relative_path = suite["relative_path"]
+    path = repo_root / relative_path
+    label = suite["label"]
+    expected_skills = suite["skills"]
+    skill_list_key = suite["skill_list_key"]
+
     if not path.is_file():
-        errors.append("Missing AI-08 scenario fixture: tests/reference-skills/AI-08-reference-scenarios.json")
+        errors.append(f"Missing scenario fixture: {relative_path}")
         return
 
     try:
         data = load_json(path)
     except json.JSONDecodeError as exc:
-        errors.append(f"AI-08-reference-scenarios.json: invalid JSON: {exc}")
+        errors.append(f"{label}: invalid JSON: {exc}")
         return
 
-    if data.get("completion_token") != TOKEN:
-        errors.append("AI-08-reference-scenarios.json: missing completion token")
-    if set(data.get("reference_skills", [])) != set(REFERENCE_SKILLS):
-        errors.append("AI-08-reference-scenarios.json: reference_skills mismatch")
+    if data.get("completion_token") != suite["token"]:
+        errors.append(f"{label}: missing completion token")
+    if set(data.get(skill_list_key, [])) != set(expected_skills):
+        errors.append(f"{label}: {skill_list_key} mismatch")
 
     scenarios = data.get("scenarios")
     if not isinstance(scenarios, list):
-        errors.append("AI-08-reference-scenarios.json: scenarios must be a list")
+        errors.append(f"{label}: scenarios must be a list")
         return
 
     coverage: dict[str, set[str]] = defaultdict(set)
     scenario_ids: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
-            errors.append("AI-08-reference-scenarios.json: scenario must be an object")
+            errors.append(f"{label}: scenario must be an object")
             continue
         scenario_id = str(scenario.get("id", "<missing id>"))
         if scenario_id in scenario_ids:
-            errors.append(f"AI-08-reference-scenarios.json: duplicate scenario id {scenario_id}")
+            errors.append(f"{label}: duplicate scenario id {scenario_id}")
         scenario_ids.add(scenario_id)
         missing = SCENARIO_FIELDS - set(scenario)
         for field in sorted(missing):
             errors.append(f"{scenario_id}: missing field {field}")
         skill = scenario.get("skill_under_test")
-        if skill not in REFERENCE_SKILLS:
+        if skill not in expected_skills:
             errors.append(f"{scenario_id}: unknown skill_under_test {skill}")
         test_type = scenario.get("test_type")
         if test_type not in VALID_TEST_TYPES:
@@ -220,20 +308,21 @@ def validate_reference_scenarios(repo_root: Path, errors: list[str]) -> None:
         for field in ("test_classes", "required_checks", "blocked_outputs"):
             if not isinstance(scenario.get(field), list) or not scenario.get(field):
                 errors.append(f"{scenario_id}: {field} must be a non-empty list")
-        if skill in REFERENCE_SKILLS and test_type in VALID_TEST_TYPES:
+        if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
-    for skill in REFERENCE_SKILLS:
+    for skill in expected_skills:
         if coverage[skill] != VALID_TEST_TYPES:
-            errors.append(f"{skill}: must have positive and negative-routing AI-08 scenarios")
+            errors.append(f"{skill}: must have positive and negative-routing scenarios in {label}")
 
 
 def validate(repo_root: Path) -> list[str]:
     errors: list[str] = []
     taxonomy_by_name = taxonomy(repo_root)
-    for name in REFERENCE_SKILLS:
+    for name in REQUIRED_SKILLS:
         validate_skill_package(repo_root, name, taxonomy_by_name, errors)
-    validate_reference_scenarios(repo_root, errors)
+    for suite in SCENARIO_SUITES:
+        validate_scenario_suite(repo_root, suite, errors)
     return errors
 
 
@@ -249,7 +338,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference skills.")
+    print("Validated AgentInvestigate AI-08 reference and AI-09 professional core skills.")
     return 0
 
 

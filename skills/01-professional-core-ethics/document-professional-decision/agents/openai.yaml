@@ -1,0 +1,6 @@
+interface:
+  display_name: "Document Professional Decision"
+  short_description: "Record decisions with evidence boundaries"
+  default_prompt: "Use $document-professional-decision to draft a neutral professional decision record."
+policy:
+  allow_implicit_invocation: true

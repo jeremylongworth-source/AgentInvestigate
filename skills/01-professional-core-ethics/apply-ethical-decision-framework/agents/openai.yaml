@@ -1,0 +1,6 @@
+interface:
+  display_name: "Apply Ethical Decision Framework"
+  short_description: "Structure ethical investigation decisions"
+  default_prompt: "Use $apply-ethical-decision-framework to structure this professional investigation or security decision."
+policy:
+  allow_implicit_invocation: true

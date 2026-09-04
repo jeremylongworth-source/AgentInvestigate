@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Duty Of Care"
+  short_description: "Spot care issues without legal conclusions"
+  default_prompt: "Use $assess-duty-of-care to identify care, safety, and escalation considerations from supplied facts."
+policy:
+  allow_implicit_invocation: true

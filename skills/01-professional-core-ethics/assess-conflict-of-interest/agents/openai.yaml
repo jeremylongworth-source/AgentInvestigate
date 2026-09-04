@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Conflict Of Interest"
+  short_description: "Spot conflicts for professional review"
+  default_prompt: "Use $assess-conflict-of-interest to identify potential conflict issues from supplied matter facts."
+policy:
+  allow_implicit_invocation: true
