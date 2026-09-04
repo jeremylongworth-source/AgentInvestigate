@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Public Record Sources"
+  short_description: "Identify public-record sources"
+  default_prompt: "Use $identify-public-record-sources to identify lawful public-record source categories for this matter."
+policy:
+  allow_implicit_invocation: true

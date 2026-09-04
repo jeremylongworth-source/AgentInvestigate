@@ -57,6 +57,8 @@ REQUIRED_FILES = (
     "docs/development/handoffs/AI-10-final-handoff.md",
     "tests/reference-skills/AI-11-case-management-scenarios.json",
     "docs/development/handoffs/AI-11-final-handoff.md",
+    "tests/reference-skills/AI-12-research-osint-scenarios.json",
+    "docs/development/handoffs/AI-12-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
@@ -303,6 +305,23 @@ REQUIRED_TOKENS = {
         "private-investigator",
         "investigative-case-manager",
         "AI-12: Research, OSINT & Public Records.",
+    ),
+    "tests/reference-skills/AI-12-research-osint-scenarios.json": (
+        "AGENTINVESTIGATE_AI_12_RESEARCH_OSINT_READY",
+        "unauthorized database access",
+        "credential acquisition",
+        "private-account compromise",
+        "protected-record acquisition through deception",
+    ),
+    "docs/development/handoffs/AI-12-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_12_RESEARCH_OSINT_READY",
+        "build-research-plan",
+        "identify-public-record-sources",
+        "research-court-records",
+        "assess-source-reliability",
+        "record-source-provenance",
+        "write-research-summary",
+        "AI-13: Identity, Entity & Timeline Analysis.",
     ),
 }
 

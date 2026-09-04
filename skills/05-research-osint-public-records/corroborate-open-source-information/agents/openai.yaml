@@ -1,0 +1,6 @@
+interface:
+  display_name: "Corroborate Open Source Information"
+  short_description: "Corroborate open-source claims"
+  default_prompt: "Use $corroborate-open-source-information to assess corroboration for these open-source claims."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Property Context"
+  short_description: "Research property context safely"
+  default_prompt: "Use $research-property-context to structure lawful property-context research for this matter."
+policy:
+  allow_implicit_invocation: true

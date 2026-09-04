@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-12 Research, OSINT & Public Records`.
+- Added all 14 Family 05 research, OSINT, and public-records skill packages.
+- Added AI-12 research scenarios and hard-boundary validation for unauthorized access, credentials, private accounts, and deceptive protected-record acquisition.
 - Completed `AI-11 Investigation Planning & Case Management`.
 - Added all 13 Family 04 case-management skill packages.
 - Added AI-11 case-management scenarios and taxonomy-derived validation for Family 04.

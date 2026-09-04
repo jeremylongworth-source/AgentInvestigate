@@ -1,0 +1,6 @@
+interface:
+  display_name: "Record Source Provenance"
+  short_description: "Record source provenance"
+  default_prompt: "Use $record-source-provenance to document provenance for these research sources."
+policy:
+  allow_implicit_invocation: true

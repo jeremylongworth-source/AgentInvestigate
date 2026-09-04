@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Source Reliability"
+  short_description: "Assess source reliability"
+  default_prompt: "Use $assess-source-reliability to assess reliability indicators for these supplied sources."
+policy:
+  allow_implicit_invocation: true

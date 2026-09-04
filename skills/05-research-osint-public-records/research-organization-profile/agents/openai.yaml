@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Organization Profile"
+  short_description: "Research organization profiles"
+  default_prompt: "Use $research-organization-profile to prepare a bounded open-source organization profile."
+policy:
+  allow_implicit_invocation: true

@@ -14,6 +14,7 @@ TOKENS = {
     "AI-09": "AGENTINVESTIGATE_AI_09_PROFESSIONAL_CORE_READY",
     "AI-10": "AGENTINVESTIGATE_AI_10_AUTHORITY_COMPLIANCE_READY",
     "AI-11": "AGENTINVESTIGATE_AI_11_CASE_MANAGEMENT_READY",
+    "AI-12": "AGENTINVESTIGATE_AI_12_RESEARCH_OSINT_READY",
 }
 
 AI10_FAMILIES = {
@@ -51,6 +52,32 @@ AI11_SCENARIO_TOPICS = {
     "review",
     "gaps",
     "closure",
+}
+
+AI12_FAMILY = "05-research-osint-public-records"
+
+AI12_RESEARCH_TOPICS = {
+    "research planning",
+    "public records",
+    "open sources",
+    "corporate records",
+    "court records",
+    "regulatory records",
+    "source reliability",
+    "provenance",
+    "corroboration",
+    "source conflict",
+    "organization research",
+    "property context",
+    "litigation research",
+    "research summaries",
+}
+
+AI12_HARD_BOUNDARY_TESTS = {
+    "unauthorized database access",
+    "credential acquisition",
+    "private-account compromise",
+    "protected-record acquisition through deception",
 }
 
 REFERENCE_SKILLS = {
@@ -222,18 +249,34 @@ def case_management_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[
     return skills
 
 
+def research_osint_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI12_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
         **PROFESSIONAL_CORE_SKILLS,
         **authority_compliance_skills(taxonomy_by_name),
         **case_management_skills(taxonomy_by_name),
+        **research_osint_skills(taxonomy_by_name),
     }
 
 
 def scenario_suites(
     ai10_skills: dict[str, dict[str, str]],
     ai11_skills: dict[str, dict[str, str]],
+    ai12_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -265,6 +308,15 @@ def scenario_suites(
             "skills": ai11_skills,
             "skill_list_key": "skills",
             "scenario_topics": AI11_SCENARIO_TOPICS,
+        },
+        {
+            "label": "AI-12-research-osint-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-12-research-osint-scenarios.json",
+            "token": TOKENS["AI-12"],
+            "skills": ai12_skills,
+            "skill_list_key": "skills",
+            "research_topics": AI12_RESEARCH_TOPICS,
+            "hard_boundary_tests": AI12_HARD_BOUNDARY_TESTS,
         },
     )
 
@@ -379,6 +431,14 @@ def validate_scenario_suite(
     if expected_scenario_topics is not None:
         if set(data.get("scenario_topics", [])) != set(expected_scenario_topics):
             errors.append(f"{label}: scenario_topics mismatch")
+    expected_research_topics = suite.get("research_topics")
+    if expected_research_topics is not None:
+        if set(data.get("research_topics", [])) != set(expected_research_topics):
+            errors.append(f"{label}: research_topics mismatch")
+    expected_hard_boundary_tests = suite.get("hard_boundary_tests")
+    if expected_hard_boundary_tests is not None:
+        if set(data.get("hard_boundary_tests", [])) != set(expected_hard_boundary_tests):
+            errors.append(f"{label}: hard_boundary_tests mismatch")
 
     scenarios = data.get("scenarios")
     if not isinstance(scenarios, list):
@@ -422,10 +482,11 @@ def validate(repo_root: Path) -> list[str]:
     taxonomy_by_name = taxonomy(repo_root)
     ai10_skills = authority_compliance_skills(taxonomy_by_name)
     ai11_skills = case_management_skills(taxonomy_by_name)
+    ai12_skills = research_osint_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
-    for suite in scenario_suites(ai10_skills, ai11_skills):
+    for suite in scenario_suites(ai10_skills, ai11_skills, ai12_skills):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
 
@@ -442,7 +503,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-11 case management skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-12 research OSINT skills.")
     return 0
 
 

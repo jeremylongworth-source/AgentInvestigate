@@ -1,0 +1,6 @@
+interface:
+  display_name: "Resolve Source Conflict"
+  short_description: "Analyze source conflicts"
+  default_prompt: "Use $resolve-source-conflict to analyze conflicts between these supplied sources."
+policy:
+  allow_implicit_invocation: true

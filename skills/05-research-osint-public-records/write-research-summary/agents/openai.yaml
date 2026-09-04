@@ -1,0 +1,6 @@
+interface:
+  display_name: "Write Research Summary"
+  short_description: "Draft source-bounded summaries"
+  default_prompt: "Use $write-research-summary to draft a source-bounded research summary."
+policy:
+  allow_implicit_invocation: true
