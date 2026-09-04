@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, and master taxonomy integration.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, and sensitivity/authority routing.
 
 Core principles:
 
@@ -17,15 +17,19 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-02 Master Taxonomy Integration`
-- Recommended next wave: `AI-03 Sensitivity, Authority & Routing Contract`
+- Latest completed wave: `AI-03 Sensitivity, Authority & Routing Contract`
+- Recommended next wave: `AI-04 Skill Authoring Standard`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
 - Prohibited capabilities: `docs/architecture/prohibited-capabilities.md`
 - Master taxonomy: `docs/architecture/master-taxonomy-v1.md`
 - Canonical taxonomy index: `docs/architecture/taxonomy-index.yaml`
-- Latest handoff: `docs/development/handoffs/AI-02-final-handoff.md`
+- Sensitivity model: `docs/architecture/sensitivity-model.md`
+- Authority routing: `docs/architecture/authority-routing.md`
+- Intrusive task gate: `docs/architecture/intrusive-task-gate.md`
+- Certification boundaries: `docs/architecture/certification-boundaries.md`
+- Latest handoff: `docs/development/handoffs/AI-03-final-handoff.md`
 
 ## Development Approach
 

@@ -25,10 +25,16 @@ REQUIRED_FILES = (
     "docs/architecture/master-taxonomy-v1.md",
     "docs/architecture/taxonomy-index.yaml",
     "docs/development/handoffs/AI-02-final-handoff.md",
+    "docs/architecture/sensitivity-model.md",
+    "docs/architecture/authority-routing.md",
+    "docs/architecture/intrusive-task-gate.md",
+    "docs/architecture/certification-boundaries.md",
+    "docs/development/handoffs/AI-03-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
     "scripts/generate-taxonomy.py",
+    "scripts/validate-routing.py",
 )
 
 REQUIRED_TOKENS = {
@@ -83,6 +89,32 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-02-final-handoff.md": (
         "AGENTINVESTIGATE_AI_02_MASTER_TAXONOMY_READY",
         "AI-03: Sensitivity, Authority & Routing Contract.",
+    ),
+    "docs/architecture/sensitivity-model.md": (
+        "AGENTINVESTIGATE_AI_03_SENSITIVITY_ROUTING_READY",
+        "ROUTINE",
+        "REGULATED",
+        "INTRUSIVE",
+        "CERTIFICATION_BOUNDARY",
+    ),
+    "docs/architecture/authority-routing.md": (
+        "AGENTINVESTIGATE_AI_03_SENSITIVITY_ROUTING_READY",
+        "Representative Request Routing",
+        "Representative requests from all four sensitivity classes route correctly on paper.",
+    ),
+    "docs/architecture/intrusive-task-gate.md": (
+        "AGENTINVESTIGATE_AI_03_SENSITIVITY_ROUTING_READY",
+        "No intrusive skill routes directly from a raw user request.",
+        "Fail-Closed Conditions",
+    ),
+    "docs/architecture/certification-boundaries.md": (
+        "AGENTINVESTIGATE_AI_03_SENSITIVITY_ROUTING_READY",
+        "Allowed Support",
+        "Prohibited Substitutes",
+    ),
+    "docs/development/handoffs/AI-03-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_03_SENSITIVITY_ROUTING_READY",
+        "AI-04: Skill Authoring Standard.",
     ),
 }
 
