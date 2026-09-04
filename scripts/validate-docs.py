@@ -34,6 +34,10 @@ REQUIRED_FILES = (
     "docs/standards/skill-naming-standard.md",
     "docs/standards/output-contract-standard.md",
     "docs/development/handoffs/AI-04-final-handoff.md",
+    "docs/standards/research-and-evidence-standard.md",
+    "docs/standards/regulatory-source-standard.md",
+    "docs/standards/source-freshness-standard.md",
+    "docs/development/handoffs/AI-05-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
@@ -145,6 +149,29 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-04-final-handoff.md": (
         "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY",
         "AI-05: Legal, Regulatory & Evidence Source Standard.",
+    ),
+    "docs/standards/research-and-evidence-standard.md": (
+        "AGENTINVESTIGATE_AI_05_SOURCE_STANDARD_READY",
+        "Source Hierarchy",
+        "Evidence Handling Requirements",
+        "A source-backed regulated skill can be updated without rewriting repository architecture",
+    ),
+    "docs/standards/regulatory-source-standard.md": (
+        "AGENTINVESTIGATE_AI_05_SOURCE_STANDARD_READY",
+        "Regulatory Metadata",
+        "source_title",
+        "supersession_risk",
+        "used_by",
+    ),
+    "docs/standards/source-freshness-standard.md": (
+        "AGENTINVESTIGATE_AI_05_SOURCE_STANDARD_READY",
+        "Freshness Classes",
+        "Stale Source Behavior",
+        "Currentness In Outputs",
+    ),
+    "docs/development/handoffs/AI-05-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_05_SOURCE_STANDARD_READY",
+        "AI-06: Validation & Evaluation Framework.",
     ),
 }
 

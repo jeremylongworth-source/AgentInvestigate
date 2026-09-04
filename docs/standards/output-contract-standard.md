@@ -78,7 +78,7 @@ Outputs using current external sources, jurisdiction-specific material, laws, re
 - verification date when the source was checked;
 - whether the source supports a final statement, issue-spotting statement, or review need.
 
-AI-05 will define the full source hierarchy, metadata model, and freshness standard. Until AI-05 is complete, skills must not encode universal legal, regulatory, licensing, privacy, employment, or compliance conclusions.
+Source hierarchy, regulated-source metadata, and freshness handling are defined in the AI-05 source standards. Skills must not encode universal legal, regulatory, licensing, privacy, employment, or compliance conclusions.
 
 ## Sensitivity Output Requirements
 

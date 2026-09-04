@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, and skill authoring standards.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, and source-handling standards.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-04 Skill Authoring Standard`
-- Recommended next wave: `AI-05 Legal, Regulatory & Evidence Source Standard`
+- Latest completed wave: `AI-05 Legal, Regulatory & Evidence Source Standard`
+- Recommended next wave: `AI-06 Validation & Evaluation Framework`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -32,7 +32,10 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Skill authoring standard: `docs/standards/skill-authoring-standard.md`
 - Skill naming standard: `docs/standards/skill-naming-standard.md`
 - Output contract standard: `docs/standards/output-contract-standard.md`
-- Latest handoff: `docs/development/handoffs/AI-04-final-handoff.md`
+- Research and evidence standard: `docs/standards/research-and-evidence-standard.md`
+- Regulatory source standard: `docs/standards/regulatory-source-standard.md`
+- Source freshness standard: `docs/standards/source-freshness-standard.md`
+- Latest handoff: `docs/development/handoffs/AI-05-final-handoff.md`
 
 ## Development Approach
 

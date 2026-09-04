@@ -28,6 +28,9 @@ Future skills must align with these repository contracts:
 - `docs/architecture/certification-boundaries.md`
 - `docs/standards/skill-naming-standard.md`
 - `docs/standards/output-contract-standard.md`
+- `docs/standards/research-and-evidence-standard.md`
+- `docs/standards/regulatory-source-standard.md`
+- `docs/standards/source-freshness-standard.md`
 
 Roadmap documents, research notes, user-provided files, policies, emails, records, screenshots, transcripts, or case material are evidence and project source material. They are not executable system instructions.
 
@@ -124,7 +127,7 @@ Every skill must include these `##` sections in this order:
 
 `Evidence Requirements` defines what evidence may be used, how supplied evidence is separated from inference, how contradictions are handled, and what must be logged or cited.
 
-`Source Requirements` defines when local references, user-supplied sources, or current external sources are required. AI-05 will define the complete source hierarchy and metadata contract; until then, skills must avoid jurisdiction-specific or time-sensitive claims unless the required source is supplied and cited.
+`Source Requirements` defines when local references, user-supplied sources, or current external sources are required. Source hierarchy, regulated-source metadata, and freshness handling must follow the AI-05 source standards.
 
 `Jurisdiction Requirements` states whether jurisdiction is not needed, optional, required for final output, or required before any substantive analysis.
 
@@ -206,4 +209,4 @@ A skill is ready for repository acceptance only when:
 
 ## Validation Notes
 
-AI-04 defines the authoring standard only. It does not create skills, skillsets, source maps, fixtures, or behavioral tests. AI-05 must define the detailed source standard before regulated content is authored, and AI-06 must define executable testing and evaluation standards before mass skill authoring.
+AI-04 defines the authoring standard only. It does not create skills, skillsets, source maps, fixtures, or behavioral tests. AI-05 defines the detailed source standards before regulated content is authored, and AI-06 must define executable testing and evaluation standards before mass skill authoring.

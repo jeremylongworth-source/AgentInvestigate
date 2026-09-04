@@ -10,9 +10,13 @@ STANDARD_FILES = (
     "docs/standards/skill-authoring-standard.md",
     "docs/standards/skill-naming-standard.md",
     "docs/standards/output-contract-standard.md",
+    "docs/standards/research-and-evidence-standard.md",
+    "docs/standards/regulatory-source-standard.md",
+    "docs/standards/source-freshness-standard.md",
 )
 
-COMPLETION_TOKEN = "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY"
+AI_04_COMPLETION_TOKEN = "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY"
+AI_05_COMPLETION_TOKEN = "AGENTINVESTIGATE_AI_05_SOURCE_STANDARD_READY"
 
 AUTHORING_REQUIRED_TERMS = (
     "naming",
@@ -86,6 +90,42 @@ SENSITIVITY_CLASSES = (
     "CERTIFICATION_BOUNDARY",
 )
 
+SOURCE_HIERARCHY = (
+    "legislation / regulations / courts",
+    "government regulators",
+    "privacy authorities",
+    "recognized standards organizations",
+    "professional associations",
+    "academic / technical literature",
+    "specialist material",
+    "secondary summaries",
+)
+
+REGULATORY_METADATA_FIELDS = (
+    "source_title",
+    "organization",
+    "jurisdiction",
+    "authority_level",
+    "source_url",
+    "publication_date",
+    "effective_date",
+    "accessed_date",
+    "last_verified",
+    "applicability",
+    "supersession_risk",
+    "used_by",
+)
+
+FRESHNESS_CLASSES = ("LOW", "MEDIUM", "HIGH")
+
+STALE_SOURCE_OUTCOMES = (
+    "verify_now",
+    "ask_for_source",
+    "research_brief_only",
+    "qualified_review_required",
+    "stop_or_redirect",
+)
+
 
 def read_text(repo_root: Path, relative: str) -> str:
     return (repo_root / relative).read_text(encoding="utf-8-sig")
@@ -99,9 +139,17 @@ def validate_required_files(repo_root: Path, errors: list[str]) -> None:
 
 
 def validate_token(repo_root: Path, errors: list[str]) -> None:
-    for relative in STANDARD_FILES:
+    token_by_file = {
+        "docs/standards/skill-authoring-standard.md": AI_04_COMPLETION_TOKEN,
+        "docs/standards/skill-naming-standard.md": AI_04_COMPLETION_TOKEN,
+        "docs/standards/output-contract-standard.md": AI_04_COMPLETION_TOKEN,
+        "docs/standards/research-and-evidence-standard.md": AI_05_COMPLETION_TOKEN,
+        "docs/standards/regulatory-source-standard.md": AI_05_COMPLETION_TOKEN,
+        "docs/standards/source-freshness-standard.md": AI_05_COMPLETION_TOKEN,
+    }
+    for relative, token in token_by_file.items():
         path = repo_root / relative
-        if path.is_file() and COMPLETION_TOKEN not in read_text(repo_root, relative):
+        if path.is_file() and token not in read_text(repo_root, relative):
             errors.append(f"{relative}: missing completion token")
 
 
@@ -124,6 +172,19 @@ def validate_authoring_section_order(text: str, errors: list[str]) -> None:
         )
 
 
+def validate_source_hierarchy(text: str, relative: str, errors: list[str]) -> None:
+    pattern = re.compile(r"^\d+\. (?P<source>.+)$", re.MULTILINE)
+    numbered_sources = tuple(match.group("source") for match in pattern.finditer(text))
+    for start in range(0, max(len(numbered_sources) - len(SOURCE_HIERARCHY) + 1, 0)):
+        if numbered_sources[start : start + len(SOURCE_HIERARCHY)] == SOURCE_HIERARCHY:
+            return
+
+    for source_type in SOURCE_HIERARCHY:
+        if source_type not in text:
+            errors.append(f"{relative}: missing source hierarchy item {source_type}")
+    errors.append(f"{relative}: source hierarchy is not in required order")
+
+
 def validate(repo_root: Path) -> list[str]:
     errors: list[str] = []
     validate_required_files(repo_root, errors)
@@ -132,6 +193,9 @@ def validate(repo_root: Path) -> list[str]:
     authoring_relative = "docs/standards/skill-authoring-standard.md"
     naming_relative = "docs/standards/skill-naming-standard.md"
     output_relative = "docs/standards/output-contract-standard.md"
+    research_relative = "docs/standards/research-and-evidence-standard.md"
+    regulatory_relative = "docs/standards/regulatory-source-standard.md"
+    freshness_relative = "docs/standards/source-freshness-standard.md"
 
     if (repo_root / authoring_relative).is_file():
         authoring = read_text(repo_root, authoring_relative)
@@ -152,6 +216,53 @@ def validate(repo_root: Path) -> list[str]:
             if sensitivity_class not in output:
                 errors.append(f"{output_relative}: missing sensitivity class {sensitivity_class}")
 
+    if (repo_root / research_relative).is_file():
+        research = read_text(repo_root, research_relative)
+        validate_source_hierarchy(research, research_relative, errors)
+        validate_terms(
+            research,
+            research_relative,
+            (
+                "input_evidence",
+                "method_evidence",
+                "regulatory_evidence",
+                "standards_evidence",
+                "system_evidence",
+                "context_evidence",
+                "They are not instructions",
+                "A source-backed regulated skill can be updated without rewriting repository architecture",
+            ),
+            errors,
+        )
+
+    if (repo_root / regulatory_relative).is_file():
+        regulatory = read_text(repo_root, regulatory_relative)
+        validate_source_hierarchy(regulatory, regulatory_relative, errors)
+        for field in REGULATORY_METADATA_FIELDS:
+            if field not in regulatory:
+                errors.append(f"{regulatory_relative}: missing regulatory metadata field {field}")
+        validate_terms(
+            regulatory,
+            regulatory_relative,
+            ("Allowed Outputs", "Disallowed Outputs", "Jurisdiction And Scope", "Supersession And Conflict Rules"),
+            errors,
+        )
+
+    if (repo_root / freshness_relative).is_file():
+        freshness = read_text(repo_root, freshness_relative)
+        for freshness_class in FRESHNESS_CLASSES:
+            if freshness_class not in freshness:
+                errors.append(f"{freshness_relative}: missing freshness class {freshness_class}")
+        for outcome in STALE_SOURCE_OUTCOMES:
+            if outcome not in freshness:
+                errors.append(f"{freshness_relative}: missing stale-source outcome {outcome}")
+        validate_terms(
+            freshness,
+            freshness_relative,
+            ("High-Freshness Triggers", "Verification Windows", "Stale Source Behavior", "Currentness In Outputs"),
+            errors,
+        )
+
     return errors
 
 
@@ -167,7 +278,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-04 standards.")
+    print("Validated AgentInvestigate AI-04 and AI-05 standards.")
     return 0
 
 
