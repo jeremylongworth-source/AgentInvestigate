@@ -30,11 +30,16 @@ REQUIRED_FILES = (
     "docs/architecture/intrusive-task-gate.md",
     "docs/architecture/certification-boundaries.md",
     "docs/development/handoffs/AI-03-final-handoff.md",
+    "docs/standards/skill-authoring-standard.md",
+    "docs/standards/skill-naming-standard.md",
+    "docs/standards/output-contract-standard.md",
+    "docs/development/handoffs/AI-04-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
     "scripts/generate-taxonomy.py",
     "scripts/validate-routing.py",
+    "scripts/validate-standards.py",
 )
 
 REQUIRED_TOKENS = {
@@ -115,6 +120,31 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-03-final-handoff.md": (
         "AGENTINVESTIGATE_AI_03_SENSITIVITY_ROUTING_READY",
         "AI-04: Skill Authoring Standard.",
+    ),
+    "docs/standards/skill-authoring-standard.md": (
+        "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY",
+        "Required Skill Sections",
+        "Evidence Requirements",
+        "Authority Checks",
+        "Sensitivity Handling",
+        "Output Contract",
+    ),
+    "docs/standards/skill-naming-standard.md": (
+        "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY",
+        "<verb>-<investigative-or-security-object>",
+        "Disallowed Patterns",
+        "Naming Review",
+    ),
+    "docs/standards/output-contract-standard.md": (
+        "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY",
+        "Universal Output Fields",
+        "Evidence Output Requirements",
+        "Sensitivity Output Requirements",
+        "Testing Requirements",
+    ),
+    "docs/development/handoffs/AI-04-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY",
+        "AI-05: Legal, Regulatory & Evidence Source Standard.",
     ),
 }
 

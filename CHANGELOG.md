@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-04 Skill Authoring Standard`.
+- Added skill authoring, naming, and output contract standards.
+- Added standards validation.
 - Completed `AI-03 Sensitivity, Authority & Routing Contract`.
 - Added sensitivity, authority routing, intrusive gate, and certification-boundary architecture docs.
 - Added routing contract validation.
