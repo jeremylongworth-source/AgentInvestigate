@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, and source-handling standards.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, and the validation/evaluation framework.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-05 Legal, Regulatory & Evidence Source Standard`
-- Recommended next wave: `AI-06 Validation & Evaluation Framework`
+- Latest completed wave: `AI-06 Validation & Evaluation Framework`
+- Recommended next wave: `AI-07 Shared Professional Foundations`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -35,7 +35,11 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Research and evidence standard: `docs/standards/research-and-evidence-standard.md`
 - Regulatory source standard: `docs/standards/regulatory-source-standard.md`
 - Source freshness standard: `docs/standards/source-freshness-standard.md`
-- Latest handoff: `docs/development/handoffs/AI-05-final-handoff.md`
+- Testing standard: `docs/standards/testing-standard.md`
+- Evaluation standard: `docs/standards/evaluation-standard.md`
+- Validation scenarios: `tests/validation-scenarios.json`
+- Evaluation rubric: `tests/evaluation-rubric.json`
+- Latest handoff: `docs/development/handoffs/AI-06-final-handoff.md`
 
 ## Development Approach
 

@@ -38,12 +38,18 @@ REQUIRED_FILES = (
     "docs/standards/regulatory-source-standard.md",
     "docs/standards/source-freshness-standard.md",
     "docs/development/handoffs/AI-05-final-handoff.md",
+    "docs/standards/testing-standard.md",
+    "docs/standards/evaluation-standard.md",
+    "tests/validation-scenarios.json",
+    "tests/evaluation-rubric.json",
+    "docs/development/handoffs/AI-06-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
     "scripts/generate-taxonomy.py",
     "scripts/validate-routing.py",
     "scripts/validate-standards.py",
+    "scripts/validate-tests.py",
 )
 
 REQUIRED_TOKENS = {
@@ -172,6 +178,22 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-05-final-handoff.md": (
         "AGENTINVESTIGATE_AI_05_SOURCE_STANDARD_READY",
         "AI-06: Validation & Evaluation Framework.",
+    ),
+    "docs/standards/testing-standard.md": (
+        "AGENTINVESTIGATE_AI_06_VALIDATION_FRAMEWORK_READY",
+        "Required Test Classes",
+        "correct routing",
+        "output-format compliance",
+    ),
+    "docs/standards/evaluation-standard.md": (
+        "AGENTINVESTIGATE_AI_06_VALIDATION_FRAMEWORK_READY",
+        "general model",
+        "general model + AgentInvestigate skill",
+        "Required Dimensions",
+    ),
+    "docs/development/handoffs/AI-06-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_06_VALIDATION_FRAMEWORK_READY",
+        "AI-07: Shared Professional Foundations.",
     ),
 }
 

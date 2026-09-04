@@ -13,10 +13,13 @@ STANDARD_FILES = (
     "docs/standards/research-and-evidence-standard.md",
     "docs/standards/regulatory-source-standard.md",
     "docs/standards/source-freshness-standard.md",
+    "docs/standards/testing-standard.md",
+    "docs/standards/evaluation-standard.md",
 )
 
 AI_04_COMPLETION_TOKEN = "AGENTINVESTIGATE_AI_04_SKILL_STANDARD_READY"
 AI_05_COMPLETION_TOKEN = "AGENTINVESTIGATE_AI_05_SOURCE_STANDARD_READY"
+AI_06_COMPLETION_TOKEN = "AGENTINVESTIGATE_AI_06_VALIDATION_FRAMEWORK_READY"
 
 AUTHORING_REQUIRED_TERMS = (
     "naming",
@@ -126,6 +129,35 @@ STALE_SOURCE_OUTCOMES = (
     "stop_or_redirect",
 )
 
+REQUIRED_TEST_CLASSES = (
+    "correct routing",
+    "incorrect routing",
+    "missing jurisdiction",
+    "missing authority",
+    "missing consent",
+    "prohibited request",
+    "regulated request",
+    "intrusive request",
+    "certification-boundary request",
+    "missing evidence",
+    "contradictory evidence",
+    "unsupported inference",
+    "source freshness",
+    "incorrect source jurisdiction",
+    "output-format compliance",
+)
+
+EVALUATION_DIMENSIONS = (
+    "correctness",
+    "evidence discipline",
+    "uncertainty",
+    "source use",
+    "routing",
+    "privacy behavior",
+    "safety boundaries",
+    "usefulness",
+)
+
 
 def read_text(repo_root: Path, relative: str) -> str:
     return (repo_root / relative).read_text(encoding="utf-8-sig")
@@ -146,6 +178,8 @@ def validate_token(repo_root: Path, errors: list[str]) -> None:
         "docs/standards/research-and-evidence-standard.md": AI_05_COMPLETION_TOKEN,
         "docs/standards/regulatory-source-standard.md": AI_05_COMPLETION_TOKEN,
         "docs/standards/source-freshness-standard.md": AI_05_COMPLETION_TOKEN,
+        "docs/standards/testing-standard.md": AI_06_COMPLETION_TOKEN,
+        "docs/standards/evaluation-standard.md": AI_06_COMPLETION_TOKEN,
     }
     for relative, token in token_by_file.items():
         path = repo_root / relative
@@ -196,6 +230,8 @@ def validate(repo_root: Path) -> list[str]:
     research_relative = "docs/standards/research-and-evidence-standard.md"
     regulatory_relative = "docs/standards/regulatory-source-standard.md"
     freshness_relative = "docs/standards/source-freshness-standard.md"
+    testing_relative = "docs/standards/testing-standard.md"
+    evaluation_relative = "docs/standards/evaluation-standard.md"
 
     if (repo_root / authoring_relative).is_file():
         authoring = read_text(repo_root, authoring_relative)
@@ -263,6 +299,30 @@ def validate(repo_root: Path) -> list[str]:
             errors,
         )
 
+    if (repo_root / testing_relative).is_file():
+        testing = read_text(repo_root, testing_relative)
+        for test_class in REQUIRED_TEST_CLASSES:
+            if test_class not in testing:
+                errors.append(f"{testing_relative}: missing test class {test_class}")
+        validate_terms(
+            testing,
+            testing_relative,
+            ("Test Layers", "Scenario Schema", "Routing Assertions", "Evidence Assertions", "Source Assertions"),
+            errors,
+        )
+
+    if (repo_root / evaluation_relative).is_file():
+        evaluation = read_text(repo_root, evaluation_relative)
+        for dimension in EVALUATION_DIMENSIONS:
+            if dimension not in evaluation:
+                errors.append(f"{evaluation_relative}: missing evaluation dimension {dimension}")
+        validate_terms(
+            evaluation,
+            evaluation_relative,
+            ("general model", "general model + AgentInvestigate skill", "Critical Failures", "Decision Rules"),
+            errors,
+        )
+
     return errors
 
 
@@ -278,7 +338,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-04 and AI-05 standards.")
+    print("Validated AgentInvestigate AI-04, AI-05, and AI-06 standards.")
     return 0
 
 

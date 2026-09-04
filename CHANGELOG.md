@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-06 Validation & Evaluation Framework`.
+- Added testing and evaluation standards with scenario and rubric fixtures.
+- Added test-framework validation and wired it into full validation.
 - Completed `AI-05 Legal, Regulatory & Evidence Source Standard`.
 - Added research and evidence, regulatory source, and source freshness standards.
 - Extended standards validation for AI-05 source hierarchy and metadata requirements.
