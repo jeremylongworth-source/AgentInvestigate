@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-07 Shared Professional Foundations`.
+- Added foundation vocabulary, schemas, report-structure contracts, and consumer map.
+- Added foundation validation and wired it into full validation.
 - Completed `AI-06 Validation & Evaluation Framework`.
 - Added testing and evaluation standards with scenario and rubric fixtures.
 - Added test-framework validation and wired it into full validation.

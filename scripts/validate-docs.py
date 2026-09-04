@@ -43,6 +43,12 @@ REQUIRED_FILES = (
     "tests/validation-scenarios.json",
     "tests/evaluation-rubric.json",
     "docs/development/handoffs/AI-06-final-handoff.md",
+    "docs/foundations/foundation-catalog.md",
+    "docs/foundations/professional-vocabulary.md",
+    "docs/foundations/shared-schemas.md",
+    "docs/foundations/report-structure-contracts.md",
+    "docs/foundations/foundation-consumer-map.json",
+    "docs/development/handoffs/AI-07-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
@@ -50,6 +56,7 @@ REQUIRED_FILES = (
     "scripts/validate-routing.py",
     "scripts/validate-standards.py",
     "scripts/validate-tests.py",
+    "scripts/validate-foundations.py",
 )
 
 REQUIRED_TOKENS = {
@@ -194,6 +201,34 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-06-final-handoff.md": (
         "AGENTINVESTIGATE_AI_06_VALIDATION_FRAMEWORK_READY",
         "AI-07: Shared Professional Foundations.",
+    ),
+    "docs/foundations/foundation-catalog.md": (
+        "AGENTINVESTIGATE_AI_07_SHARED_FOUNDATIONS_READY",
+        "professional terminology",
+        "common report structures",
+        "Do not create a shared asset unless a real skill consumes it.",
+    ),
+    "docs/foundations/professional-vocabulary.md": (
+        "AGENTINVESTIGATE_AI_07_SHARED_FOUNDATIONS_READY",
+        "Professional Terminology",
+        "Evidence Terminology",
+        "Source Reliability Vocabulary",
+    ),
+    "docs/foundations/shared-schemas.md": (
+        "AGENTINVESTIGATE_AI_07_SHARED_FOUNDATIONS_READY",
+        "Jurisdiction Schema",
+        "Authority Schema",
+        "Sensitivity Schema",
+    ),
+    "docs/foundations/report-structure-contracts.md": (
+        "AGENTINVESTIGATE_AI_07_SHARED_FOUNDATIONS_READY",
+        "case-intake",
+        "evidence-matrix",
+        "not filled template assets",
+    ),
+    "docs/development/handoffs/AI-07-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_07_SHARED_FOUNDATIONS_READY",
+        "AI-08: Four-Class Reference Implementation.",
     ),
 }
 

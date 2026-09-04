@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, and the validation/evaluation framework.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, and shared professional foundations.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-06 Validation & Evaluation Framework`
-- Recommended next wave: `AI-07 Shared Professional Foundations`
+- Latest completed wave: `AI-07 Shared Professional Foundations`
+- Recommended next wave: `AI-08 Four-Class Reference Implementation`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -39,7 +39,12 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Evaluation standard: `docs/standards/evaluation-standard.md`
 - Validation scenarios: `tests/validation-scenarios.json`
 - Evaluation rubric: `tests/evaluation-rubric.json`
-- Latest handoff: `docs/development/handoffs/AI-06-final-handoff.md`
+- Foundation catalog: `docs/foundations/foundation-catalog.md`
+- Professional vocabulary: `docs/foundations/professional-vocabulary.md`
+- Shared schemas: `docs/foundations/shared-schemas.md`
+- Report structure contracts: `docs/foundations/report-structure-contracts.md`
+- Foundation consumer map: `docs/foundations/foundation-consumer-map.json`
+- Latest handoff: `docs/development/handoffs/AI-07-final-handoff.md`
 
 ## Development Approach
 

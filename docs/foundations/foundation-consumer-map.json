@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "status": "READY",
+  "completion_token": "AGENTINVESTIGATE_AI_07_SHARED_FOUNDATIONS_READY",
+  "asset_rule": "Do not create a shared asset unless a real skill consumes it.",
+  "notes": [
+    "AI-07 records foundation contracts and planned taxonomy-backed consumers.",
+    "Reusable template files must not be materialized inside skill packages until an implemented skill consumes them."
+  ],
+  "foundations": [
+    {
+      "id": "professional-vocabulary",
+      "path": "docs/foundations/professional-vocabulary.md",
+      "type": "vocabulary",
+      "covers": [
+        "professional terminology",
+        "evidence terminology",
+        "case status vocabulary",
+        "confidence vocabulary",
+        "source reliability vocabulary"
+      ],
+      "planned_consumers": [
+        "classify-request-type",
+        "validate-investigative-authority",
+        "build-evidence-matrix",
+        "write-investigative-report",
+        "triage-security-incident"
+      ],
+      "materialized_asset": false
+    },
+    {
+      "id": "shared-schemas",
+      "path": "docs/foundations/shared-schemas.md",
+      "type": "schema",
+      "covers": [
+        "jurisdiction schema",
+        "authority schema",
+        "sensitivity schema",
+        "source schema",
+        "evidence item schema",
+        "artifact metadata schema"
+      ],
+      "planned_consumers": [
+        "identify-jurisdiction",
+        "prepare-authority-check",
+        "identify-licensing-requirement",
+        "assess-observation-proportionality",
+        "determine-emergency-escalation"
+      ],
+      "materialized_asset": false
+    },
+    {
+      "id": "report-structure-contracts",
+      "path": "docs/foundations/report-structure-contracts.md",
+      "type": "template_contract",
+      "covers": [
+        "common report structures",
+        "case-intake",
+        "conflict-check",
+        "authority-check",
+        "investigation-plan",
+        "case-action-log",
+        "research-source-log",
+        "interview-plan",
+        "evidence-log",
+        "chain-of-custody",
+        "evidence-matrix",
+        "case-chronology",
+        "incident-report",
+        "shift-handoff",
+        "risk-register",
+        "case-closure"
+      ],
+      "planned_consumers": [
+        "define-case-scope",
+        "prepare-authority-check",
+        "create-evidence-log",
+        "build-evidence-matrix",
+        "construct-event-chronology",
+        "document-alarm-response",
+        "prepare-case-status-update"
+      ],
+      "materialized_asset": false
+    }
+  ]
+}
