@@ -1,0 +1,6 @@
+interface:
+  display_name: "Estimate Investigative Resources"
+  short_description: "Estimate investigation resources"
+  default_prompt: "Use $estimate-investigative-resources to estimate resources for this scoped investigation plan."
+policy:
+  allow_implicit_invocation: true

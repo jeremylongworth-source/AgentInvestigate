@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Case Gaps"
+  short_description: "Identify case gaps"
+  default_prompt: "Use $identify-case-gaps to identify unresolved questions and missing support in this case."
+policy:
+  allow_implicit_invocation: true

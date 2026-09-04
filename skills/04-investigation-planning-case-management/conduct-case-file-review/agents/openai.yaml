@@ -1,0 +1,6 @@
+interface:
+  display_name: "Conduct Case File Review"
+  short_description: "Review case file completeness"
+  default_prompt: "Use $conduct-case-file-review to review this supplied case file for completeness and gaps."
+policy:
+  allow_implicit_invocation: true

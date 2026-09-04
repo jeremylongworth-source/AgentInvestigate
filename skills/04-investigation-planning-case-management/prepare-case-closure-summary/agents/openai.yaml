@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Case Closure Summary"
+  short_description: "Draft closure summaries"
+  default_prompt: "Use $prepare-case-closure-summary to draft a bounded closure summary for this matter."
+policy:
+  allow_implicit_invocation: true

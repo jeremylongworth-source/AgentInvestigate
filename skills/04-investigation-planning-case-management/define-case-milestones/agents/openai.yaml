@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Case Milestones"
+  short_description: "Define case milestones"
+  default_prompt: "Use $define-case-milestones to define milestones and review points for this matter."
+policy:
+  allow_implicit_invocation: true

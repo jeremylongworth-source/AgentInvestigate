@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prioritize Investigative Leads"
+  short_description: "Prioritize case leads safely"
+  default_prompt: "Use $prioritize-investigative-leads to rank supplied leads for this matter."
+policy:
+  allow_implicit_invocation: true

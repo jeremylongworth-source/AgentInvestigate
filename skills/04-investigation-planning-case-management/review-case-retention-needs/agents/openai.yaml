@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Case Retention Needs"
+  short_description: "Review case retention needs"
+  default_prompt: "Use $review-case-retention-needs to review retention and preservation needs for this matter."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Create Case Timeline"
+  short_description: "Build source-linked timelines"
+  default_prompt: "Use $create-case-timeline to create a source-linked timeline for this matter."
+policy:
+  allow_implicit_invocation: true

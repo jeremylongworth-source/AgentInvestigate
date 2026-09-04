@@ -1,0 +1,6 @@
+interface:
+  display_name: "Write Case Notes"
+  short_description: "Draft neutral case notes"
+  default_prompt: "Use $write-case-notes to draft neutral notes from these supplied case facts."
+policy:
+  allow_implicit_invocation: true

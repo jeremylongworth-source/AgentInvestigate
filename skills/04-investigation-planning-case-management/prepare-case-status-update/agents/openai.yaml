@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Case Status Update"
+  short_description: "Prepare case status updates"
+  default_prompt: "Use $prepare-case-status-update to prepare a status update for this matter."
+policy:
+  allow_implicit_invocation: true

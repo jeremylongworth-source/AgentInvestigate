@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-11 Investigation Planning & Case Management`.
+- Added all 13 Family 04 case-management skill packages.
+- Added AI-11 case-management scenarios and taxonomy-derived validation for Family 04.
 - Completed `AI-10 Intake, Authority, Law & Privacy`.
 - Added the Family 02 and Family 03 control-layer skills.
 - Added AI-10 authority/compliance scenarios and taxonomy-derived validation for the control layer.

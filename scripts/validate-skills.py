@@ -13,6 +13,7 @@ TOKENS = {
     "AI-08": "AGENTINVESTIGATE_AI_08_REFERENCE_SKILLS_READY",
     "AI-09": "AGENTINVESTIGATE_AI_09_PROFESSIONAL_CORE_READY",
     "AI-10": "AGENTINVESTIGATE_AI_10_AUTHORITY_COMPLIANCE_READY",
+    "AI-11": "AGENTINVESTIGATE_AI_11_CASE_MANAGEMENT_READY",
 }
 
 AI10_FAMILIES = {
@@ -32,6 +33,24 @@ AI10_CRITICAL_INTEGRATION_TESTS = {
     "unknown jurisdiction",
     "prohibited request",
     "conflicting client authority",
+}
+
+AI11_FAMILY = "04-investigation-planning-case-management"
+
+AI11_SCENARIO_TOPICS = {
+    "investigation plan",
+    "investigative questions",
+    "timeline",
+    "leads",
+    "resources",
+    "milestones",
+    "case log",
+    "notes",
+    "status",
+    "retention",
+    "review",
+    "gaps",
+    "closure",
 }
 
 REFERENCE_SKILLS = {
@@ -189,15 +208,33 @@ def authority_compliance_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> 
     return skills
 
 
+def case_management_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI11_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
         **PROFESSIONAL_CORE_SKILLS,
         **authority_compliance_skills(taxonomy_by_name),
+        **case_management_skills(taxonomy_by_name),
     }
 
 
-def scenario_suites(ai10_skills: dict[str, dict[str, str]]) -> tuple[dict[str, Any], ...]:
+def scenario_suites(
+    ai10_skills: dict[str, dict[str, str]],
+    ai11_skills: dict[str, dict[str, str]],
+) -> tuple[dict[str, Any], ...]:
     return (
         {
             "label": "AI-08-reference-scenarios.json",
@@ -220,6 +257,14 @@ def scenario_suites(ai10_skills: dict[str, dict[str, str]]) -> tuple[dict[str, A
             "skills": ai10_skills,
             "skill_list_key": "skills",
             "critical_integration_tests": AI10_CRITICAL_INTEGRATION_TESTS,
+        },
+        {
+            "label": "AI-11-case-management-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-11-case-management-scenarios.json",
+            "token": TOKENS["AI-11"],
+            "skills": ai11_skills,
+            "skill_list_key": "skills",
+            "scenario_topics": AI11_SCENARIO_TOPICS,
         },
     )
 
@@ -330,6 +375,10 @@ def validate_scenario_suite(
     if expected_critical_tests is not None:
         if set(data.get("critical_integration_tests", [])) != set(expected_critical_tests):
             errors.append(f"{label}: critical_integration_tests mismatch")
+    expected_scenario_topics = suite.get("scenario_topics")
+    if expected_scenario_topics is not None:
+        if set(data.get("scenario_topics", [])) != set(expected_scenario_topics):
+            errors.append(f"{label}: scenario_topics mismatch")
 
     scenarios = data.get("scenarios")
     if not isinstance(scenarios, list):
@@ -372,10 +421,11 @@ def validate(repo_root: Path) -> list[str]:
     errors: list[str] = []
     taxonomy_by_name = taxonomy(repo_root)
     ai10_skills = authority_compliance_skills(taxonomy_by_name)
+    ai11_skills = case_management_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
-    for suite in scenario_suites(ai10_skills):
+    for suite in scenario_suites(ai10_skills, ai11_skills):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
 
@@ -392,7 +442,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference, AI-09 professional core, and AI-10 authority compliance skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-11 case management skills.")
     return 0
 
 
