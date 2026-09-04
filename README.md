@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup and the first domain-boundary wave.
+The project has completed baseline setup, domain-boundary work, and master taxonomy integration.
 
 Core principles:
 
@@ -17,13 +17,15 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-01 Domain & Scope Contract`
-- Recommended next wave: `AI-02 Master Taxonomy Integration`
+- Latest completed wave: `AI-02 Master Taxonomy Integration`
+- Recommended next wave: `AI-03 Sensitivity, Authority & Routing Contract`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
 - Prohibited capabilities: `docs/architecture/prohibited-capabilities.md`
-- Latest handoff: `docs/development/handoffs/AI-01-final-handoff.md`
+- Master taxonomy: `docs/architecture/master-taxonomy-v1.md`
+- Canonical taxonomy index: `docs/architecture/taxonomy-index.yaml`
+- Latest handoff: `docs/development/handoffs/AI-02-final-handoff.md`
 
 ## Development Approach
 

@@ -7,4 +7,9 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
-Write-Host "All AgentInvestigate baseline validation checks passed."
+python "$PSScriptRoot\validate-taxonomy.py" --repo-root "$RepoRoot"
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}
+
+Write-Host "All AgentInvestigate validation checks passed."

@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-02 Master Taxonomy Integration`.
+- Added the canonical 212-skill taxonomy index and human-readable taxonomy projection.
+- Added taxonomy generation and validation scripts.
 - Completed `AI-01 Domain & Scope Contract`.
 - Added domain, scope-boundary, and prohibited-capability architecture docs.
 - Updated baseline validation to include AI-01 artifacts.

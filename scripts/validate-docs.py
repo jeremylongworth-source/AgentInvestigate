@@ -22,8 +22,13 @@ REQUIRED_FILES = (
     "docs/architecture/scope-boundaries.md",
     "docs/architecture/prohibited-capabilities.md",
     "docs/development/handoffs/AI-01-final-handoff.md",
+    "docs/architecture/master-taxonomy-v1.md",
+    "docs/architecture/taxonomy-index.yaml",
+    "docs/development/handoffs/AI-02-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
+    "scripts/validate-taxonomy.py",
+    "scripts/generate-taxonomy.py",
 )
 
 REQUIRED_TOKENS = {
@@ -64,6 +69,20 @@ REQUIRED_TOKENS = {
     "docs/development/handoffs/AI-01-final-handoff.md": (
         "AGENTINVESTIGATE_AI_01_DOMAIN_CONTRACT_READY",
         "AI-02: Master Taxonomy Integration.",
+    ),
+    "docs/architecture/master-taxonomy-v1.md": (
+        "AGENTINVESTIGATE_AI_02_MASTER_TAXONOMY_READY",
+        "`docs/architecture/taxonomy-index.yaml` is the canonical taxonomy source.",
+        "Exactly one canonical taxonomy source exists: docs/architecture/taxonomy-index.yaml",
+    ),
+    "docs/architecture/taxonomy-index.yaml": (
+        "AGENTINVESTIGATE_AI_02_MASTER_TAXONOMY_READY",
+        "AgentInvestigate Master Taxonomy v1.0",
+        "\"skills\": 212",
+    ),
+    "docs/development/handoffs/AI-02-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_02_MASTER_TAXONOMY_READY",
+        "AI-03: Sensitivity, Authority & Routing Contract.",
     ),
 }
 

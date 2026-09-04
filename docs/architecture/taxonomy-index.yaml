@@ -1,0 +1,4492 @@
+{
+  "schema_version": "1.0",
+  "taxonomy_name": "AgentInvestigate Master Taxonomy v1.0",
+  "status": "READY",
+  "canonical": true,
+  "completion_token": "AGENTINVESTIGATE_AI_02_MASTER_TAXONOMY_READY",
+  "source_provenance": [
+    "ROADMAP.md",
+    "docs/architecture/domain-contract.md",
+    "docs/architecture/scope-boundaries.md",
+    "docs/architecture/prohibited-capabilities.md",
+    "docs/development/handoffs/AI-01-final-handoff.md"
+  ],
+  "source_limitation": "No standalone approved 212-skill taxonomy file was found during AI-02. This canonical in-repository taxonomy is reconstructed from the roadmap's family structure, explicitly named roadmap skills, AI-01 domain mapping, and stated 212-skill target.",
+  "field_contract": {
+    "name": "Unique kebab-case atomic skill slug.",
+    "family": "Canonical family slug.",
+    "family_name": "Human-readable family name.",
+    "branch": "Shared, Private Investigation, Private Security, or Hybrid.",
+    "tier": "FOUNDATION, CORE, or ADVANCED.",
+    "sensitivity": "ROUTINE, REGULATED, INTRUSIVE, or CERTIFICATION_BOUNDARY.",
+    "jurisdiction_requirement": "Jurisdiction gate expectation.",
+    "authority_requirement": "Authority or review gate expectation.",
+    "freshness_requirement": "LOW, MEDIUM, or HIGH source freshness expectation.",
+    "priority": "P0, P1, P2, or P3.",
+    "dependencies": "Other skill slugs expected before this skill is used or authored.",
+    "professional_skillsets": "Future role-level skillsets likely to compose the skill."
+  },
+  "families": [
+    {
+      "slug": "01-professional-core-ethics",
+      "name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "skill_count": 9
+    },
+    {
+      "slug": "02-case-intake-scope-authority",
+      "name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "skill_count": 11
+    },
+    {
+      "slug": "03-law-licensing-privacy-compliance",
+      "name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "skill_count": 11
+    },
+    {
+      "slug": "04-investigation-planning-case-management",
+      "name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "skill_count": 13
+    },
+    {
+      "slug": "05-research-osint-public-records",
+      "name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "skill_count": 14
+    },
+    {
+      "slug": "06-identity-entity-timeline-analysis",
+      "name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "skill_count": 10
+    },
+    {
+      "slug": "07-interviewing-witnesses-statements",
+      "name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "skill_count": 10
+    },
+    {
+      "slug": "08-evidence-chain-of-custody",
+      "name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "skill_count": 12
+    },
+    {
+      "slug": "09-investigative-analysis",
+      "name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "skill_count": 11
+    },
+    {
+      "slug": "10-observation-surveillance-governance",
+      "name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "skill_count": 8
+    },
+    {
+      "slug": "11-reporting-findings-case-presentation",
+      "name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "skill_count": 10
+    },
+    {
+      "slug": "12-corporate-workplace-investigations",
+      "name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "skill_count": 10
+    },
+    {
+      "slug": "13-background-screening-due-diligence",
+      "name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "skill_count": 10
+    },
+    {
+      "slug": "14-security-operations-access-patrol",
+      "name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "skill_count": 15
+    },
+    {
+      "slug": "15-incident-response",
+      "name": "Incident Response",
+      "branch": "Private Security",
+      "skill_count": 9
+    },
+    {
+      "slug": "16-communication-deescalation",
+      "name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "skill_count": 8
+    },
+    {
+      "slug": "17-physical-security-risk-assessment",
+      "name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "skill_count": 11
+    },
+    {
+      "slug": "18-security-systems-technology",
+      "name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "skill_count": 9
+    },
+    {
+      "slug": "19-loss-prevention-asset-protection",
+      "name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "skill_count": 8
+    },
+    {
+      "slug": "20-investigation-security-program-management",
+      "name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "skill_count": 13
+    }
+  ],
+  "summary_counts": {
+    "skills": 212,
+    "families": 20,
+    "sensitivity": {
+      "CERTIFICATION_BOUNDARY": 10,
+      "INTRUSIVE": 27,
+      "REGULATED": 44,
+      "ROUTINE": 131
+    },
+    "priority": {
+      "P0": 31,
+      "P1": 112,
+      "P2": 69
+    },
+    "tier": {
+      "ADVANCED": 69,
+      "CORE": 112,
+      "FOUNDATION": 31
+    }
+  },
+  "skills": [
+    {
+      "name": "define-professional-role-boundaries",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-conflict-of-interest",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "define-professional-role-boundaries"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "apply-ethical-decision-framework",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "define-professional-role-boundaries"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-investigative-bias",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "apply-ethical-decision-framework"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "separate-fact-from-inference",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-duty-of-care",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "define-professional-role-boundaries"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "protect-confidential-information",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "define-professional-role-boundaries"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-escalation-requirement",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "assess-duty-of-care"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "document-professional-decision",
+      "family": "01-professional-core-ethics",
+      "family_name": "Professional Core & Ethics",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "separate-fact-from-inference"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "classify-request-type",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-client-role",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "classify-request-type"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-jurisdiction",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "classify-request-type"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "validate-investigative-authority",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-client-role",
+        "identify-jurisdiction"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "validate-security-service-authority",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-client-role",
+        "identify-jurisdiction"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-lawful-purpose",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "define-case-scope",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "assess-lawful-purpose"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "define-scope-boundaries",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "define-case-scope"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-stakeholders-and-subjects",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P0",
+      "dependencies": [
+        "define-case-scope"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-consent-requirement",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction",
+        "identify-stakeholders-and-subjects"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-authority-check",
+      "family": "02-case-intake-scope-authority",
+      "family_name": "Case Intake, Scope & Authority",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "validate-investigative-authority",
+        "validate-security-service-authority"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-licensing-requirement",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-regulated-activity",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "classify-request-type",
+        "identify-jurisdiction"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-privacy-obligation",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction",
+        "identify-stakeholders-and-subjects"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-recording-law-issue",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction",
+        "identify-privacy-obligation"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-information-collection-basis",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-privacy-obligation",
+        "assess-lawful-purpose"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-record-access-authority",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction",
+        "validate-investigative-authority"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-data-minimization-requirement",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-privacy-obligation"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "review-retention-obligation",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction",
+        "identify-privacy-obligation"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-reporting-obligation",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-jurisdiction",
+        "identify-regulated-activity"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "review-training-requirements",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-licensing-requirement"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-compliance-escalation",
+      "family": "03-law-licensing-privacy-compliance",
+      "family_name": "Law, Licensing, Privacy & Compliance",
+      "branch": "Shared",
+      "tier": "FOUNDATION",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P0",
+      "dependencies": [
+        "identify-regulated-activity"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "build-investigation-plan",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-case-scope",
+        "prepare-authority-check"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "define-investigative-question",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-case-scope"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "create-case-timeline",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-investigation-plan"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prioritize-investigative-leads",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-investigative-question"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "estimate-investigative-resources",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-investigation-plan"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "define-case-milestones",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-investigation-plan"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "maintain-case-action-log",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-investigation-plan"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "write-case-notes",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "maintain-case-action-log"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prepare-case-status-update",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "maintain-case-action-log"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "review-case-retention-needs",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "review-retention-obligation"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "conduct-case-file-review",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "maintain-case-action-log"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-case-gaps",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "conduct-case-file-review"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prepare-case-closure-summary",
+      "family": "04-investigation-planning-case-management",
+      "family_name": "Investigation Planning & Case Management",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "identify-case-gaps"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "build-research-plan",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-investigative-question"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-public-record-sources",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "identify-jurisdiction",
+        "build-research-plan"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "plan-open-source-research",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-research-plan"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "research-corporate-records",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "identify-public-record-sources"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "research-court-records",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "identify-public-record-sources"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "research-regulatory-records",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "identify-public-record-sources"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-source-reliability",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-research-plan"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "record-source-provenance",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "assess-source-reliability"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "corroborate-open-source-information",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "record-source-provenance"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "resolve-source-conflict",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "corroborate-open-source-information"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "research-organization-profile",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "plan-open-source-research"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "research-property-context",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "identify-public-record-sources"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "research-litigation-history",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "research-court-records"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "write-research-summary",
+      "family": "05-research-osint-public-records",
+      "family_name": "Research, OSINT & Public Records",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "resolve-source-conflict"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-identity-ambiguity",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "record-source-provenance"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "differentiate-same-name-individuals",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "assess-identity-ambiguity"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "normalize-person-identifiers",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "assess-information-collection-basis"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "normalize-organization-identifiers",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "record-source-provenance"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "construct-subject-timeline",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "assess-identity-ambiguity"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "map-relationship-evidence",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "record-source-provenance"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-association-strength",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "map-relationship-evidence"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-timeline-gap",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "construct-subject-timeline"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "resolve-entity-contradiction",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "differentiate-same-name-individuals"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "state-identity-confidence",
+      "family": "06-identity-entity-timeline-analysis",
+      "family_name": "Identity, Entity & Timeline Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "resolve-entity-contradiction"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "define-interview-objectives",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-investigative-question"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prepare-neutral-question-set",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-interview-objectives"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "sequence-interview-topics",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "prepare-neutral-question-set"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-interview-information-gaps",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-investigative-question"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prepare-witness-interview-plan",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "sequence-interview-topics"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "summarize-witness-statement",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "write-case-notes"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "compare-statement-consistency",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "summarize-witness-statement"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-corroboration-needs",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "compare-statement-consistency"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prepare-follow-up-questions",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "identify-corroboration-needs"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "review-interview-bias-risk",
+      "family": "07-interviewing-witnesses-statements",
+      "family_name": "Interviewing, Witnesses & Statements",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "identify-investigative-bias"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "create-evidence-log",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "define-case-scope"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "classify-evidence-type",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "create-evidence-log"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "record-evidence-source",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "create-evidence-log"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-evidence-relevance",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "classify-evidence-type"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "build-chain-of-custody-summary",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "create-evidence-log"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-chain-of-custody-gap",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-chain-of-custody-summary"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "track-evidence-transfer",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-chain-of-custody-summary"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "compare-original-and-copy",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "classify-evidence-type"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "verify-evidence-timestamp",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "record-evidence-source"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "map-evidence-to-allegation",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "assess-evidence-relevance"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-evidence-continuity-issue",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "identify-chain-of-custody-gap"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-evidence-handling-escalation",
+      "family": "08-evidence-chain-of-custody",
+      "family_name": "Evidence & Chain of Custody",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "identify-evidence-continuity-issue"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "build-evidence-matrix",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "map-evidence-to-allegation"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "generate-investigative-hypotheses",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-evidence-matrix"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "test-investigative-hypothesis",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "generate-investigative-hypotheses"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "compare-alternative-explanations",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "test-investigative-hypothesis"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-evidence-contradiction",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-evidence-matrix"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "construct-event-chronology",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "create-case-timeline"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "analyze-pattern-of-events",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "construct-event-chronology"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-source-weight",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "assess-source-reliability"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-finding-confidence",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "compare-alternative-explanations"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-unresolved-question",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "assess-finding-confidence"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "draft-investigative-finding",
+      "family": "09-investigative-analysis",
+      "family_name": "Investigative Analysis",
+      "branch": "Private Investigation",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "assess-finding-confidence"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-observation-authorization",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "validate-investigative-authority",
+        "identify-jurisdiction"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-observation-necessity",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "assess-observation-authorization"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-observation-proportionality",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "assess-observation-necessity"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "define-observation-purpose",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "assess-observation-proportionality"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "plan-lawful-observation-assignment",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "define-observation-purpose"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "record-field-observation",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "plan-lawful-observation-assignment"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "minimize-third-party-information",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "record-field-observation"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "review-observation-record-for-compliance",
+      "family": "10-observation-surveillance-governance",
+      "family_name": "Observation & Surveillance Governance",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "minimize-third-party-information"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "investigative-analyst",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "write-investigative-report",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "draft-investigative-finding"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "write-incident-report",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "document-incident-timeline"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-case-chronology",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "construct-event-chronology"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "summarize-evidence",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-evidence-matrix"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-findings-matrix",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "draft-investigative-finding"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "write-executive-summary",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "prepare-findings-matrix"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "review-report-quality",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "write-investigative-report"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-case-presentation",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "review-report-quality"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-testimony-support-outline",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "prepare-case-presentation"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-report-limitations",
+      "family": "11-reporting-findings-case-presentation",
+      "family_name": "Reporting, Findings & Case Presentation",
+      "branch": "Shared",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "review-report-quality"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "classify-workplace-allegation",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "classify-request-type"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "map-allegation-to-policy",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "classify-workplace-allegation"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "build-allegations-matrix",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "map-allegation-to-policy"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "plan-workplace-investigation",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "build-allegations-matrix",
+        "prepare-authority-check"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "identify-workplace-evidence-sources",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "plan-workplace-investigation"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prepare-workplace-interview-plan",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "prepare-witness-interview-plan"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "compare-workplace-statements",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "compare-statement-consistency"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "assess-evidentiary-support",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "build-evidence-matrix"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "draft-workplace-finding",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "assess-evidentiary-support"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "prepare-workplace-investigation-report",
+      "family": "12-corporate-workplace-investigations",
+      "family_name": "Corporate & Workplace Investigations",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "draft-workplace-finding"
+      ],
+      "professional_skillsets": [
+        "workplace-investigator",
+        "corporate-investigator",
+        "investigative-case-manager"
+      ]
+    },
+    {
+      "name": "define-screening-purpose",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "classify-request-type"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "assess-background-screening-authority",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "define-screening-purpose",
+        "identify-jurisdiction"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "verify-screening-consent",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "assess-background-screening-authority"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "select-screening-source-type",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "verify-screening-consent"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "assess-screening-source-reliability",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "select-screening-source-type"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "evaluate-record-relevance",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "assess-screening-source-reliability"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "identify-screening-identity-ambiguity",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "assess-identity-ambiguity"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "resolve-screening-discrepancy",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "identify-screening-identity-ambiguity"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "prepare-due-diligence-summary",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "resolve-screening-discrepancy"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "identify-adverse-information-review-need",
+      "family": "13-background-screening-due-diligence",
+      "family_name": "Background Screening & Due Diligence",
+      "branch": "Private Investigation",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "evaluate-record-relevance"
+      ],
+      "professional_skillsets": [
+        "background-screening-specialist",
+        "private-investigator",
+        "corporate-investigator"
+      ]
+    },
+    {
+      "name": "review-post-orders",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "validate-security-service-authority"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "build-shift-plan",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "review-post-orders"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "plan-patrol-route",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "build-shift-plan"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "document-patrol-observation",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "plan-patrol-route"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "log-security-occurrence",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "document-patrol-observation"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "verify-access-event",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "review-post-orders"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "triage-access-control-event",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "verify-access-event"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "document-visitor-management-issue",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "verify-access-event"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "record-key-control-event",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "verify-access-event"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "document-alarm-response",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "review-post-orders"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "prepare-shift-handoff",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "log-security-occurrence"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "review-security-log",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "prepare-shift-handoff"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "identify-post-order-gap",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "review-security-log"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "prepare-security-operations-brief",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "identify-post-order-gap"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "identify-supervisor-notification-need",
+      "family": "14-security-operations-access-patrol",
+      "family_name": "Security Operations, Access & Patrol",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "triage-access-control-event"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "mobile-patrol-officer",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "triage-security-incident",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "log-security-occurrence"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "determine-emergency-escalation",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "triage-security-incident"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "support-emergency-service-access",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "determine-emergency-escalation"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "preserve-incident-scene",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "triage-security-incident"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "identify-incident-notification-requirement",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "triage-security-incident"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "document-incident-timeline",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "triage-security-incident"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "collect-incident-account",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "document-incident-timeline"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "prepare-post-incident-review",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "document-incident-timeline"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "identify-corrective-action",
+      "family": "15-incident-response",
+      "family_name": "Incident Response",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "prepare-post-incident-review"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "assess-conflict-risk",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "log-security-occurrence"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "prepare-deescalation-communication-plan",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "assess-conflict-risk"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "draft-radio-communication",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "triage-security-incident"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "prepare-incident-notification",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "identify-incident-notification-requirement"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "adapt-message-to-audience",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "prepare-incident-notification"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "review-communication-bias",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "identify-investigative-bias"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "document-deescalation-attempt",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P1",
+      "dependencies": [
+        "prepare-deescalation-communication-plan"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "identify-communication-escalation-need",
+      "family": "16-communication-deescalation",
+      "family_name": "Communication & De-escalation",
+      "branch": "Private Security",
+      "tier": "CORE",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P1",
+      "dependencies": [
+        "assess-conflict-risk"
+      ],
+      "professional_skillsets": [
+        "security-officer",
+        "incident-response-coordinator",
+        "security-supervisor"
+      ]
+    },
+    {
+      "name": "define-protected-assets",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "validate-security-service-authority"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-security-threats",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "define-protected-assets"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-physical-vulnerabilities",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "identify-security-threats"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-security-consequences",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "assess-physical-vulnerabilities"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-risk-likelihood",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "identify-security-threats"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "build-security-risk-register",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "assess-risk-likelihood",
+        "assess-security-consequences"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "map-existing-controls",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "define-protected-assets"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-control-gaps",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "map-existing-controls"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "compare-security-improvement-options",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "identify-control-gaps"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prioritize-security-improvements",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "compare-security-improvement-options"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-physical-security-assessment-summary",
+      "family": "17-physical-security-risk-assessment",
+      "family_name": "Physical Security & Risk Assessment",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "prioritize-security-improvements"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "define-access-control-requirements",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "identify-control-gaps"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "analyze-access-control-event",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "triage-access-control-event"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "define-video-surveillance-requirements",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "identify-privacy-obligation"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-camera-coverage-gap",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "define-video-surveillance-requirements"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "analyze-video-event-log",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "INTRUSIVE",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "human_approval_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "define-video-surveillance-requirements"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "define-intrusion-detection-requirements",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "identify-control-gaps"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "analyze-alarm-event",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "document-alarm-response"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-security-system-failure",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "CERTIFICATION_BOUNDARY",
+      "jurisdiction_requirement": "required_when_operational_or_emergency_adjacent",
+      "authority_requirement": "qualified_review_or_escalation_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "analyze-alarm-event"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-security-system-requirements-summary",
+      "family": "18-security-systems-technology",
+      "family_name": "Security Systems & Technology",
+      "branch": "Private Security",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "define-access-control-requirements",
+        "define-intrusion-detection-requirements"
+      ],
+      "professional_skillsets": [
+        "physical-security-analyst",
+        "security-risk-assessor",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "assess-asset-protection-risk",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "define-protected-assets"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "analyze-loss-event",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "triage-security-incident"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "analyze-shrink-pattern",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "analyze-loss-event"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "triage-loss-prevention-incident",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "analyze-loss-event"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "map-loss-event-evidence",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "create-evidence-log"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "identify-process-control-weakness",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "map-loss-event-evidence"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "prepare-loss-prevention-case-summary",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "identify-process-control-weakness"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "build-asset-protection-improvement-plan",
+      "family": "19-loss-prevention-asset-protection",
+      "family_name": "Loss Prevention & Asset Protection",
+      "branch": "Hybrid",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "prepare-loss-prevention-case-summary"
+      ],
+      "professional_skillsets": [
+        "loss-prevention-investigator",
+        "asset-protection-specialist",
+        "corporate-security-investigator"
+      ]
+    },
+    {
+      "name": "draft-investigative-policy",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "define-professional-role-boundaries"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "draft-security-post-orders",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "review-post-orders"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "review-investigative-procedure",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "draft-investigative-policy"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "review-security-procedure",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "draft-security-post-orders"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "audit-case-file",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "conduct-case-file-review"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "audit-security-program",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "review-security-procedure"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "select-investigation-kpis",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "define-case-milestones"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "select-security-kpis",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "audit-security-program"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "review-training-requirement",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "review-training-requirements"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "track-corrective-action",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "identify-corrective-action"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "measure-improvement-result",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "track-corrective-action"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "prepare-program-status-report",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "ROUTINE",
+      "jurisdiction_requirement": "contextual",
+      "authority_requirement": "scope_required",
+      "freshness_requirement": "LOW",
+      "priority": "P2",
+      "dependencies": [
+        "select-security-kpis",
+        "select-investigation-kpis"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    },
+    {
+      "name": "identify-program-governance-gap",
+      "family": "20-investigation-security-program-management",
+      "family_name": "Investigation & Security Program Management",
+      "branch": "Shared",
+      "tier": "ADVANCED",
+      "sensitivity": "REGULATED",
+      "jurisdiction_requirement": "required",
+      "authority_requirement": "authority_required",
+      "freshness_requirement": "HIGH",
+      "priority": "P2",
+      "dependencies": [
+        "audit-security-program"
+      ],
+      "professional_skillsets": [
+        "private-investigator",
+        "security-officer",
+        "investigative-case-manager",
+        "security-program-manager"
+      ]
+    }
+  ]
+}
