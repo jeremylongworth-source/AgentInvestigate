@@ -1,0 +1,6 @@
+interface:
+  display_name: "Build Asset Protection Improvement Plan"
+  short_description: "Build protection plan"
+  default_prompt: "Use $build-asset-protection-improvement-plan to build an asset-protection improvement plan."
+policy:
+  allow_implicit_invocation: true

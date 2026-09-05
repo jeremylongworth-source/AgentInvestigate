@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-25 Loss Prevention & Asset Protection`.
+- Added all 8 Family 19 loss-prevention and asset-protection skill packages.
+- Added AI-25 loss prevention scenarios, composition-target validation, and physical-intervention/detention/search/pursuit/coercion/theft-conclusion boundary checks.
 - Completed `AI-24 Security Systems & Technology`.
 - Added all 9 Family 18 security systems and technology skill packages.
 - Added AI-24 security systems scenarios, system-analysis capability validation, and explicit alarm/camera/credential/access/monitoring misuse tests.

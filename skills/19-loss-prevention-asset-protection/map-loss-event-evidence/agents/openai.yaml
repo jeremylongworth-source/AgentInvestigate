@@ -1,0 +1,6 @@
+interface:
+  display_name: "Map Loss Event Evidence"
+  short_description: "Map loss evidence"
+  default_prompt: "Use $map-loss-event-evidence to map evidence for this loss event."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze Loss Event"
+  short_description: "Analyze loss event"
+  default_prompt: "Use $analyze-loss-event to analyze this loss event."
+policy:
+  allow_implicit_invocation: true

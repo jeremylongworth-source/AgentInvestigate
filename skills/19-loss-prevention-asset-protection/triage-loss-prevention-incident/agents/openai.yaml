@@ -1,0 +1,6 @@
+interface:
+  display_name: "Triage Loss Prevention Incident"
+  short_description: "Triage LP incident"
+  default_prompt: "Use $triage-loss-prevention-incident to triage this loss-prevention incident."
+policy:
+  allow_implicit_invocation: true

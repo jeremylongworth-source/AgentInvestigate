@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Asset Protection Risk"
+  short_description: "Assess asset risk"
+  default_prompt: "Use $assess-asset-protection-risk to assess asset-protection risk."
+policy:
+  allow_implicit_invocation: true

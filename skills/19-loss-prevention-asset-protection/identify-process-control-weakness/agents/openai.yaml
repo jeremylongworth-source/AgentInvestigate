@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Process Control Weakness"
+  short_description: "Find process weakness"
+  default_prompt: "Use $identify-process-control-weakness to identify process-control weaknesses."
+policy:
+  allow_implicit_invocation: true

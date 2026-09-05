@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Loss Prevention Case Summary"
+  short_description: "Prepare LP summary"
+  default_prompt: "Use $prepare-loss-prevention-case-summary to prepare a loss-prevention case summary."
+policy:
+  allow_implicit_invocation: true

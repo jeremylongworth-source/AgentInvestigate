@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze Shrink Pattern"
+  short_description: "Analyze shrink pattern"
+  default_prompt: "Use $analyze-shrink-pattern to analyze this shrink pattern."
+policy:
+  allow_implicit_invocation: true

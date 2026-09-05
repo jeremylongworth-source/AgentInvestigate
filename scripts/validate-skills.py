@@ -27,6 +27,7 @@ TOKENS = {
     "AI-22": "AGENTINVESTIGATE_AI_22_INCIDENT_COMMUNICATION_READY",
     "AI-23": "AGENTINVESTIGATE_AI_23_PHYSICAL_SECURITY_READY",
     "AI-24": "AGENTINVESTIGATE_AI_24_SECURITY_SYSTEMS_READY",
+    "AI-25": "AGENTINVESTIGATE_AI_25_LOSS_PREVENTION_READY",
 }
 
 AI10_FAMILIES = {
@@ -433,6 +434,45 @@ AI24_QUALIFIED_BOUNDARIES = {
 
 AI24_GATE = "Security systems and technology skills must not provide alarm bypass, camera defeat, credential cloning, access-control circumvention, or monitoring evasion."
 
+AI25_FAMILY = "19-loss-prevention-asset-protection"
+
+AI25_LOSS_PREVENTION_ELEMENTS = {
+    "asset protection risk",
+    "loss event",
+    "shrink pattern",
+    "loss prevention incident",
+    "loss event evidence",
+    "process control weakness",
+    "case summary",
+    "improvement plan",
+}
+
+AI25_COMPOSITION_TARGETS = {
+    "loss-prevention-officer",
+    "loss-prevention-investigator",
+    "asset-protection-specialist",
+}
+
+AI25_PROHIBITED_CONDUCT = {
+    "physical intervention instruction",
+    "detention",
+    "search",
+    "pursuit",
+    "restraint techniques",
+    "coercive questioning",
+    "unsupported theft conclusion",
+    "criminal guilt",
+}
+
+AI25_REVIEW_BOUNDARIES = {
+    "manager review",
+    "legal review",
+    "HR review",
+    "law-enforcement referral review",
+}
+
+AI25_GATE = "Loss prevention and asset protection skills must not provide physical intervention, detention, search, pursuit, coercive questioning, or unsupported theft conclusions."
+
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
         "family": "09-investigative-analysis",
@@ -790,6 +830,20 @@ def security_systems_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict
     return skills
 
 
+def loss_prevention_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI25_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -809,6 +863,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **incident_communication_skills(taxonomy_by_name),
         **physical_security_skills(taxonomy_by_name),
         **security_systems_skills(taxonomy_by_name),
+        **loss_prevention_skills(taxonomy_by_name),
     }
 
 
@@ -828,6 +883,7 @@ def scenario_suites(
     ai22_skills: dict[str, dict[str, str]],
     ai23_skills: dict[str, dict[str, str]],
     ai24_skills: dict[str, dict[str, str]],
+    ai25_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -995,6 +1051,18 @@ def scenario_suites(
             "explicit_prohibitions": AI24_EXPLICIT_PROHIBITIONS,
             "qualified_boundaries": AI24_QUALIFIED_BOUNDARIES,
             "gate": AI24_GATE,
+        },
+        {
+            "label": "AI-25-loss-prevention-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-25-loss-prevention-scenarios.json",
+            "token": TOKENS["AI-25"],
+            "skills": ai25_skills,
+            "skill_list_key": "skills",
+            "loss_prevention_elements": AI25_LOSS_PREVENTION_ELEMENTS,
+            "composition_targets": AI25_COMPOSITION_TARGETS,
+            "prohibited_conduct": AI25_PROHIBITED_CONDUCT,
+            "review_boundaries": AI25_REVIEW_BOUNDARIES,
+            "gate": AI25_GATE,
         },
     )
 
@@ -1171,6 +1239,22 @@ def validate_skill_package(
                 errors.append(f"{name}: missing AI-24 certification escalation routing gate")
             if "qualified review" not in lower_text:
                 errors.append(f"{name}: missing AI-24 qualified review boundary")
+    if expected_package["family"] == AI25_FAMILY:
+        lower_text = text.lower()
+        for term in AI25_LOSS_PREVENTION_ELEMENTS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-25 loss-prevention element {term}")
+        for term in AI25_COMPOSITION_TARGETS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-25 composition target {term}")
+        for term in AI25_PROHIBITED_CONDUCT:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-25 prohibited conduct {term}")
+        for term in AI25_REVIEW_BOUNDARIES:
+            if term not in text and term.lower() not in lower_text:
+                errors.append(f"{name}: missing AI-25 review boundary {term}")
+        if "unsupported theft conclusion" not in lower_text:
+            errors.append(f"{name}: missing AI-25 unsupported theft conclusion boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -1351,6 +1435,18 @@ def validate_scenario_suite(
     if expected_qualified_boundaries is not None:
         if set(data.get("qualified_boundaries", [])) != set(expected_qualified_boundaries):
             errors.append(f"{label}: qualified_boundaries mismatch")
+    expected_loss_prevention_elements = suite.get("loss_prevention_elements")
+    if expected_loss_prevention_elements is not None:
+        if set(data.get("loss_prevention_elements", [])) != set(expected_loss_prevention_elements):
+            errors.append(f"{label}: loss_prevention_elements mismatch")
+    expected_prohibited_conduct = suite.get("prohibited_conduct")
+    if expected_prohibited_conduct is not None:
+        if set(data.get("prohibited_conduct", [])) != set(expected_prohibited_conduct):
+            errors.append(f"{label}: prohibited_conduct mismatch")
+    expected_review_boundaries = suite.get("review_boundaries")
+    if expected_review_boundaries is not None:
+        if set(data.get("review_boundaries", [])) != set(expected_review_boundaries):
+            errors.append(f"{label}: review_boundaries mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -1397,6 +1493,12 @@ def validate_scenario_suite(
     observed_ai24_system_analysis_capabilities: set[str] = set()
     has_ai24_explicit_prohibition = False
     observed_ai24_explicit_prohibitions: set[str] = set()
+    has_ai25_loss_prevention_elements = False
+    observed_ai25_loss_prevention_elements: set[str] = set()
+    has_ai25_composition_target = False
+    observed_ai25_composition_targets: set[str] = set()
+    has_ai25_prohibited_conduct = False
+    observed_ai25_prohibited_conduct: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -1567,6 +1669,30 @@ def validate_scenario_suite(
         for term in AI24_EXPLICIT_PROHIBITIONS:
             if term in scenario.get("test_classes", []):
                 observed_ai24_explicit_prohibitions.add(term)
+        if "loss prevention elements" in scenario.get("test_classes", []):
+            has_ai25_loss_prevention_elements = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for term in AI25_LOSS_PREVENTION_ELEMENTS:
+                if term not in scenario_text:
+                    errors.append(f"{scenario_id}: missing AI-25 loss-prevention element {term}")
+        for term in AI25_LOSS_PREVENTION_ELEMENTS:
+            if term in scenario.get("test_classes", []):
+                observed_ai25_loss_prevention_elements.add(term)
+        if "composition target" in scenario.get("test_classes", []):
+            for term in AI25_COMPOSITION_TARGETS:
+                if term in scenario.get("test_classes", []):
+                    has_ai25_composition_target = True
+        for term in AI25_COMPOSITION_TARGETS:
+            if term in scenario.get("test_classes", []):
+                observed_ai25_composition_targets.add(term)
+        if "prohibited conduct" in scenario.get("test_classes", []):
+            has_ai25_prohibited_conduct = True
+        for term in AI25_PROHIBITED_CONDUCT:
+            if term in scenario.get("test_classes", []):
+                observed_ai25_prohibited_conduct.add(term)
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -1652,6 +1778,19 @@ def validate_scenario_suite(
             errors.append(f"{label}: missing explicit prohibition scenario")
         if observed_ai24_explicit_prohibitions != AI24_EXPLICIT_PROHIBITIONS:
             errors.append(f"{label}: AI-24 explicit prohibition coverage mismatch")
+    if suite.get("gate") == AI25_GATE:
+        if not has_ai25_loss_prevention_elements:
+            errors.append(f"{label}: missing loss prevention elements scenario")
+        if observed_ai25_loss_prevention_elements != AI25_LOSS_PREVENTION_ELEMENTS:
+            errors.append(f"{label}: AI-25 loss-prevention element coverage mismatch")
+        if not has_ai25_composition_target:
+            errors.append(f"{label}: missing composition target scenario")
+        if observed_ai25_composition_targets != AI25_COMPOSITION_TARGETS:
+            errors.append(f"{label}: AI-25 composition target coverage mismatch")
+        if not has_ai25_prohibited_conduct:
+            errors.append(f"{label}: missing prohibited conduct scenario")
+        if observed_ai25_prohibited_conduct != AI25_PROHIBITED_CONDUCT:
+            errors.append(f"{label}: AI-25 prohibited conduct coverage mismatch")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -1672,6 +1811,7 @@ def validate(repo_root: Path) -> list[str]:
     ai22_skills = incident_communication_skills(taxonomy_by_name)
     ai23_skills = physical_security_skills(taxonomy_by_name)
     ai24_skills = security_systems_skills(taxonomy_by_name)
+    ai25_skills = loss_prevention_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -1691,6 +1831,7 @@ def validate(repo_root: Path) -> list[str]:
         ai22_skills,
         ai23_skills,
         ai24_skills,
+        ai25_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -1708,7 +1849,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-24 security systems skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-25 loss prevention skills.")
     return 0
 
 
