@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Physical Security Assessment Summary"
+  short_description: "Prepare assessment summaries"
+  default_prompt: "Use $prepare-physical-security-assessment-summary to prepare a physical security assessment summary."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Map Existing Controls"
+  short_description: "Map controls"
+  default_prompt: "Use $map-existing-controls to map existing physical security controls."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compare Security Improvement Options"
+  short_description: "Compare options"
+  default_prompt: "Use $compare-security-improvement-options to compare physical security improvement options."
+policy:
+  allow_implicit_invocation: true

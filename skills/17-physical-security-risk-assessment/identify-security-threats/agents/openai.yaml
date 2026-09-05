@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Security Threats"
+  short_description: "Identify threats"
+  default_prompt: "Use $identify-security-threats to identify physical security threat categories."
+policy:
+  allow_implicit_invocation: true

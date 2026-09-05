@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Risk Likelihood"
+  short_description: "Assess likelihood"
+  default_prompt: "Use $assess-risk-likelihood to assess physical security risk likelihood."
+policy:
+  allow_implicit_invocation: true

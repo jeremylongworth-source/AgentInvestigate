@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Physical Vulnerabilities"
+  short_description: "Assess vulnerabilities"
+  default_prompt: "Use $assess-physical-vulnerabilities to assess supplied physical security vulnerabilities."
+policy:
+  allow_implicit_invocation: true

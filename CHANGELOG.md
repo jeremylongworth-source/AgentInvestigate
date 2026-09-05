@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-23 Physical Security & Risk Assessment`.
+- Added all 11 Family 17 physical-security and risk-assessment skill packages.
+- Added AI-23 physical security scenarios, reasoning-chain validation, composition-target checks, and engineering/fire/life-safety boundary checks.
 - Completed `AI-22 Incident Response, Communication & De-escalation`.
 - Added all Family 15 incident-response and Family 16 communication/de-escalation skill packages.
 - Added AI-22 incident and communication scenarios, capability validation, and the no-physical-intervention certification boundary.

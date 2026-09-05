@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, the Research, OSINT & Public Records skill family, the Identity, Entity & Timeline Analysis skill family, the Interviewing, Witnesses & Statements skill family, the Evidence & Chain of Custody skill family, the Investigative Analysis skill family, the Reporting, Findings & Case Presentation skill family, the Observation & Surveillance Governance skill family, the Corporate & Workplace Investigations skill family, the Background Screening & Due Diligence skill family, the Security Operations, Access & Patrol skill family, and the Incident Response and Communication & De-escalation skill families.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, the Research, OSINT & Public Records skill family, the Identity, Entity & Timeline Analysis skill family, the Interviewing, Witnesses & Statements skill family, the Evidence & Chain of Custody skill family, the Investigative Analysis skill family, the Reporting, Findings & Case Presentation skill family, the Observation & Surveillance Governance skill family, the Corporate & Workplace Investigations skill family, the Background Screening & Due Diligence skill family, the Security Operations, Access & Patrol skill family, the Incident Response and Communication & De-escalation skill families, and the Physical Security & Risk Assessment skill family.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-22 Incident Response, Communication & De-escalation`
-- Recommended next wave: `AI-23 Physical Security & Risk Assessment`
+- Latest completed wave: `AI-23 Physical Security & Risk Assessment`
+- Recommended next wave: `AI-24 Security Systems & Technology`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -59,7 +59,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Background screening and due diligence scenarios: `tests/reference-skills/AI-20-screening-due-diligence-scenarios.json`
 - Security operations scenarios: `tests/reference-skills/AI-21-security-operations-scenarios.json`
 - Incident response and communication scenarios: `tests/reference-skills/AI-22-incident-communication-scenarios.json`
-- Latest handoff: `docs/development/handoffs/AI-22-final-handoff.md`
+- Physical security scenarios: `tests/reference-skills/AI-23-physical-security-scenarios.json`
+- Latest handoff: `docs/development/handoffs/AI-23-final-handoff.md`
 
 ## Development Approach
 

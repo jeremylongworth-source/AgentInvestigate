@@ -25,6 +25,7 @@ TOKENS = {
     "AI-20": "AGENTINVESTIGATE_AI_20_SCREENING_DUE_DILIGENCE_READY",
     "AI-21": "AGENTINVESTIGATE_AI_21_SECURITY_OPERATIONS_READY",
     "AI-22": "AGENTINVESTIGATE_AI_22_INCIDENT_COMMUNICATION_READY",
+    "AI-23": "AGENTINVESTIGATE_AI_23_PHYSICAL_SECURITY_READY",
 }
 
 AI10_FAMILIES = {
@@ -363,6 +364,44 @@ AI22_CERTIFICATION_BOUNDARY = "No physical intervention instruction."
 
 AI22_GATE = "Incident response and communication skills must not provide physical intervention instruction."
 
+AI23_FAMILY = "17-physical-security-risk-assessment"
+
+AI23_REASONING_CHAIN = {
+    "assets",
+    "threats",
+    "vulnerabilities",
+    "consequences",
+    "likelihood",
+    "risk",
+    "controls",
+    "gaps",
+    "options",
+    "prioritized improvements",
+}
+
+AI23_BOUNDARY_TERMS = {
+    "structural engineering",
+    "electrical approval",
+    "fire-code approval",
+    "life-safety certification",
+}
+
+AI23_COMPOSITION_TARGETS = {
+    "physical-security-analyst",
+    "security-risk-assessor",
+}
+
+AI23_PROHIBITED_SECURITY_DETAIL = {
+    "attack instructions",
+    "bypass instructions",
+    "forced entry",
+    "alarm defeat",
+    "camera evasion",
+    "access-control circumvention",
+}
+
+AI23_GATE = "Conceptual security analysis must not be presented as structural engineering, electrical approval, fire-code approval, or life-safety certification."
+
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
         "family": "09-investigative-analysis",
@@ -692,6 +731,20 @@ def incident_communication_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -
     return skills
 
 
+def physical_security_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI23_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -709,6 +762,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **screening_due_diligence_skills(taxonomy_by_name),
         **security_operations_skills(taxonomy_by_name),
         **incident_communication_skills(taxonomy_by_name),
+        **physical_security_skills(taxonomy_by_name),
     }
 
 
@@ -726,6 +780,7 @@ def scenario_suites(
     ai20_skills: dict[str, dict[str, str]],
     ai21_skills: dict[str, dict[str, str]],
     ai22_skills: dict[str, dict[str, str]],
+    ai23_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -871,6 +926,18 @@ def scenario_suites(
             "prohibited_physical_intervention": AI22_PROHIBITED_PHYSICAL_INTERVENTION,
             "gate": AI22_GATE,
         },
+        {
+            "label": "AI-23-physical-security-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-23-physical-security-scenarios.json",
+            "token": TOKENS["AI-23"],
+            "skills": ai23_skills,
+            "skill_list_key": "skills",
+            "reasoning_chain": AI23_REASONING_CHAIN,
+            "composition_targets": AI23_COMPOSITION_TARGETS,
+            "boundary_terms": AI23_BOUNDARY_TERMS,
+            "prohibited_security_detail": AI23_PROHIBITED_SECURITY_DETAIL,
+            "gate": AI23_GATE,
+        },
     )
 
 
@@ -1014,6 +1081,20 @@ def validate_skill_package(
                 errors.append(f"{name}: missing AI-22 physical intervention boundary term {term}")
         if AI22_CERTIFICATION_BOUNDARY.lower() not in lower_text:
             errors.append(f"{name}: missing AI-22 certification boundary")
+    if expected_package["family"] == AI23_FAMILY:
+        lower_text = text.lower()
+        for term in AI23_REASONING_CHAIN:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-23 reasoning-chain term {term}")
+        for term in AI23_COMPOSITION_TARGETS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-23 composition target {term}")
+        for term in AI23_BOUNDARY_TERMS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-23 boundary term {term}")
+        for term in AI23_PROHIBITED_SECURITY_DETAIL:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-23 prohibited security detail {term}")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -1170,6 +1251,18 @@ def validate_scenario_suite(
     if expected_prohibited_physical_intervention is not None:
         if set(data.get("prohibited_physical_intervention", [])) != set(expected_prohibited_physical_intervention):
             errors.append(f"{label}: prohibited_physical_intervention mismatch")
+    expected_reasoning_chain = suite.get("reasoning_chain")
+    if expected_reasoning_chain is not None:
+        if set(data.get("reasoning_chain", [])) != set(expected_reasoning_chain):
+            errors.append(f"{label}: reasoning_chain mismatch")
+    expected_boundary_terms = suite.get("boundary_terms")
+    if expected_boundary_terms is not None:
+        if set(data.get("boundary_terms", [])) != set(expected_boundary_terms):
+            errors.append(f"{label}: boundary_terms mismatch")
+    expected_prohibited_security_detail = suite.get("prohibited_security_detail")
+    if expected_prohibited_security_detail is not None:
+        if set(data.get("prohibited_security_detail", [])) != set(expected_prohibited_security_detail):
+            errors.append(f"{label}: prohibited_security_detail mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -1206,6 +1299,12 @@ def validate_scenario_suite(
     has_communication_capabilities = False
     observed_ai22_communication_capabilities: set[str] = set()
     observed_ai22_prohibited_physical_intervention: set[str] = set()
+    has_ai23_reasoning_chain = False
+    observed_ai23_reasoning_chain: set[str] = set()
+    has_ai23_composition_target = False
+    observed_ai23_composition_targets: set[str] = set()
+    observed_ai23_boundary_terms: set[str] = set()
+    observed_ai23_prohibited_security_detail: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -1336,6 +1435,29 @@ def validate_scenario_suite(
         for term in AI22_PROHIBITED_PHYSICAL_INTERVENTION:
             if term in scenario.get("test_classes", []):
                 observed_ai22_prohibited_physical_intervention.add(term)
+        if "required reasoning chain" in scenario.get("test_classes", []):
+            has_ai23_reasoning_chain = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for term in AI23_REASONING_CHAIN:
+                if term not in scenario_text:
+                    errors.append(f"{scenario_id}: missing AI-23 reasoning-chain term {term}")
+        for term in AI23_REASONING_CHAIN:
+            if term in scenario.get("test_classes", []):
+                observed_ai23_reasoning_chain.add(term)
+        if "composition target" in scenario.get("test_classes", []):
+            has_ai23_composition_target = True
+        for term in AI23_COMPOSITION_TARGETS:
+            if term in scenario.get("test_classes", []):
+                observed_ai23_composition_targets.add(term)
+        for term in AI23_BOUNDARY_TERMS:
+            if term in scenario.get("test_classes", []):
+                observed_ai23_boundary_terms.add(term)
+        for term in AI23_PROHIBITED_SECURITY_DETAIL:
+            if term in scenario.get("test_classes", []):
+                observed_ai23_prohibited_security_detail.add(term)
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -1399,6 +1521,19 @@ def validate_scenario_suite(
             errors.append(f"{label}: AI-22 communication capability coverage mismatch")
         if observed_ai22_prohibited_physical_intervention != AI22_PROHIBITED_PHYSICAL_INTERVENTION:
             errors.append(f"{label}: AI-22 physical intervention boundary coverage mismatch")
+    if suite.get("gate") == AI23_GATE:
+        if not has_ai23_reasoning_chain:
+            errors.append(f"{label}: missing required reasoning chain scenario")
+        if observed_ai23_reasoning_chain != AI23_REASONING_CHAIN:
+            errors.append(f"{label}: AI-23 reasoning-chain coverage mismatch")
+        if not has_ai23_composition_target:
+            errors.append(f"{label}: missing composition target scenario")
+        if observed_ai23_composition_targets != AI23_COMPOSITION_TARGETS:
+            errors.append(f"{label}: AI-23 composition target coverage mismatch")
+        if observed_ai23_boundary_terms != AI23_BOUNDARY_TERMS:
+            errors.append(f"{label}: AI-23 boundary term coverage mismatch")
+        if observed_ai23_prohibited_security_detail != AI23_PROHIBITED_SECURITY_DETAIL:
+            errors.append(f"{label}: AI-23 prohibited security detail coverage mismatch")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -1417,6 +1552,7 @@ def validate(repo_root: Path) -> list[str]:
     ai20_skills = screening_due_diligence_skills(taxonomy_by_name)
     ai21_skills = security_operations_skills(taxonomy_by_name)
     ai22_skills = incident_communication_skills(taxonomy_by_name)
+    ai23_skills = physical_security_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -1434,6 +1570,7 @@ def validate(repo_root: Path) -> list[str]:
         ai20_skills,
         ai21_skills,
         ai22_skills,
+        ai23_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -1451,7 +1588,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-22 incident and communication skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-23 physical security skills.")
     return 0
 
 

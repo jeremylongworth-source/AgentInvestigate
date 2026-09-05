@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Security Consequences"
+  short_description: "Assess consequences"
+  default_prompt: "Use $assess-security-consequences to assess physical security consequences."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Control Gaps"
+  short_description: "Identify control gaps"
+  default_prompt: "Use $identify-control-gaps to identify physical security control gaps."
+policy:
+  allow_implicit_invocation: true
