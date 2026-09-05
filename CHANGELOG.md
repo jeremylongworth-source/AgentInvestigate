@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-28 Ontario Investigation & Security Module`.
+- Added Ontario specialization at `specializations/canada/ontario/` with HIGH-freshness licensing, training/testing, conduct, authority/restrictions, privacy/reporting, security operations, and provincial law references.
+- Added AI-28 regulatory fixture and specialization validation enforcing PSISA/provincial-source and federal-overlap boundaries.
 - Completed `AI-27 Canadian Federal Regulatory Foundation`.
 - Added the first jurisdiction specialization at `specializations/canada/federal/` with HIGH-freshness federal privacy, criminal-law, evidence, human-rights, information-handling, and federally regulated organization references.
 - Added AI-27 regulatory fixture and specialization validation enforcing the boundary that federal rules alone do not authorize private investigative or security work.
