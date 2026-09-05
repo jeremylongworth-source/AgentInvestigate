@@ -1,0 +1,6 @@
+interface:
+  display_name: "Triage Security Incident"
+  short_description: "Triage security incidents"
+  default_prompt: "Use $triage-security-incident to triage this security incident."
+policy:
+  allow_implicit_invocation: true

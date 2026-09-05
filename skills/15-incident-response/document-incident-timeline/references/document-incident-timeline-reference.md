@@ -1,8 +1,8 @@
-# Determine Emergency Escalation Reference
+# Document Incident Timeline Reference
 
 ## When To Read
 
-Read this reference when using `determine-emergency-escalation` for incident response, communication, de-escalation, emergency-service support, scene preservation, notification, radio communication, audience adaptation, bias review, documentation, post-incident review, or escalation support.
+Read this reference when using `document-incident-timeline` for incident response, communication, de-escalation, emergency-service support, scene preservation, notification, radio communication, audience adaptation, bias review, documentation, post-incident review, or escalation support.
 
 ## Incident Capabilities
 

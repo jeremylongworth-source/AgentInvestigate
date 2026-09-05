@@ -1,14 +1,14 @@
 ---
-name: determine-emergency-escalation
-description: Determine whether supplied incident facts require emergency or qualified escalation without replacing local procedures or responders.
+name: assess-conflict-risk
+description: Assess supplied conflict-risk facts for escalation, communication, safety, and documentation needs without intervention tactics.
 license: MIT
 ---
 
-# Determine Emergency Escalation
+# Assess Conflict Risk
 
 ## Overview
 
-Determines emergency, supervisor, qualified-review, or documentation-only escalation needs from supplied incident facts. This is a `CERTIFICATION_BOUNDARY` incident response skill for professional security support.
+Assesses conflict risk signals and routes to de-escalation, notification, supervisor, or emergency support. This is a `CERTIFICATION_BOUNDARY` communication and de-escalation skill for professional security support.
 
 AI-22 incident capabilities:
 
@@ -33,7 +33,7 @@ Certification boundary: No physical intervention instruction.
 
 ## Triggers
 
-- User asks to triage, determine, support, preserve, identify, document, collect, prepare, assess, draft, adapt, review, or communicate emergency escalation.
+- User asks to triage, determine, support, preserve, identify, document, collect, prepare, assess, draft, adapt, review, or communicate conflict risk.
 - User supplies incident facts, conflict-risk facts, alarm facts, scene details, emergency-service access needs, notifications, radio-message context, de-escalation notes, audience needs, bias concerns, timeline records, or post-incident review material.
 - User needs incident capabilities across recognition, escalation, notification, scene preservation, emergency-service support, documentation, post-incident review.
 - User needs communication capabilities across conflict avoidance, de-escalation, radio communication, incident notification, audience adaptation, bias review.
@@ -50,7 +50,7 @@ Certification boundary: No physical intervention instruction.
 ## Required Inputs
 
 - Security role, site or incident scope, authority basis, jurisdiction when required, post orders or local procedure if supplied, urgency, safety status, and review boundary.
-- Supplied facts relevant to emergency escalation, including dates, times, locations, people or roles, observations, incident conditions, communications, notifications, actions already taken, records, and open issues where applicable.
+- Supplied facts relevant to conflict risk, including dates, times, locations, people or roles, observations, incident conditions, communications, notifications, actions already taken, records, and open issues where applicable.
 - Applicable emergency-service path, supervisor path, client contact, communication channel, reporting format, scene-preservation limits, and records to preserve.
 - Known limitations, missing facts, disputed facts, vulnerable people, injuries, threats, hazards, conflict risk, failed communication, bias risk, unresolved issues, and required qualified review.
 
@@ -71,7 +71,7 @@ Certification boundary: No physical intervention instruction.
 
 ## Dependencies
 
-- Canonical taxonomy dependency: `triage-security-incident`.
+- Canonical taxonomy dependency: `log-security-occurrence`.
 - Use `triage-security-incident`, `determine-emergency-escalation`, `support-emergency-service-access`, and `preserve-incident-scene` for recognition, escalation, emergency-service support, and scene preservation.
 - Use `identify-incident-notification-requirement`, `document-incident-timeline`, `collect-incident-account`, `prepare-post-incident-review`, and `identify-corrective-action` for notification, documentation, accounts, review, and corrective-action workflows.
 - Use `assess-conflict-risk`, `prepare-deescalation-communication-plan`, `draft-radio-communication`, `prepare-incident-notification`, `adapt-message-to-audience`, `review-communication-bias`, `document-deescalation-attempt`, and `identify-communication-escalation-need` for communication and de-escalation workflows.
@@ -139,7 +139,7 @@ Escalate to emergency services, supervisor, security command, client authority, 
 
 ## References
 
-- Read `references/emergency-escalation-checklist.md` when preparing emergency escalation outputs.
+- Read `references/assess-conflict-risk-reference.md` when preparing conflict risk outputs.
 - Use shared schemas and report structure contracts for incidents, timelines, notifications, communications, de-escalation attempts, scene notes, post-incident reviews, corrective actions, confidence, and escalation fields.
 
 ## Testing

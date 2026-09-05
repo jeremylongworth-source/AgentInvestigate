@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Conflict Risk"
+  short_description: "Assess conflict risk"
+  default_prompt: "Use $assess-conflict-risk to assess conflict risk and escalation needs."
+policy:
+  allow_implicit_invocation: true

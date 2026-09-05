@@ -1,0 +1,6 @@
+interface:
+  display_name: "Document Incident Timeline"
+  short_description: "Document timelines"
+  default_prompt: "Use $document-incident-timeline to document this incident timeline."
+policy:
+  allow_implicit_invocation: true

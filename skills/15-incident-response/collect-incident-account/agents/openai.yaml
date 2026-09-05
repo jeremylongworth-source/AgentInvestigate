@@ -1,0 +1,6 @@
+interface:
+  display_name: "Collect Incident Account"
+  short_description: "Collect incident accounts"
+  default_prompt: "Use $collect-incident-account to prepare neutral incident account collection notes."
+policy:
+  allow_implicit_invocation: true

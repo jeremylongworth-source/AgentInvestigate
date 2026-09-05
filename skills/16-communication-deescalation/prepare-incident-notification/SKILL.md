@@ -1,14 +1,14 @@
 ---
-name: determine-emergency-escalation
-description: Determine whether supplied incident facts require emergency or qualified escalation without replacing local procedures or responders.
+name: prepare-incident-notification
+description: Prepare incident notifications from supplied facts, audience, urgency, notification requirement, and review boundary.
 license: MIT
 ---
 
-# Determine Emergency Escalation
+# Prepare Incident Notification
 
 ## Overview
 
-Determines emergency, supervisor, qualified-review, or documentation-only escalation needs from supplied incident facts. This is a `CERTIFICATION_BOUNDARY` incident response skill for professional security support.
+Prepares factual incident notifications tailored to audience, urgency, escalation path, and known limits. This is a `ROUTINE` communication and de-escalation skill for professional security support.
 
 AI-22 incident capabilities:
 
@@ -33,7 +33,7 @@ Certification boundary: No physical intervention instruction.
 
 ## Triggers
 
-- User asks to triage, determine, support, preserve, identify, document, collect, prepare, assess, draft, adapt, review, or communicate emergency escalation.
+- User asks to triage, determine, support, preserve, identify, document, collect, prepare, assess, draft, adapt, review, or communicate incident notification.
 - User supplies incident facts, conflict-risk facts, alarm facts, scene details, emergency-service access needs, notifications, radio-message context, de-escalation notes, audience needs, bias concerns, timeline records, or post-incident review material.
 - User needs incident capabilities across recognition, escalation, notification, scene preservation, emergency-service support, documentation, post-incident review.
 - User needs communication capabilities across conflict avoidance, de-escalation, radio communication, incident notification, audience adaptation, bias review.
@@ -50,7 +50,7 @@ Certification boundary: No physical intervention instruction.
 ## Required Inputs
 
 - Security role, site or incident scope, authority basis, jurisdiction when required, post orders or local procedure if supplied, urgency, safety status, and review boundary.
-- Supplied facts relevant to emergency escalation, including dates, times, locations, people or roles, observations, incident conditions, communications, notifications, actions already taken, records, and open issues where applicable.
+- Supplied facts relevant to incident notification, including dates, times, locations, people or roles, observations, incident conditions, communications, notifications, actions already taken, records, and open issues where applicable.
 - Applicable emergency-service path, supervisor path, client contact, communication channel, reporting format, scene-preservation limits, and records to preserve.
 - Known limitations, missing facts, disputed facts, vulnerable people, injuries, threats, hazards, conflict risk, failed communication, bias risk, unresolved issues, and required qualified review.
 
@@ -71,7 +71,7 @@ Certification boundary: No physical intervention instruction.
 
 ## Dependencies
 
-- Canonical taxonomy dependency: `triage-security-incident`.
+- Canonical taxonomy dependency: `identify-incident-notification-requirement`.
 - Use `triage-security-incident`, `determine-emergency-escalation`, `support-emergency-service-access`, and `preserve-incident-scene` for recognition, escalation, emergency-service support, and scene preservation.
 - Use `identify-incident-notification-requirement`, `document-incident-timeline`, `collect-incident-account`, `prepare-post-incident-review`, and `identify-corrective-action` for notification, documentation, accounts, review, and corrective-action workflows.
 - Use `assess-conflict-risk`, `prepare-deescalation-communication-plan`, `draft-radio-communication`, `prepare-incident-notification`, `adapt-message-to-audience`, `review-communication-bias`, `document-deescalation-attempt`, and `identify-communication-escalation-need` for communication and de-escalation workflows.
@@ -111,7 +111,7 @@ Confirm security-service authority, user role, site assignment, post orders, loc
 
 ## Sensitivity Handling
 
-Default class: `CERTIFICATION_BOUNDARY`. Upgrade to `REGULATED`, `INTRUSIVE`, or `CERTIFICATION_BOUNDARY` when incident response or communication work involves immediate danger, injuries, threats, medical issues, fire or life-safety issues, vulnerable people, conflict escalation, alarm response, emergency-service support, scene preservation, suspected crime, use-of-force implications, protected characteristics, sensitive personal information, privacy, reporting duties, licensing, or material consequences.
+Default class: `ROUTINE`. Upgrade to `REGULATED`, `INTRUSIVE`, or `CERTIFICATION_BOUNDARY` when incident response or communication work involves immediate danger, injuries, threats, medical issues, fire or life-safety issues, vulnerable people, conflict escalation, alarm response, emergency-service support, scene preservation, suspected crime, use-of-force implications, protected characteristics, sensitive personal information, privacy, reporting duties, licensing, or material consequences.
 
 ## Output Contract
 
@@ -139,7 +139,7 @@ Escalate to emergency services, supervisor, security command, client authority, 
 
 ## References
 
-- Read `references/emergency-escalation-checklist.md` when preparing emergency escalation outputs.
+- Read `references/prepare-incident-notification-reference.md` when preparing incident notification outputs.
 - Use shared schemas and report structure contracts for incidents, timelines, notifications, communications, de-escalation attempts, scene notes, post-incident reviews, corrective actions, confidence, and escalation fields.
 
 ## Testing

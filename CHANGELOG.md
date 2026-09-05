@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-22 Incident Response, Communication & De-escalation`.
+- Added all Family 15 incident-response and Family 16 communication/de-escalation skill packages.
+- Added AI-22 incident and communication scenarios, capability validation, and the no-physical-intervention certification boundary.
 - Completed `AI-21 Security Operations, Access & Patrol`.
 - Added all 15 Family 14 security operations, access, and patrol skill packages.
 - Added AI-21 security operations scenarios, representative lifecycle validation, composition-target checks, and operational misuse boundary checks.

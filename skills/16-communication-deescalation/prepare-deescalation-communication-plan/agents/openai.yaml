@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Deescalation Communication Plan"
+  short_description: "Plan de-escalation"
+  default_prompt: "Use $prepare-deescalation-communication-plan to prepare a de-escalation communication plan."
+policy:
+  allow_implicit_invocation: true

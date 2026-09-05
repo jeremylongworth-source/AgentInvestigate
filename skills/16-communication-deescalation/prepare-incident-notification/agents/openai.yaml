@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Incident Notification"
+  short_description: "Prepare notifications"
+  default_prompt: "Use $prepare-incident-notification to prepare an incident notification."
+policy:
+  allow_implicit_invocation: true

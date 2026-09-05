@@ -1,0 +1,6 @@
+interface:
+  display_name: "Support Emergency Service Access"
+  short_description: "Support responder access"
+  default_prompt: "Use $support-emergency-service-access to prepare emergency-service access information."
+policy:
+  allow_implicit_invocation: true

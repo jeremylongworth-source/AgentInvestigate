@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Communication Bias"
+  short_description: "Review bias"
+  default_prompt: "Use $review-communication-bias to review this security communication for bias."
+policy:
+  allow_implicit_invocation: true

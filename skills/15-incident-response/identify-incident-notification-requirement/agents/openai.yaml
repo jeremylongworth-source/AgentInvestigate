@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Incident Notification Requirement"
+  short_description: "Identify notifications"
+  default_prompt: "Use $identify-incident-notification-requirement to identify incident notification requirements."
+policy:
+  allow_implicit_invocation: true

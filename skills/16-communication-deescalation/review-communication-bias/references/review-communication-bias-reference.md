@@ -1,8 +1,8 @@
-# Determine Emergency Escalation Reference
+# Review Communication Bias Reference
 
 ## When To Read
 
-Read this reference when using `determine-emergency-escalation` for incident response, communication, de-escalation, emergency-service support, scene preservation, notification, radio communication, audience adaptation, bias review, documentation, post-incident review, or escalation support.
+Read this reference when using `review-communication-bias` for incident response, communication, de-escalation, emergency-service support, scene preservation, notification, radio communication, audience adaptation, bias review, documentation, post-incident review, or escalation support.
 
 ## Incident Capabilities
 

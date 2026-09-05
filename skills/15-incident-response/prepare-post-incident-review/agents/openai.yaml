@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Post Incident Review"
+  short_description: "Prepare incident reviews"
+  default_prompt: "Use $prepare-post-incident-review to prepare a post-incident review."
+policy:
+  allow_implicit_invocation: true

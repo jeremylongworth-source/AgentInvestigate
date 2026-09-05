@@ -1,14 +1,14 @@
 ---
-name: determine-emergency-escalation
-description: Determine whether supplied incident facts require emergency or qualified escalation without replacing local procedures or responders.
+name: preserve-incident-scene
+description: Prepare high-level incident scene preservation notes from supplied facts without tactical confrontation or evidence-control overreach.
 license: MIT
 ---
 
-# Determine Emergency Escalation
+# Preserve Incident Scene
 
 ## Overview
 
-Determines emergency, supervisor, qualified-review, or documentation-only escalation needs from supplied incident facts. This is a `CERTIFICATION_BOUNDARY` incident response skill for professional security support.
+Supports scene preservation through safe documentation, access notes, contamination risks, and escalation needs. This is a `CERTIFICATION_BOUNDARY` incident response skill for professional security support.
 
 AI-22 incident capabilities:
 
@@ -33,7 +33,7 @@ Certification boundary: No physical intervention instruction.
 
 ## Triggers
 
-- User asks to triage, determine, support, preserve, identify, document, collect, prepare, assess, draft, adapt, review, or communicate emergency escalation.
+- User asks to triage, determine, support, preserve, identify, document, collect, prepare, assess, draft, adapt, review, or communicate incident scene preservation.
 - User supplies incident facts, conflict-risk facts, alarm facts, scene details, emergency-service access needs, notifications, radio-message context, de-escalation notes, audience needs, bias concerns, timeline records, or post-incident review material.
 - User needs incident capabilities across recognition, escalation, notification, scene preservation, emergency-service support, documentation, post-incident review.
 - User needs communication capabilities across conflict avoidance, de-escalation, radio communication, incident notification, audience adaptation, bias review.
@@ -50,7 +50,7 @@ Certification boundary: No physical intervention instruction.
 ## Required Inputs
 
 - Security role, site or incident scope, authority basis, jurisdiction when required, post orders or local procedure if supplied, urgency, safety status, and review boundary.
-- Supplied facts relevant to emergency escalation, including dates, times, locations, people or roles, observations, incident conditions, communications, notifications, actions already taken, records, and open issues where applicable.
+- Supplied facts relevant to incident scene preservation, including dates, times, locations, people or roles, observations, incident conditions, communications, notifications, actions already taken, records, and open issues where applicable.
 - Applicable emergency-service path, supervisor path, client contact, communication channel, reporting format, scene-preservation limits, and records to preserve.
 - Known limitations, missing facts, disputed facts, vulnerable people, injuries, threats, hazards, conflict risk, failed communication, bias risk, unresolved issues, and required qualified review.
 
@@ -139,7 +139,7 @@ Escalate to emergency services, supervisor, security command, client authority, 
 
 ## References
 
-- Read `references/emergency-escalation-checklist.md` when preparing emergency escalation outputs.
+- Read `references/preserve-incident-scene-reference.md` when preparing incident scene preservation outputs.
 - Use shared schemas and report structure contracts for incidents, timelines, notifications, communications, de-escalation attempts, scene notes, post-incident reviews, corrective actions, confidence, and escalation fields.
 
 ## Testing

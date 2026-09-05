@@ -1,0 +1,6 @@
+interface:
+  display_name: "Preserve Incident Scene"
+  short_description: "Preserve incident scenes"
+  default_prompt: "Use $preserve-incident-scene to prepare incident scene preservation notes."
+policy:
+  allow_implicit_invocation: true

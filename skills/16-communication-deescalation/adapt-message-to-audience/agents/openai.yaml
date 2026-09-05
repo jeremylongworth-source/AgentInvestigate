@@ -1,0 +1,6 @@
+interface:
+  display_name: "Adapt Message To Audience"
+  short_description: "Adapt messages"
+  default_prompt: "Use $adapt-message-to-audience to adapt this incident message to its audience."
+policy:
+  allow_implicit_invocation: true

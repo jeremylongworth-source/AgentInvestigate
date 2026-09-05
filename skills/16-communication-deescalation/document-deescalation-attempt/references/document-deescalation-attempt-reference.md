@@ -1,8 +1,8 @@
-# Determine Emergency Escalation Reference
+# Document Deescalation Attempt Reference
 
 ## When To Read
 
-Read this reference when using `determine-emergency-escalation` for incident response, communication, de-escalation, emergency-service support, scene preservation, notification, radio communication, audience adaptation, bias review, documentation, post-incident review, or escalation support.
+Read this reference when using `document-deescalation-attempt` for incident response, communication, de-escalation, emergency-service support, scene preservation, notification, radio communication, audience adaptation, bias review, documentation, post-incident review, or escalation support.
 
 ## Incident Capabilities
 

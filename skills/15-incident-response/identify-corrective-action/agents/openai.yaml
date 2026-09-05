@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Corrective Action"
+  short_description: "Identify corrective actions"
+  default_prompt: "Use $identify-corrective-action to identify candidate corrective actions."
+policy:
+  allow_implicit_invocation: true
