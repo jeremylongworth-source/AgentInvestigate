@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Unresolved Question"
+  short_description: "Identify unresolved questions"
+  default_prompt: "Use $identify-unresolved-question to identify unresolved questions in this matter."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Construct Event Chronology"
+  short_description: "Construct event chronologies"
+  default_prompt: "Use $construct-event-chronology to construct an event chronology from this material."
+policy:
+  allow_implicit_invocation: true

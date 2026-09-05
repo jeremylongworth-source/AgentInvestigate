@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compare Alternative Explanations"
+  short_description: "Compare explanations"
+  default_prompt: "Use $compare-alternative-explanations to compare plausible explanations for this matter."
+policy:
+  allow_implicit_invocation: true

@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-16 Investigative Analysis`.
+- Added the remaining 10 Family 09 investigative-analysis skill packages and upgraded `build-evidence-matrix`.
+- Added AI-16 investigative-analysis scenarios, hard-reasoning-rule validation, and disconfirming-evidence gate checks.
 - Completed `AI-15 Evidence & Chain of Custody`.
 - Added all 12 Family 08 evidence and chain-of-custody skill packages.
 - Added AI-15 evidence scenarios, representative continuity validation, and admissibility-boundary gate checks.

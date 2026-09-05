@@ -65,6 +65,8 @@ REQUIRED_FILES = (
     "docs/development/handoffs/AI-14-final-handoff.md",
     "tests/reference-skills/AI-15-evidence-scenarios.json",
     "docs/development/handoffs/AI-15-final-handoff.md",
+    "tests/reference-skills/AI-16-investigative-analysis-scenarios.json",
+    "docs/development/handoffs/AI-16-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
@@ -379,6 +381,21 @@ REQUIRED_TOKENS = {
         "identify-evidence-continuity-issue",
         "prepare-evidence-handling-escalation",
         "AI-16: Investigative Analysis.",
+    ),
+    "tests/reference-skills/AI-16-investigative-analysis-scenarios.json": (
+        "AGENTINVESTIGATE_AI_16_INVESTIGATIVE_ANALYSIS_READY",
+        "FACT ≠ INFERENCE ≠ ALLEGATION ≠ FINDING",
+        "plausible incorrect hypothesis",
+        "disconfirming evidence",
+        "Integration tests must include plausible but incorrect hypotheses and disconfirming evidence.",
+    ),
+    "docs/development/handoffs/AI-16-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_16_INVESTIGATIVE_ANALYSIS_READY",
+        "generate-investigative-hypotheses",
+        "test-investigative-hypothesis",
+        "assess-finding-confidence",
+        "draft-investigative-finding",
+        "AI-17: Reporting, Findings & Case Presentation.",
     ),
 }
 

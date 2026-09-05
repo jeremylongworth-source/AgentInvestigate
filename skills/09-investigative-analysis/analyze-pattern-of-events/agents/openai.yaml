@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze Pattern Of Events"
+  short_description: "Analyze event patterns"
+  default_prompt: "Use $analyze-pattern-of-events to analyze event patterns in this matter."
+policy:
+  allow_implicit_invocation: true

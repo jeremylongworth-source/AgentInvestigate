@@ -1,0 +1,6 @@
+interface:
+  display_name: "Draft Investigative Finding"
+  short_description: "Draft investigative findings"
+  default_prompt: "Use $draft-investigative-finding to draft an evidence-bounded investigative finding."
+policy:
+  allow_implicit_invocation: true

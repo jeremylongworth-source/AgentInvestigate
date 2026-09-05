@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Evidence Contradiction"
+  short_description: "Identify evidence contradictions"
+  default_prompt: "Use $identify-evidence-contradiction to identify contradictions in this evidence."
+policy:
+  allow_implicit_invocation: true

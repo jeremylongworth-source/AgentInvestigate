@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Source Weight"
+  short_description: "Assess source weight"
+  default_prompt: "Use $assess-source-weight to assess source weight for this material."
+policy:
+  allow_implicit_invocation: true

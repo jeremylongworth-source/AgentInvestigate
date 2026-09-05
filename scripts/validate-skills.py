@@ -18,6 +18,7 @@ TOKENS = {
     "AI-13": "AGENTINVESTIGATE_AI_13_ENTITY_ANALYSIS_READY",
     "AI-14": "AGENTINVESTIGATE_AI_14_INTERVIEWING_READY",
     "AI-15": "AGENTINVESTIGATE_AI_15_EVIDENCE_READY",
+    "AI-16": "AGENTINVESTIGATE_AI_16_INVESTIGATIVE_ANALYSIS_READY",
 }
 
 AI10_FAMILIES = {
@@ -154,6 +155,33 @@ AI15_CONTINUITY_ELEMENTS = {
 }
 
 AI15_GATE = "Continuity issues must be identified without claiming admissibility as a legal conclusion."
+
+AI16_FAMILY = "09-investigative-analysis"
+
+AI16_REASONING_RULE = "FACT ≠ INFERENCE ≠ ALLEGATION ≠ FINDING"
+
+AI16_REASONING_CATEGORIES = {
+    "FACT",
+    "INFERENCE",
+    "ALLEGATION",
+    "FINDING",
+}
+
+AI16_REQUIRED_CAPABILITIES = {
+    "evidence matrix",
+    "hypothesis generation",
+    "hypothesis testing",
+    "alternative explanations",
+    "evidence contradiction",
+    "event chronology",
+    "pattern analysis",
+    "source weight",
+    "finding confidence",
+    "unresolved question",
+    "investigative finding",
+}
+
+AI16_GATE = "Integration tests must include plausible but incorrect hypotheses and disconfirming evidence."
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -380,6 +408,21 @@ def evidence_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
     return skills
 
 
+def investigative_analysis_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI16_FAMILY:
+            continue
+        reference = "references/evidence-matrix-reference.md" if name == "build-evidence-matrix" else f"references/{name}-reference.md"
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": reference,
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -390,6 +433,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **entity_analysis_skills(taxonomy_by_name),
         **interviewing_skills(taxonomy_by_name),
         **evidence_skills(taxonomy_by_name),
+        **investigative_analysis_skills(taxonomy_by_name),
     }
 
 
@@ -400,6 +444,7 @@ def scenario_suites(
     ai13_skills: dict[str, dict[str, str]],
     ai14_skills: dict[str, dict[str, str]],
     ai15_skills: dict[str, dict[str, str]],
+    ai16_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -469,6 +514,17 @@ def scenario_suites(
             "required_emphasis": AI15_REQUIRED_EMPHASIS,
             "continuity_elements": AI15_CONTINUITY_ELEMENTS,
             "gate": AI15_GATE,
+        },
+        {
+            "label": "AI-16-investigative-analysis-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-16-investigative-analysis-scenarios.json",
+            "token": TOKENS["AI-16"],
+            "skills": ai16_skills,
+            "skill_list_key": "skills",
+            "required_capabilities": AI16_REQUIRED_CAPABILITIES,
+            "reasoning_rule": AI16_REASONING_RULE,
+            "reasoning_categories": AI16_REASONING_CATEGORIES,
+            "gate": AI16_GATE,
         },
     )
 
@@ -540,6 +596,13 @@ def validate_skill_package(
                 errors.append(f"{name}: missing AI-15 continuity element {term}")
         if "admissibility as a legal conclusion" not in text:
             errors.append(f"{name}: missing AI-15 admissibility legal conclusion boundary")
+    if expected_package["family"] == AI16_FAMILY:
+        if AI16_REASONING_RULE not in text:
+            errors.append(f"{name}: missing AI-16 hard reasoning rule")
+        if "disconfirming evidence" not in text:
+            errors.append(f"{name}: missing AI-16 disconfirming evidence gate")
+        if "plausible but incorrect hypotheses" not in text:
+            errors.append(f"{name}: missing AI-16 plausible incorrect hypothesis gate")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -625,6 +688,13 @@ def validate_scenario_suite(
     if expected_continuity_elements is not None:
         if set(data.get("continuity_elements", [])) != set(expected_continuity_elements):
             errors.append(f"{label}: continuity_elements mismatch")
+    expected_reasoning_rule = suite.get("reasoning_rule")
+    if expected_reasoning_rule is not None and data.get("reasoning_rule") != expected_reasoning_rule:
+        errors.append(f"{label}: reasoning_rule mismatch")
+    expected_reasoning_categories = suite.get("reasoning_categories")
+    if expected_reasoning_categories is not None:
+        if set(data.get("reasoning_categories", [])) != set(expected_reasoning_categories):
+            errors.append(f"{label}: reasoning_categories mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -639,6 +709,8 @@ def validate_scenario_suite(
     has_identity_overclaiming = False
     has_prohibited_inference = False
     has_representative_continuity = False
+    has_plausible_incorrect_hypothesis = False
+    has_disconfirming_evidence = False
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -676,6 +748,19 @@ def validate_scenario_suite(
                     errors.append(f"{scenario_id}: missing representative continuity element {element}")
             if "admissibility" not in scenario_text:
                 errors.append(f"{scenario_id}: missing admissibility boundary")
+        if "plausible incorrect hypothesis" in scenario.get("test_classes", []):
+            has_plausible_incorrect_hypothesis = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            )
+            if "disconfirming evidence" not in scenario_text:
+                errors.append(f"{scenario_id}: missing disconfirming evidence")
+            for category in AI16_REASONING_CATEGORIES:
+                if category.lower() not in scenario_text.lower():
+                    errors.append(f"{scenario_id}: missing reasoning category {category}")
+        if "disconfirming evidence" in scenario.get("test_classes", []):
+            has_disconfirming_evidence = True
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -688,6 +773,11 @@ def validate_scenario_suite(
         errors.append(f"{label}: missing prohibited inference scenario coverage")
     if suite.get("gate") == AI15_GATE and not has_representative_continuity:
         errors.append(f"{label}: missing representative continuity scenario coverage")
+    if suite.get("gate") == AI16_GATE:
+        if not has_plausible_incorrect_hypothesis:
+            errors.append(f"{label}: missing plausible incorrect hypothesis scenario coverage")
+        if not has_disconfirming_evidence:
+            errors.append(f"{label}: missing disconfirming evidence scenario coverage")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -699,10 +789,19 @@ def validate(repo_root: Path) -> list[str]:
     ai13_skills = entity_analysis_skills(taxonomy_by_name)
     ai14_skills = interviewing_skills(taxonomy_by_name)
     ai15_skills = evidence_skills(taxonomy_by_name)
+    ai16_skills = investigative_analysis_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
-    for suite in scenario_suites(ai10_skills, ai11_skills, ai12_skills, ai13_skills, ai14_skills, ai15_skills):
+    for suite in scenario_suites(
+        ai10_skills,
+        ai11_skills,
+        ai12_skills,
+        ai13_skills,
+        ai14_skills,
+        ai15_skills,
+        ai16_skills,
+    ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
 
@@ -719,7 +818,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-15 evidence skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-16 investigative analysis skills.")
     return 0
 
 

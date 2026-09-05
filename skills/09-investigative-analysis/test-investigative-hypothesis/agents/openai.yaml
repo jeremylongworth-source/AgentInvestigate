@@ -1,0 +1,6 @@
+interface:
+  display_name: "Test Investigative Hypothesis"
+  short_description: "Test investigative hypotheses"
+  default_prompt: "Use $test-investigative-hypothesis to test this hypothesis against the evidence."
+policy:
+  allow_implicit_invocation: true

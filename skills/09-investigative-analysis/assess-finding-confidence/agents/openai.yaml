@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Finding Confidence"
+  short_description: "Assess finding confidence"
+  default_prompt: "Use $assess-finding-confidence to assess confidence in this draft finding."
+policy:
+  allow_implicit_invocation: true

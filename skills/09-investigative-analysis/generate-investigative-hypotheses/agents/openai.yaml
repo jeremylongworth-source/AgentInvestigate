@@ -1,0 +1,6 @@
+interface:
+  display_name: "Generate Investigative Hypotheses"
+  short_description: "Generate investigative hypotheses"
+  default_prompt: "Use $generate-investigative-hypotheses to generate evidence-bounded hypotheses for this matter."
+policy:
+  allow_implicit_invocation: true
