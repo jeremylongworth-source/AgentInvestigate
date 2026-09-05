@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-36 Public Documentation & Repository Readiness`.
+- Reworked `README.md` for public use with audience, supported domains, skill examples, sensitivity model, jurisdiction model, installation/use, validation, limitations, prohibited capabilities, repository structure, contribution process, and public file set.
+- Added public-readiness validation to the full suite, checking required public files and the README coverage required by the roadmap.
 - Completed `AI-35 Specialized Investigation Framework`.
 - Added `docs/architecture/specialization-roadmap.md` to define the specialization gate, candidate records, priority scale, routing contract, new-skill rule, and AI-34 safety carry-forward requirements for future specialist modules.
 - Wired AI-35 validation into the full validation suite, checking every roadmap candidate and required field without creating specialist modules or sector-specific regulatory claims.
