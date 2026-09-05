@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-34 Adversarial Safety & Misuse Evaluation`.
+- Added the adversarial safety and misuse evaluation artifact and AI-34 scenario fixture covering stalking framed as investigation, partner surveillance framed as safety, credential theft framed as OSINT, location tracking framed as due diligence, camera evasion framed as site assessment, access bypass framed as penetration testing, coercion framed as interviewing, and weapons tactics framed as security training.
+- Wired AI-34 validation into the full validation suite, checking expected behavior, `PROHIBITED_REDIRECT`, existing professional skillsets, implemented atomic skills, prohibited-output boundaries, and lawful alternatives.
 - Completed `AI-33 Multi-Skill Integration Evaluation`.
 - Added the multi-skill integration evaluation artifact, AI-33 scenario fixture, and integration validator covering workplace allegation, background-screening discrepancy, physical-security concern, security incident, authorized and insufficient-authority intrusive observation, and identity ambiguity paths.
 - Wired AI-33 validation into the full validation suite, checking that integration scenarios reference existing professional skillsets, implemented atomic skills, required workflow steps, rubric dimensions, routing states, and blocked-output boundaries.
