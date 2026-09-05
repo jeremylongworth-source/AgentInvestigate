@@ -1,0 +1,6 @@
+interface:
+  display_name: "Verify Access Event"
+  short_description: "Verify access events"
+  default_prompt: "Use $verify-access-event to verify supplied access-event details."
+policy:
+  allow_implicit_invocation: true

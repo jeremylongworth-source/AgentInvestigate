@@ -1,0 +1,6 @@
+interface:
+  display_name: "Build Shift Plan"
+  short_description: "Build shift plans"
+  default_prompt: "Use $build-shift-plan to build a security shift plan from supplied post orders."
+policy:
+  allow_implicit_invocation: true

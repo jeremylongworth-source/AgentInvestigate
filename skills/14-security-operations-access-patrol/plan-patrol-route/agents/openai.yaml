@@ -1,0 +1,6 @@
+interface:
+  display_name: "Plan Patrol Route"
+  short_description: "Plan patrol routes"
+  default_prompt: "Use $plan-patrol-route to plan an authorized patrol route from supplied post orders."
+policy:
+  allow_implicit_invocation: true

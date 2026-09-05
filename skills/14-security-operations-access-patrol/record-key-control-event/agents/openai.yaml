@@ -1,0 +1,6 @@
+interface:
+  display_name: "Record Key Control Event"
+  short_description: "Record key control"
+  default_prompt: "Use $record-key-control-event to record this key-control event."
+policy:
+  allow_implicit_invocation: true

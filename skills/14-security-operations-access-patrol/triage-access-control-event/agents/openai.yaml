@@ -1,0 +1,6 @@
+interface:
+  display_name: "Triage Access Control Event"
+  short_description: "Triage access events"
+  default_prompt: "Use $triage-access-control-event to triage this access-control event."
+policy:
+  allow_implicit_invocation: true

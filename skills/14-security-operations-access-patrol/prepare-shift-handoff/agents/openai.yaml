@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Shift Handoff"
+  short_description: "Prepare handoffs"
+  default_prompt: "Use $prepare-shift-handoff to prepare a security shift handoff."
+policy:
+  allow_implicit_invocation: true

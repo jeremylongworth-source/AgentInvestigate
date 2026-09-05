@@ -1,0 +1,6 @@
+interface:
+  display_name: "Document Patrol Observation"
+  short_description: "Document patrol observations"
+  default_prompt: "Use $document-patrol-observation to document a patrol observation neutrally."
+policy:
+  allow_implicit_invocation: true

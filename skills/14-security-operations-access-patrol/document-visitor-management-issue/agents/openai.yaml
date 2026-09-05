@@ -1,0 +1,6 @@
+interface:
+  display_name: "Document Visitor Management Issue"
+  short_description: "Document visitor issues"
+  default_prompt: "Use $document-visitor-management-issue to document this visitor management issue."
+policy:
+  allow_implicit_invocation: true

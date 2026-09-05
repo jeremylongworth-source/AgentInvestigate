@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Security Operations Brief"
+  short_description: "Prepare operations briefs"
+  default_prompt: "Use $prepare-security-operations-brief to prepare a security operations brief."
+policy:
+  allow_implicit_invocation: true

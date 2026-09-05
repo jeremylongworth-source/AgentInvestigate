@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Post Order Gap"
+  short_description: "Identify post-order gaps"
+  default_prompt: "Use $identify-post-order-gap to identify post-order gaps from supplied security records."
+policy:
+  allow_implicit_invocation: true

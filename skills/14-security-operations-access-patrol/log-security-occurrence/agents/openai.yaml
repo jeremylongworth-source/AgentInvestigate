@@ -1,0 +1,6 @@
+interface:
+  display_name: "Log Security Occurrence"
+  short_description: "Log occurrences"
+  default_prompt: "Use $log-security-occurrence to log this security occurrence."
+policy:
+  allow_implicit_invocation: true

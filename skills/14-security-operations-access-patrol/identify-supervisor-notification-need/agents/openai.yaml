@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Supervisor Notification Need"
+  short_description: "Identify notifications"
+  default_prompt: "Use $identify-supervisor-notification-need to identify supervisor notification needs."
+policy:
+  allow_implicit_invocation: true

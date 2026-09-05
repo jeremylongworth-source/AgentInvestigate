@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Post Orders"
+  short_description: "Review post orders"
+  default_prompt: "Use $review-post-orders to review supplied security post orders for scope and gaps."
+policy:
+  allow_implicit_invocation: true

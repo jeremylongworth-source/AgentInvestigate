@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Security Log"
+  short_description: "Review security logs"
+  default_prompt: "Use $review-security-log to review this security log for completeness and gaps."
+policy:
+  allow_implicit_invocation: true

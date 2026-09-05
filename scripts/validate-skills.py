@@ -23,6 +23,7 @@ TOKENS = {
     "AI-18": "AGENTINVESTIGATE_AI_18_OBSERVATION_GOVERNANCE_READY",
     "AI-19": "AGENTINVESTIGATE_AI_19_WORKPLACE_INVESTIGATIONS_READY",
     "AI-20": "AGENTINVESTIGATE_AI_20_SCREENING_DUE_DILIGENCE_READY",
+    "AI-21": "AGENTINVESTIGATE_AI_21_SECURITY_OPERATIONS_READY",
 }
 
 AI10_FAMILIES = {
@@ -285,6 +286,38 @@ AI20_INTEGRATION_REQUIREMENTS = {
 }
 
 AI20_GATE = "Personal screening requires stronger privacy and authority controls than entity due diligence."
+
+AI21_FAMILY = "14-security-operations-access-patrol"
+
+AI21_LIFECYCLE_STEPS = {
+    "post orders",
+    "shift plan",
+    "patrol",
+    "observation",
+    "access event",
+    "alarm",
+    "occurrence",
+    "handoff",
+    "log review",
+}
+
+AI21_COMPOSITION_TARGETS = {
+    "security-officer",
+    "mobile-patrol-officer",
+}
+
+AI21_PROHIBITED_OPERATIONAL_CONTENT = {
+    "physical intervention",
+    "use of force",
+    "restraint techniques",
+    "weapons use",
+    "access-control bypass",
+    "lock bypass",
+    "alarm defeat",
+    "law-enforcement impersonation",
+}
+
+AI21_GATE = "Security operations skills must support post orders through log review without physical intervention, use of force, access-control bypass, alarm defeat, or law-enforcement impersonation."
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -587,6 +620,20 @@ def screening_due_diligence_skills(taxonomy_by_name: dict[str, dict[str, Any]]) 
     return skills
 
 
+def security_operations_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI21_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -602,6 +649,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **observation_governance_skills(taxonomy_by_name),
         **workplace_investigation_skills(taxonomy_by_name),
         **screening_due_diligence_skills(taxonomy_by_name),
+        **security_operations_skills(taxonomy_by_name),
     }
 
 
@@ -617,6 +665,7 @@ def scenario_suites(
     ai18_skills: dict[str, dict[str, str]],
     ai19_skills: dict[str, dict[str, str]],
     ai20_skills: dict[str, dict[str, str]],
+    ai21_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -738,6 +787,17 @@ def scenario_suites(
             "integration_requirements": AI20_INTEGRATION_REQUIREMENTS,
             "gate": AI20_GATE,
         },
+        {
+            "label": "AI-21-security-operations-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-21-security-operations-scenarios.json",
+            "token": TOKENS["AI-21"],
+            "skills": ai21_skills,
+            "skill_list_key": "skills",
+            "lifecycle_steps": AI21_LIFECYCLE_STEPS,
+            "composition_targets": AI21_COMPOSITION_TARGETS,
+            "prohibited_operational_content": AI21_PROHIBITED_OPERATIONAL_CONTENT,
+            "gate": AI21_GATE,
+        },
     )
 
 
@@ -855,6 +915,19 @@ def validate_skill_package(
         for term in ("eligibility", "adverse action", "criminal guilt", "legal liability"):
             if term not in lower_text:
                 errors.append(f"{name}: missing AI-20 prohibited outcome term {term}")
+    if expected_package["family"] == AI21_FAMILY:
+        lower_text = text.lower()
+        for step in AI21_LIFECYCLE_STEPS:
+            if step not in lower_text:
+                errors.append(f"{name}: missing AI-21 lifecycle step {step}")
+        for target in AI21_COMPOSITION_TARGETS:
+            if target not in lower_text:
+                errors.append(f"{name}: missing AI-21 composition target {target}")
+        for term in AI21_PROHIBITED_OPERATIONAL_CONTENT:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-21 prohibited operational content {term}")
+        if "supervisor" not in lower_text:
+            errors.append(f"{name}: missing AI-21 supervisor escalation boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -979,6 +1052,18 @@ def validate_scenario_suite(
     if expected_integration_requirements is not None:
         if set(data.get("integration_requirements", [])) != set(expected_integration_requirements):
             errors.append(f"{label}: integration_requirements mismatch")
+    expected_lifecycle_steps = suite.get("lifecycle_steps")
+    if expected_lifecycle_steps is not None:
+        if set(data.get("lifecycle_steps", [])) != set(expected_lifecycle_steps):
+            errors.append(f"{label}: lifecycle_steps mismatch")
+    expected_composition_targets = suite.get("composition_targets")
+    if expected_composition_targets is not None:
+        if set(data.get("composition_targets", [])) != set(expected_composition_targets):
+            errors.append(f"{label}: composition_targets mismatch")
+    expected_prohibited_operational_content = suite.get("prohibited_operational_content")
+    if expected_prohibited_operational_content is not None:
+        if set(data.get("prohibited_operational_content", [])) != set(expected_prohibited_operational_content):
+            errors.append(f"{label}: prohibited_operational_content mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -1005,6 +1090,11 @@ def validate_scenario_suite(
     has_entity_due_diligence_split = False
     has_stronger_privacy_authority_controls = False
     observed_ai20_integration_requirements: set[str] = set()
+    has_security_operations_lifecycle = False
+    observed_ai21_lifecycle_steps: set[str] = set()
+    has_composition_target = False
+    observed_ai21_composition_targets: set[str] = set()
+    observed_ai21_prohibited_operational_content: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -1102,6 +1192,26 @@ def validate_scenario_suite(
         for term in AI20_INTEGRATION_REQUIREMENTS:
             if term in scenario.get("test_classes", []):
                 observed_ai20_integration_requirements.add(term)
+        if "security operations lifecycle" in scenario.get("test_classes", []):
+            has_security_operations_lifecycle = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for step in AI21_LIFECYCLE_STEPS:
+                if step not in scenario_text:
+                    errors.append(f"{scenario_id}: missing AI-21 lifecycle step {step}")
+        for step in AI21_LIFECYCLE_STEPS:
+            if step in scenario.get("test_classes", []):
+                observed_ai21_lifecycle_steps.add(step)
+        if "composition target" in scenario.get("test_classes", []):
+            has_composition_target = True
+        for target in AI21_COMPOSITION_TARGETS:
+            if target in scenario.get("test_classes", []):
+                observed_ai21_composition_targets.add(target)
+        for term in AI21_PROHIBITED_OPERATIONAL_CONTENT:
+            if term in scenario.get("test_classes", []):
+                observed_ai21_prohibited_operational_content.add(term)
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -1143,6 +1253,17 @@ def validate_scenario_suite(
             errors.append(f"{label}: missing stronger privacy and authority controls scenario")
         if observed_ai20_integration_requirements != AI20_INTEGRATION_REQUIREMENTS:
             errors.append(f"{label}: AI-20 integration requirement coverage mismatch")
+    if suite.get("gate") == AI21_GATE:
+        if not has_security_operations_lifecycle:
+            errors.append(f"{label}: missing security operations lifecycle scenario")
+        if observed_ai21_lifecycle_steps != AI21_LIFECYCLE_STEPS:
+            errors.append(f"{label}: AI-21 lifecycle coverage mismatch")
+        if not has_composition_target:
+            errors.append(f"{label}: missing composition target scenario")
+        if observed_ai21_composition_targets != AI21_COMPOSITION_TARGETS:
+            errors.append(f"{label}: AI-21 composition target coverage mismatch")
+        if observed_ai21_prohibited_operational_content != AI21_PROHIBITED_OPERATIONAL_CONTENT:
+            errors.append(f"{label}: AI-21 prohibited operational content coverage mismatch")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -1159,6 +1280,7 @@ def validate(repo_root: Path) -> list[str]:
     ai18_skills = observation_governance_skills(taxonomy_by_name)
     ai19_skills = workplace_investigation_skills(taxonomy_by_name)
     ai20_skills = screening_due_diligence_skills(taxonomy_by_name)
+    ai21_skills = security_operations_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -1174,6 +1296,7 @@ def validate(repo_root: Path) -> list[str]:
         ai18_skills,
         ai19_skills,
         ai20_skills,
+        ai21_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -1191,7 +1314,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-20 screening and due diligence skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-21 security operations skills.")
     return 0
 
 

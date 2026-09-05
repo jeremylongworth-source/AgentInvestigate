@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-21 Security Operations, Access & Patrol`.
+- Added all 15 Family 14 security operations, access, and patrol skill packages.
+- Added AI-21 security operations scenarios, representative lifecycle validation, composition-target checks, and operational misuse boundary checks.
 - Completed `AI-20 Background Screening & Due Diligence`.
 - Added all 10 Family 13 background-screening and due-diligence skill packages.
 - Added AI-20 screening scenarios, person/entity split validation, and consent/relevance/public-records/adverse-information gate checks.

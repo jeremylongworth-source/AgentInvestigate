@@ -1,0 +1,6 @@
+interface:
+  display_name: "Document Alarm Response"
+  short_description: "Document alarm response"
+  default_prompt: "Use $document-alarm-response to document this alarm response."
+policy:
+  allow_implicit_invocation: true
