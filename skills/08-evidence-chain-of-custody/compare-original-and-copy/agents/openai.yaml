@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compare Original And Copy"
+  short_description: "Compare originals and copies"
+  default_prompt: "Use $compare-original-and-copy to compare the supplied original and copy records."
+policy:
+  allow_implicit_invocation: true

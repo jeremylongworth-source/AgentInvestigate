@@ -1,0 +1,6 @@
+interface:
+  display_name: "Create Evidence Log"
+  short_description: "Create evidence logs"
+  default_prompt: "Use $create-evidence-log to create a bounded evidence log for this matter."
+policy:
+  allow_implicit_invocation: true

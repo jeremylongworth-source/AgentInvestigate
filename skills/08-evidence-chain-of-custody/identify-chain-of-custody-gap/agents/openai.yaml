@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Chain Of Custody Gap"
+  short_description: "Identify custody gaps"
+  default_prompt: "Use $identify-chain-of-custody-gap to identify custody gaps in this record."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Build Chain Of Custody Summary"
+  short_description: "Summarize custody chains"
+  default_prompt: "Use $build-chain-of-custody-summary to summarize the custody history for this evidence."
+policy:
+  allow_implicit_invocation: true

@@ -63,6 +63,8 @@ REQUIRED_FILES = (
     "docs/development/handoffs/AI-13-final-handoff.md",
     "tests/reference-skills/AI-14-interviewing-scenarios.json",
     "docs/development/handoffs/AI-14-final-handoff.md",
+    "tests/reference-skills/AI-15-evidence-scenarios.json",
+    "docs/development/handoffs/AI-15-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
@@ -360,6 +362,23 @@ REQUIRED_TOKENS = {
         "summarize-witness-statement",
         "review-interview-bias-risk",
         "AI-15: Evidence & Chain of Custody.",
+    ),
+    "tests/reference-skills/AI-15-evidence-scenarios.json": (
+        "AGENTINVESTIGATE_AI_15_EVIDENCE_READY",
+        "original evidence item",
+        "missing signature",
+        "duplicate copy",
+        "disputed timestamp",
+        "partial continuity record",
+        "Continuity issues must be identified without claiming admissibility as a legal conclusion.",
+    ),
+    "docs/development/handoffs/AI-15-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_15_EVIDENCE_READY",
+        "create-evidence-log",
+        "build-chain-of-custody-summary",
+        "identify-evidence-continuity-issue",
+        "prepare-evidence-handling-escalation",
+        "AI-16: Investigative Analysis.",
     ),
 }
 

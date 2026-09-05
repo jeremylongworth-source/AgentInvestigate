@@ -1,0 +1,6 @@
+interface:
+  display_name: "Classify Evidence Type"
+  short_description: "Classify evidence types"
+  default_prompt: "Use $classify-evidence-type to classify these supplied evidence items."
+policy:
+  allow_implicit_invocation: true

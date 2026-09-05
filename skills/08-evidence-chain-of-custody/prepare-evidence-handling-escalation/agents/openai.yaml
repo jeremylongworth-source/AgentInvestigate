@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Evidence Handling Escalation"
+  short_description: "Prepare evidence escalations"
+  default_prompt: "Use $prepare-evidence-handling-escalation to prepare an evidence handling escalation note."
+policy:
+  allow_implicit_invocation: true

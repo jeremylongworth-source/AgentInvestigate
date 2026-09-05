@@ -1,0 +1,6 @@
+interface:
+  display_name: "Verify Evidence Timestamp"
+  short_description: "Review evidence timestamps"
+  default_prompt: "Use $verify-evidence-timestamp to review the supplied evidence timestamps."
+policy:
+  allow_implicit_invocation: true

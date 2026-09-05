@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Evidence Continuity Issue"
+  short_description: "Identify continuity issues"
+  default_prompt: "Use $identify-evidence-continuity-issue to identify continuity issues in these evidence records."
+policy:
+  allow_implicit_invocation: true

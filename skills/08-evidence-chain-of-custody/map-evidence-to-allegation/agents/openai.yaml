@@ -1,0 +1,6 @@
+interface:
+  display_name: "Map Evidence To Allegation"
+  short_description: "Map evidence to allegations"
+  default_prompt: "Use $map-evidence-to-allegation to map supplied evidence to the scoped allegations."
+policy:
+  allow_implicit_invocation: true

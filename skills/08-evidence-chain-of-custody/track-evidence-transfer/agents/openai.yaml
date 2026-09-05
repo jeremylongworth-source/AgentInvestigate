@@ -1,0 +1,6 @@
+interface:
+  display_name: "Track Evidence Transfer"
+  short_description: "Track evidence transfers"
+  default_prompt: "Use $track-evidence-transfer to track these evidence transfers."
+policy:
+  allow_implicit_invocation: true

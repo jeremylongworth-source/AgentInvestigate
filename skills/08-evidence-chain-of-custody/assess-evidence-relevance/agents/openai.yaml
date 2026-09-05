@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Evidence Relevance"
+  short_description: "Assess evidence relevance"
+  default_prompt: "Use $assess-evidence-relevance to assess apparent relevance for this evidence."
+policy:
+  allow_implicit_invocation: true

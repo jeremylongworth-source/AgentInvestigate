@@ -1,0 +1,6 @@
+interface:
+  display_name: "Record Evidence Source"
+  short_description: "Record evidence sources"
+  default_prompt: "Use $record-evidence-source to record the source and provenance for this evidence."
+policy:
+  allow_implicit_invocation: true

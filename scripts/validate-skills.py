@@ -17,6 +17,7 @@ TOKENS = {
     "AI-12": "AGENTINVESTIGATE_AI_12_RESEARCH_OSINT_READY",
     "AI-13": "AGENTINVESTIGATE_AI_13_ENTITY_ANALYSIS_READY",
     "AI-14": "AGENTINVESTIGATE_AI_14_INTERVIEWING_READY",
+    "AI-15": "AGENTINVESTIGATE_AI_15_EVIDENCE_READY",
 }
 
 AI10_FAMILIES = {
@@ -125,6 +126,34 @@ AI14_PROHIBITED_INFERENCE = {
     "personality",
     "unsupported behavioral stereotypes",
 }
+
+AI15_FAMILY = "08-evidence-chain-of-custody"
+
+AI15_REQUIRED_EMPHASIS = {
+    "evidence log",
+    "evidence type",
+    "source",
+    "relevance",
+    "chain of custody",
+    "continuity gap",
+    "transfer",
+    "original and copy",
+    "timestamp",
+    "allegation mapping",
+    "continuity issue",
+    "handling escalation",
+}
+
+AI15_CONTINUITY_ELEMENTS = {
+    "original evidence item",
+    "transfer",
+    "missing signature",
+    "duplicate copy",
+    "disputed timestamp",
+    "partial continuity record",
+}
+
+AI15_GATE = "Continuity issues must be identified without claiming admissibility as a legal conclusion."
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -337,6 +366,20 @@ def interviewing_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str
     return skills
 
 
+def evidence_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI15_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -346,6 +389,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **research_osint_skills(taxonomy_by_name),
         **entity_analysis_skills(taxonomy_by_name),
         **interviewing_skills(taxonomy_by_name),
+        **evidence_skills(taxonomy_by_name),
     }
 
 
@@ -355,6 +399,7 @@ def scenario_suites(
     ai12_skills: dict[str, dict[str, str]],
     ai13_skills: dict[str, dict[str, str]],
     ai14_skills: dict[str, dict[str, str]],
+    ai15_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -414,6 +459,16 @@ def scenario_suites(
             "skill_list_key": "skills",
             "required_emphasis": AI14_REQUIRED_EMPHASIS,
             "prohibited_inference": AI14_PROHIBITED_INFERENCE,
+        },
+        {
+            "label": "AI-15-evidence-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-15-evidence-scenarios.json",
+            "token": TOKENS["AI-15"],
+            "skills": ai15_skills,
+            "skill_list_key": "skills",
+            "required_emphasis": AI15_REQUIRED_EMPHASIS,
+            "continuity_elements": AI15_CONTINUITY_ELEMENTS,
+            "gate": AI15_GATE,
         },
     )
 
@@ -479,6 +534,12 @@ def validate_skill_package(
         for term in AI14_PROHIBITED_INFERENCE:
             if term not in text:
                 errors.append(f"{name}: missing AI-14 prohibited inference term {term}")
+    if expected_package["family"] == AI15_FAMILY:
+        for term in AI15_CONTINUITY_ELEMENTS:
+            if term not in text:
+                errors.append(f"{name}: missing AI-15 continuity element {term}")
+        if "admissibility as a legal conclusion" not in text:
+            errors.append(f"{name}: missing AI-15 admissibility legal conclusion boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -560,6 +621,10 @@ def validate_scenario_suite(
     if expected_prohibited_inference is not None:
         if set(data.get("prohibited_inference", [])) != set(expected_prohibited_inference):
             errors.append(f"{label}: prohibited_inference mismatch")
+    expected_continuity_elements = suite.get("continuity_elements")
+    if expected_continuity_elements is not None:
+        if set(data.get("continuity_elements", [])) != set(expected_continuity_elements):
+            errors.append(f"{label}: continuity_elements mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -573,6 +638,7 @@ def validate_scenario_suite(
     scenario_ids: set[str] = set()
     has_identity_overclaiming = False
     has_prohibited_inference = False
+    has_representative_continuity = False
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -599,6 +665,17 @@ def validate_scenario_suite(
             has_identity_overclaiming = True
         if "prohibited inference" in scenario.get("test_classes", []):
             has_prohibited_inference = True
+        if "representative continuity test" in scenario.get("test_classes", []):
+            has_representative_continuity = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            )
+            for element in AI15_CONTINUITY_ELEMENTS:
+                if element not in scenario_text:
+                    errors.append(f"{scenario_id}: missing representative continuity element {element}")
+            if "admissibility" not in scenario_text:
+                errors.append(f"{scenario_id}: missing admissibility boundary")
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -609,6 +686,8 @@ def validate_scenario_suite(
         errors.append(f"{label}: missing identity overclaiming scenario coverage")
     if suite.get("prohibited_inference") is not None and not has_prohibited_inference:
         errors.append(f"{label}: missing prohibited inference scenario coverage")
+    if suite.get("gate") == AI15_GATE and not has_representative_continuity:
+        errors.append(f"{label}: missing representative continuity scenario coverage")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -619,10 +698,11 @@ def validate(repo_root: Path) -> list[str]:
     ai12_skills = research_osint_skills(taxonomy_by_name)
     ai13_skills = entity_analysis_skills(taxonomy_by_name)
     ai14_skills = interviewing_skills(taxonomy_by_name)
+    ai15_skills = evidence_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
-    for suite in scenario_suites(ai10_skills, ai11_skills, ai12_skills, ai13_skills, ai14_skills):
+    for suite in scenario_suites(ai10_skills, ai11_skills, ai12_skills, ai13_skills, ai14_skills, ai15_skills):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
 
@@ -639,7 +719,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-14 interviewing skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-15 evidence skills.")
     return 0
 
 

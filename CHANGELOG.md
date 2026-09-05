@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-15 Evidence & Chain of Custody`.
+- Added all 12 Family 08 evidence and chain-of-custody skill packages.
+- Added AI-15 evidence scenarios, representative continuity validation, and admissibility-boundary gate checks.
 - Completed `AI-14 Interviewing, Witnesses & Statements`.
 - Added all 10 Family 07 interviewing, witness, and statement skill packages.
 - Added AI-14 interviewing scenarios, required-emphasis validation, and prohibited behavioral-inference gate checks.
