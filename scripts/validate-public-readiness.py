@@ -52,7 +52,8 @@ README_REQUIRED_TEXT = (
     "docs/architecture/prohibited-capabilities.md",
     "docs/architecture/canadian-jurisdiction-roadmap.md",
     "docs/architecture/specialization-roadmap.md",
-    "Latest completed wave: `AI-37 v1 Release Candidate Audit`",
+    "Latest completed wave: `AI-38 Public Release Distribution`",
+    "Current public distribution verdict: `PUBLIC_RELEASE_READY`",
     "Recommended next step: Post-v1 candidate tracks require separate review",
 )
 

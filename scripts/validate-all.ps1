@@ -72,4 +72,9 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
+python "$PSScriptRoot\validate-public-release-distribution.py" --repo-root "$RepoRoot"
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}
+
 Write-Host "All AgentInvestigate validation checks passed."

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "status": "READY",
+  "completion_token": "AGENTINVESTIGATE_AI_38_PUBLIC_DISTRIBUTION_READY",
+  "release_artifact": "docs/release/public-release-distribution.md",
+  "distribution_verdict": "PUBLIC_RELEASE_READY",
+  "repository": {
+    "owner": "jeremylongworth-source",
+    "name": "AgentInvestigate",
+    "url": "https://github.com/jeremylongworth-source/AgentInvestigate",
+    "visibility_required": "PUBLIC",
+    "wiki_required": true,
+    "required_topic": "agent-skills"
+  },
+  "wiki": {
+    "url": "https://github.com/jeremylongworth-source/AgentInvestigate/wiki",
+    "source_pages": [
+      "docs/wiki/Home.md",
+      "docs/wiki/_Sidebar.md",
+      "docs/wiki/Getting-Started.md",
+      "docs/wiki/Architecture-Overview.md",
+      "docs/wiki/Skill-Catalog.md",
+      "docs/wiki/Professional-Skillsets.md",
+      "docs/wiki/Sensitivity-And-Routing.md",
+      "docs/wiki/Jurisdiction-Model.md",
+      "docs/wiki/Safety-Boundaries.md",
+      "docs/wiki/Validation-And-Testing.md",
+      "docs/wiki/Contributing-Guide.md",
+      "docs/wiki/Release-Readiness.md"
+    ]
+  },
+  "copilot_skill_distribution": {
+    "publish_dry_run_command": "gh skill publish --dry-run",
+    "preview_command": "gh skill preview jeremylongworth-source/AgentInvestigate classify-request-type",
+    "install_command": "gh skill install jeremylongworth-source/AgentInvestigate classify-request-type",
+    "copilot_install_command": "gh skill install jeremylongworth-source/AgentInvestigate classify-request-type --agent github-copilot --scope user"
+  },
+  "caveats": [
+    "gh skill is a GitHub CLI preview feature and may change",
+    "GitHub release publishing is a maintainer decision",
+    "tag protection may require repository ruleset configuration outside this wave",
+    "current-source verification remains required before relying on high-supersession regulatory content",
+    "external legal, privacy, safety, and professional review are not replaced by this release-distribution wave"
+  ]
+}

@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-38 Public Release Distribution`.
+- Made the GitHub repository public, enabled GitHub Wiki, added professional wiki source pages under `docs/wiki/`, and documented Copilot `gh skill` preview/install commands.
+- Added public release distribution validation covering wiki source pages, public distribution artifact, README install commands, and `PUBLIC_RELEASE_READY` status.
 - Completed `AI-37 v1 Release Candidate Audit`.
 - Added `docs/evaluation/v1-release-candidate-audit.md`, AI-37 release audit fixture, and validator with the verdict `V1_PARTIALLY_READY`.
 - Wired AI-37 validation into the full suite, checking all 17 roadmap audit dimensions, possible verdicts, selected verdict, readiness conditions, and work not performed before unconditional v1 readiness.

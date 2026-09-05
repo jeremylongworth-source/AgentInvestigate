@@ -10,6 +10,12 @@ Public readiness token:
 AGENTINVESTIGATE_AI_36_PUBLIC_READINESS_READY
 ```
 
+Public distribution token:
+
+```text
+AGENTINVESTIGATE_AI_38_PUBLIC_DISTRIBUTION_READY
+```
+
 Core principles:
 
 ```text
@@ -124,6 +130,32 @@ Run validation:
 .\scripts\validate-all.ps1
 ```
 
+GitHub Wiki: `https://github.com/jeremylongworth-source/AgentInvestigate/wiki`
+
+Validate Copilot skill publishing:
+
+```powershell
+gh skill publish --dry-run
+```
+
+Preview a skill:
+
+```powershell
+gh skill preview jeremylongworth-source/AgentInvestigate classify-request-type
+```
+
+Install a skill:
+
+```powershell
+gh skill install jeremylongworth-source/AgentInvestigate classify-request-type
+```
+
+Install for GitHub Copilot:
+
+```powershell
+gh skill install jeremylongworth-source/AgentInvestigate classify-request-type --agent github-copilot --scope user
+```
+
 Use the repository by pointing an AI agent or reviewer at the relevant `SKILL.md`, architecture document, skillset registry, and test fixture for the task. Start with:
 
 - `ROADMAP.md`
@@ -154,8 +186,9 @@ The suite validates:
 - multi-skill integration scenarios;
 - adversarial safety scenarios;
 - specialization roadmap candidates.
+- public release distribution readiness.
 
-The latest validated handoff is `docs/development/handoffs/AI-37-final-handoff.md`.
+The latest validated handoff is `docs/development/handoffs/AI-38-final-handoff.md`.
 
 ## Limitations
 
@@ -195,12 +228,14 @@ scripts/                   Repository validators and generators
 
 ## Current Status
 
-- Latest completed wave: `AI-37 v1 Release Candidate Audit`
+- Latest completed wave: `AI-38 Public Release Distribution`
 - Current v1 audit verdict: `V1_PARTIALLY_READY`
+- Current public distribution verdict: `PUBLIC_RELEASE_READY`
 - Recommended next step: Post-v1 candidate tracks require separate review before roadmap admission.
 - Roadmap: `ROADMAP.md`
 - v1 release candidate audit: `docs/evaluation/v1-release-candidate-audit.md`
-- Latest handoff: `docs/development/handoffs/AI-37-final-handoff.md`
+- Public release distribution: `docs/release/public-release-distribution.md`
+- Latest handoff: `docs/development/handoffs/AI-38-final-handoff.md`
 - Changelog: `CHANGELOG.md`
 
 ## Contributing
