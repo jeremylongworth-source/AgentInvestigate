@@ -1,0 +1,6 @@
+interface:
+  display_name: "Evaluate Record Relevance"
+  short_description: "Evaluate record relevance"
+  default_prompt: "Use $evaluate-record-relevance to evaluate record relevance for this screening purpose."
+policy:
+  allow_implicit_invocation: true

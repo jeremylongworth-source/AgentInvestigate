@@ -1,0 +1,6 @@
+interface:
+  display_name: "Select Screening Source Type"
+  short_description: "Select screening sources"
+  default_prompt: "Use $select-screening-source-type to select appropriate screening source types."
+policy:
+  allow_implicit_invocation: true

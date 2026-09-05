@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-20 Background Screening & Due Diligence`.
+- Added all 10 Family 13 background-screening and due-diligence skill packages.
+- Added AI-20 screening scenarios, person/entity split validation, and consent/relevance/public-records/adverse-information gate checks.
 - Completed `AI-19 Corporate & Workplace Investigations`.
 - Added all 10 Family 12 corporate and workplace investigation skill packages.
 - Added AI-19 workplace scenarios, end-to-end flow validation, and prohibited outcome-decision gate checks.

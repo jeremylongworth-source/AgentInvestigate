@@ -1,0 +1,6 @@
+interface:
+  display_name: "Verify Screening Consent"
+  short_description: "Verify screening consent"
+  default_prompt: "Use $verify-screening-consent to verify supplied screening-consent status and gaps."
+policy:
+  allow_implicit_invocation: true

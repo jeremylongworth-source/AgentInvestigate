@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Screening Source Reliability"
+  short_description: "Assess source reliability"
+  default_prompt: "Use $assess-screening-source-reliability to assess supplied screening source reliability."
+policy:
+  allow_implicit_invocation: true

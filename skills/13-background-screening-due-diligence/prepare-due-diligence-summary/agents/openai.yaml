@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Due Diligence Summary"
+  short_description: "Prepare due diligence"
+  default_prompt: "Use $prepare-due-diligence-summary to prepare a bounded due-diligence summary."
+policy:
+  allow_implicit_invocation: true

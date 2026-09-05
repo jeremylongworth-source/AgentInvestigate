@@ -1,0 +1,6 @@
+interface:
+  display_name: "Resolve Screening Discrepancy"
+  short_description: "Resolve discrepancies"
+  default_prompt: "Use $resolve-screening-discrepancy to resolve supplied screening discrepancies."
+policy:
+  allow_implicit_invocation: true

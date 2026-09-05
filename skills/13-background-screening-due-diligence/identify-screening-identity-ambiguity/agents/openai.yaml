@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Screening Identity Ambiguity"
+  short_description: "Identify identity ambiguity"
+  default_prompt: "Use $identify-screening-identity-ambiguity to identify identity ambiguity in screening records."
+policy:
+  allow_implicit_invocation: true

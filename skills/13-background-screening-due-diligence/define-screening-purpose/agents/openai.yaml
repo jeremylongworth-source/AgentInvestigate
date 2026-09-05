@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Screening Purpose"
+  short_description: "Define screening purpose"
+  default_prompt: "Use $define-screening-purpose to define a bounded background-screening or due-diligence purpose."
+policy:
+  allow_implicit_invocation: true

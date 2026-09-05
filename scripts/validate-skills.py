@@ -22,6 +22,7 @@ TOKENS = {
     "AI-17": "AGENTINVESTIGATE_AI_17_REPORTING_READY",
     "AI-18": "AGENTINVESTIGATE_AI_18_OBSERVATION_GOVERNANCE_READY",
     "AI-19": "AGENTINVESTIGATE_AI_19_WORKPLACE_INVESTIGATIONS_READY",
+    "AI-20": "AGENTINVESTIGATE_AI_20_SCREENING_DUE_DILIGENCE_READY",
 }
 
 AI10_FAMILIES = {
@@ -265,6 +266,25 @@ AI19_PROHIBITED_DECISIONS = {
 }
 
 AI19_GATE = "End-to-end workplace investigation flow must not decide discipline, termination, legal liability, or criminal guilt."
+
+AI20_FAMILY = "13-background-screening-due-diligence"
+
+AI20_REQUIRED_SPLIT = {
+    "PERSON SCREENING",
+    "ENTITY DUE DILIGENCE",
+}
+
+AI20_INTEGRATION_REQUIREMENTS = {
+    "consent",
+    "relevance",
+    "public records",
+    "conflicting identities",
+    "adverse information",
+    "unresolved records",
+    "bias risk",
+}
+
+AI20_GATE = "Personal screening requires stronger privacy and authority controls than entity due diligence."
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -553,6 +573,20 @@ def workplace_investigation_skills(taxonomy_by_name: dict[str, dict[str, Any]]) 
     return skills
 
 
+def screening_due_diligence_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI20_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -567,6 +601,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **reporting_skills(taxonomy_by_name),
         **observation_governance_skills(taxonomy_by_name),
         **workplace_investigation_skills(taxonomy_by_name),
+        **screening_due_diligence_skills(taxonomy_by_name),
     }
 
 
@@ -581,6 +616,7 @@ def scenario_suites(
     ai17_skills: dict[str, dict[str, str]],
     ai18_skills: dict[str, dict[str, str]],
     ai19_skills: dict[str, dict[str, str]],
+    ai20_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -692,6 +728,16 @@ def scenario_suites(
             "prohibited_decisions": AI19_PROHIBITED_DECISIONS,
             "gate": AI19_GATE,
         },
+        {
+            "label": "AI-20-screening-due-diligence-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-20-screening-due-diligence-scenarios.json",
+            "token": TOKENS["AI-20"],
+            "skills": ai20_skills,
+            "skill_list_key": "skills",
+            "required_split": AI20_REQUIRED_SPLIT,
+            "integration_requirements": AI20_INTEGRATION_REQUIREMENTS,
+            "gate": AI20_GATE,
+        },
     )
 
 
@@ -796,6 +842,19 @@ def validate_skill_package(
                 errors.append(f"{name}: missing AI-19 prohibited decision {decision}")
         if "qualified human review" not in lower_text and "qualified review" not in lower_text:
             errors.append(f"{name}: missing AI-19 qualified review boundary")
+    if expected_package["family"] == AI20_FAMILY:
+        lower_text = text.lower()
+        for split in AI20_REQUIRED_SPLIT:
+            if split not in text:
+                errors.append(f"{name}: missing AI-20 required split {split}")
+        for term in AI20_INTEGRATION_REQUIREMENTS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-20 integration requirement {term}")
+        if "stronger privacy and authority controls" not in lower_text:
+            errors.append(f"{name}: missing AI-20 stronger privacy and authority controls gate")
+        for term in ("eligibility", "adverse action", "criminal guilt", "legal liability"):
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-20 prohibited outcome term {term}")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -912,6 +971,14 @@ def validate_scenario_suite(
     if expected_prohibited_decisions is not None:
         if set(data.get("prohibited_decisions", [])) != set(expected_prohibited_decisions):
             errors.append(f"{label}: prohibited_decisions mismatch")
+    expected_required_split = suite.get("required_split")
+    if expected_required_split is not None:
+        if set(data.get("required_split", [])) != set(expected_required_split):
+            errors.append(f"{label}: required_split mismatch")
+    expected_integration_requirements = suite.get("integration_requirements")
+    if expected_integration_requirements is not None:
+        if set(data.get("integration_requirements", [])) != set(expected_integration_requirements):
+            errors.append(f"{label}: integration_requirements mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -934,6 +1001,10 @@ def validate_scenario_suite(
     observed_prohibited_operational_skills: set[str] = set()
     has_workplace_flow = False
     has_prohibited_workplace_decision = False
+    has_person_screening_split = False
+    has_entity_due_diligence_split = False
+    has_stronger_privacy_authority_controls = False
+    observed_ai20_integration_requirements: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -1022,6 +1093,15 @@ def validate_scenario_suite(
                     errors.append(f"{scenario_id}: missing prohibited workplace decision {decision}")
         if "prohibited decision" in scenario.get("test_classes", []):
             has_prohibited_workplace_decision = True
+        if "person screening split" in scenario.get("test_classes", []):
+            has_person_screening_split = True
+        if "entity due diligence split" in scenario.get("test_classes", []):
+            has_entity_due_diligence_split = True
+        if "stronger privacy authority controls" in scenario.get("test_classes", []):
+            has_stronger_privacy_authority_controls = True
+        for term in AI20_INTEGRATION_REQUIREMENTS:
+            if term in scenario.get("test_classes", []):
+                observed_ai20_integration_requirements.add(term)
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -1054,6 +1134,15 @@ def validate_scenario_suite(
             errors.append(f"{label}: missing end-to-end workplace flow scenario")
         if not has_prohibited_workplace_decision:
             errors.append(f"{label}: missing prohibited workplace decision scenario coverage")
+    if suite.get("gate") == AI20_GATE:
+        if not has_person_screening_split:
+            errors.append(f"{label}: missing PERSON SCREENING split scenario")
+        if not has_entity_due_diligence_split:
+            errors.append(f"{label}: missing ENTITY DUE DILIGENCE split scenario")
+        if not has_stronger_privacy_authority_controls:
+            errors.append(f"{label}: missing stronger privacy and authority controls scenario")
+        if observed_ai20_integration_requirements != AI20_INTEGRATION_REQUIREMENTS:
+            errors.append(f"{label}: AI-20 integration requirement coverage mismatch")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -1069,6 +1158,7 @@ def validate(repo_root: Path) -> list[str]:
     ai17_skills = reporting_skills(taxonomy_by_name)
     ai18_skills = observation_governance_skills(taxonomy_by_name)
     ai19_skills = workplace_investigation_skills(taxonomy_by_name)
+    ai20_skills = screening_due_diligence_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -1083,6 +1173,7 @@ def validate(repo_root: Path) -> list[str]:
         ai17_skills,
         ai18_skills,
         ai19_skills,
+        ai20_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -1100,7 +1191,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-19 workplace investigation skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-20 screening and due diligence skills.")
     return 0
 
 

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Adverse Information Review Need"
+  short_description: "Identify adverse review"
+  default_prompt: "Use $identify-adverse-information-review-need to identify adverse-information review needs."
+policy:
+  allow_implicit_invocation: true

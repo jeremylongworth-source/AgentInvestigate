@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Background Screening Authority"
+  short_description: "Assess screening authority"
+  default_prompt: "Use $assess-background-screening-authority to assess screening authority and required gates."
+policy:
+  allow_implicit_invocation: true
