@@ -8,6 +8,7 @@ from pathlib import Path
 
 AI27_TOKEN = "AGENTINVESTIGATE_AI_27_CANADA_FEDERAL_READY"
 AI28_TOKEN = "AGENTINVESTIGATE_AI_28_ONTARIO_READY"
+AI29_TOKEN = "AGENTINVESTIGATE_AI_29_BRITISH_COLUMBIA_READY"
 
 AI27_FILES = (
     "specializations/canada/federal/README.md",
@@ -30,6 +31,18 @@ AI28_FILES = (
     "specializations/canada/ontario/provincial-laws-map.md",
     "specializations/canada/ontario/routing-boundaries.md",
     "tests/regulatory/AI-28-ontario-specialization.json",
+)
+
+AI29_FILES = (
+    "specializations/canada/british-columbia/README.md",
+    "specializations/canada/british-columbia/source-log.yaml",
+    "specializations/canada/british-columbia/licensing-and-registration.md",
+    "specializations/canada/british-columbia/training-and-conduct.md",
+    "specializations/canada/british-columbia/authority-restrictions-and-security-operations.md",
+    "specializations/canada/british-columbia/privacy-reporting-and-records.md",
+    "specializations/canada/british-columbia/provincial-laws-map.md",
+    "specializations/canada/british-columbia/routing-boundaries.md",
+    "tests/regulatory/AI-29-british-columbia-specialization.json",
 )
 
 AI27_RESEARCH_AREAS = {
@@ -93,6 +106,48 @@ AI28_SOURCE_IDS = {
     "ontario-aoda",
 }
 
+AI29_REQUIRED_COVERAGE = {
+    "security worker licensing",
+    "private investigator licence types",
+    "security guard licence types",
+    "security business licensing",
+    "training",
+    "professional conduct",
+    "permitted authorities",
+    "restrictions",
+    "privacy interaction",
+    "reporting",
+    "security operations",
+    "provincial laws materially relevant to scoped skills",
+}
+
+AI29_SOURCE_IDS = {
+    "bc-security-services-act",
+    "bc-security-services-regulation",
+    "bc-security-worker-licence-guidance",
+    "bc-security-worker-application-guidance",
+    "bc-security-worker-training-guidance",
+    "bc-security-worker-rules-guidance",
+    "bc-security-business-licence-guidance",
+    "bc-security-business-application-guidance",
+    "bc-security-business-rules-guidance",
+    "bc-licensing-process-policies",
+    "bc-security-licensing-enforcement",
+    "bc-pipa",
+    "bc-fippa",
+    "bc-oipc-overt-video-private-sector",
+    "bc-oipc-public-sector-surveillance",
+    "bc-oipc-employee-privacy",
+    "bc-human-rights-code",
+    "bc-workers-compensation-act",
+    "bc-ohs-regulation",
+    "bc-trespass-act",
+    "bc-employment-standards-act",
+    "bc-body-armour-control-act",
+    "bc-body-armour-control-regulation",
+    "bc-body-armour-possession-guidance",
+}
+
 AI27_BOUNDARY_TERMS = {
     "Federal rules alone do not determine whether private investigative or security work is authorized",
     "Occupational licensing is often provincial or territorial",
@@ -103,6 +158,16 @@ AI27_BOUNDARY_TERMS = {
 
 AI28_BOUNDARY_TERMS = {
     "Ontario sources can identify provincial issue areas, but they do not by themselves authorize private investigative or security work without current licensing, authority, role, purpose, and qualified review",
+    "Federal privacy, criminal-law, evidence, human-rights, federally regulated workplace, or labour issues may also apply",
+    "REGULATED_RESEARCH_ONLY",
+    "INTRUSIVE_GATE_REQUIRED",
+    "CERTIFICATION_ESCALATION",
+    "PROHIBITED_REDIRECT",
+    "freshness: `HIGH`",
+}
+
+AI29_BOUNDARY_TERMS = {
+    "British Columbia sources can identify provincial issue areas, but they do not by themselves authorize private investigative or security work without current security worker licence status, security business licence status, role, purpose, authority, and qualified review",
     "Federal privacy, criminal-law, evidence, human-rights, federally regulated workplace, or labour issues may also apply",
     "REGULATED_RESEARCH_ONLY",
     "INTRUSIVE_GATE_REQUIRED",
@@ -309,8 +374,108 @@ def validate_ai28(repo_root: Path) -> list[str]:
     return errors
 
 
+def validate_ai29(repo_root: Path) -> list[str]:
+    errors: list[str] = []
+    for relative in AI29_FILES:
+        path = repo_root / relative
+        if not path.is_file():
+            errors.append(f"Missing AI-29 file: {relative}")
+
+    combined_text = ""
+    for relative in AI29_FILES:
+        path = repo_root / relative
+        if path.is_file() and path.suffix.lower() != ".json":
+            combined_text += "\n" + path.read_text(encoding="utf-8-sig")
+
+    if AI29_TOKEN not in combined_text:
+        errors.append("AI-29 specialization files missing completion token")
+
+    for term in AI29_REQUIRED_COVERAGE:
+        if term not in combined_text:
+            errors.append(f"AI-29 specialization missing required coverage: {term}")
+    for term in AI29_BOUNDARY_TERMS:
+        if term not in combined_text:
+            errors.append(f"AI-29 specialization missing boundary term: {term}")
+
+    source_log = repo_root / "specializations/canada/british-columbia/source-log.yaml"
+    if source_log.is_file():
+        source_text = source_log.read_text(encoding="utf-8-sig")
+        for source_id in AI29_SOURCE_IDS:
+            if source_id not in source_text:
+                errors.append(f"AI-29 source log missing source id: {source_id}")
+        for field in REGULATORY_METADATA_FIELDS:
+            if field not in source_text:
+                errors.append(f"AI-29 source log missing metadata field: {field}")
+        if source_text.count("source_id:") != len(AI29_SOURCE_IDS):
+            errors.append("AI-29 source log source count mismatch")
+        for url in (
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/07030_01",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/10_207_2008",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/workers",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/workers/application",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/workers/training",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/workers/rules",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/businesses",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/businesses/application-and-licence-management-process",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/businesses/rules",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/about/law-policy/licensing-process-licence-conditions-policies",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/security-industry-licensing/about/enforcement",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/03063_01",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96165_00",
+            "https://www.oipc.bc.ca/guidance-documents/1453",
+            "https://www.oipc.bc.ca/documents/guidance-documents/3072",
+            "https://www.oipc.bc.ca/guidance-documents/2098",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/00_96210_01",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/19001_02",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/296_97_00",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/18003",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/00_96113_01",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/09024_01",
+            "https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/203_2010",
+            "https://www2.gov.bc.ca/gov/content/employment-business/business/security-services/body-armour/possessing",
+        ):
+            if url not in source_text:
+                errors.append(f"AI-29 source log missing source URL: {url}")
+
+    fixture_path = repo_root / "tests/regulatory/AI-29-british-columbia-specialization.json"
+    if fixture_path.is_file():
+        try:
+            fixture = load_json(fixture_path)
+        except json.JSONDecodeError as exc:
+            errors.append(f"AI-29 regulatory fixture invalid JSON: {exc}")
+            fixture = None
+        if isinstance(fixture, dict):
+            if fixture.get("completion_token") != AI29_TOKEN:
+                errors.append("AI-29 regulatory fixture missing completion token")
+            if fixture.get("specialization_path") != "specializations/canada/british-columbia/":
+                errors.append("AI-29 regulatory fixture has wrong specialization path")
+            if fixture.get("jurisdiction") != "British Columbia":
+                errors.append("AI-29 regulatory fixture has wrong jurisdiction")
+            if fixture.get("freshness") != "HIGH":
+                errors.append("AI-29 regulatory fixture must be HIGH freshness")
+            if set(fixture.get("required_coverage", [])) != AI29_REQUIRED_COVERAGE:
+                errors.append("AI-29 regulatory fixture required coverage mismatch")
+            if set(fixture.get("required_sources", [])) != AI29_SOURCE_IDS:
+                errors.append("AI-29 regulatory fixture source id mismatch")
+            routing_tests = fixture.get("routing_tests")
+            if not isinstance(routing_tests, list) or len(routing_tests) < 7:
+                errors.append("AI-29 regulatory fixture must include at least 7 routing tests")
+            else:
+                seen_states = {str(test.get("expected_routing_state")) for test in routing_tests if isinstance(test, dict)}
+                for state in (
+                    "REGULATED_RESEARCH_ONLY",
+                    "INTRUSIVE_GATE_REQUIRED",
+                    "CERTIFICATION_ESCALATION",
+                    "PROHIBITED_REDIRECT",
+                ):
+                    if state not in seen_states:
+                        errors.append(f"AI-29 fixture missing {state} routing test")
+
+    return errors
+
+
 def validate(repo_root: Path) -> list[str]:
-    return validate_ai27(repo_root) + validate_ai28(repo_root)
+    return validate_ai27(repo_root) + validate_ai28(repo_root) + validate_ai29(repo_root)
 
 
 def main() -> int:
@@ -323,7 +488,7 @@ def main() -> int:
         for error in errors:
             print(error, file=sys.stderr)
         return 1
-    print("Validated AgentInvestigate AI-27 Canada federal and AI-28 Ontario specializations.")
+    print("Validated AgentInvestigate AI-27 Canada federal through AI-29 British Columbia specializations.")
     return 0
 
 
