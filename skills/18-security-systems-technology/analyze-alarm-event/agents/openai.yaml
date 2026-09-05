@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze Alarm Event"
+  short_description: "Analyze alarm events"
+  default_prompt: "Use $analyze-alarm-event to analyze this alarm event."
+policy:
+  allow_implicit_invocation: true

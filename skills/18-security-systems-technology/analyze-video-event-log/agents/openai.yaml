@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze Video Event Log"
+  short_description: "Analyze video logs"
+  default_prompt: "Use $analyze-video-event-log to analyze this video event log."
+policy:
+  allow_implicit_invocation: true

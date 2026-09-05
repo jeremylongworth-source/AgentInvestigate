@@ -26,6 +26,7 @@ TOKENS = {
     "AI-21": "AGENTINVESTIGATE_AI_21_SECURITY_OPERATIONS_READY",
     "AI-22": "AGENTINVESTIGATE_AI_22_INCIDENT_COMMUNICATION_READY",
     "AI-23": "AGENTINVESTIGATE_AI_23_PHYSICAL_SECURITY_READY",
+    "AI-24": "AGENTINVESTIGATE_AI_24_SECURITY_SYSTEMS_READY",
 }
 
 AI10_FAMILIES = {
@@ -402,6 +403,36 @@ AI23_PROHIBITED_SECURITY_DETAIL = {
 
 AI23_GATE = "Conceptual security analysis must not be presented as structural engineering, electrical approval, fire-code approval, or life-safety certification."
 
+AI24_FAMILY = "18-security-systems-technology"
+
+AI24_SYSTEM_ANALYSIS_CAPABILITIES = {
+    "access control",
+    "video surveillance",
+    "intrusion detection",
+    "alarm monitoring",
+    "event analysis",
+    "coverage",
+    "failures",
+    "requirements",
+}
+
+AI24_EXPLICIT_PROHIBITIONS = {
+    "alarm bypass",
+    "camera defeat",
+    "credential cloning",
+    "access-control circumvention",
+    "monitoring evasion",
+}
+
+AI24_QUALIFIED_BOUNDARIES = {
+    "licensed technician review",
+    "privacy review",
+    "life-safety review",
+    "security authority review",
+}
+
+AI24_GATE = "Security systems and technology skills must not provide alarm bypass, camera defeat, credential cloning, access-control circumvention, or monitoring evasion."
+
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
         "family": "09-investigative-analysis",
@@ -745,6 +776,20 @@ def physical_security_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dic
     return skills
 
 
+def security_systems_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI24_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -763,6 +808,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **security_operations_skills(taxonomy_by_name),
         **incident_communication_skills(taxonomy_by_name),
         **physical_security_skills(taxonomy_by_name),
+        **security_systems_skills(taxonomy_by_name),
     }
 
 
@@ -781,6 +827,7 @@ def scenario_suites(
     ai21_skills: dict[str, dict[str, str]],
     ai22_skills: dict[str, dict[str, str]],
     ai23_skills: dict[str, dict[str, str]],
+    ai24_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -937,6 +984,17 @@ def scenario_suites(
             "boundary_terms": AI23_BOUNDARY_TERMS,
             "prohibited_security_detail": AI23_PROHIBITED_SECURITY_DETAIL,
             "gate": AI23_GATE,
+        },
+        {
+            "label": "AI-24-security-systems-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-24-security-systems-scenarios.json",
+            "token": TOKENS["AI-24"],
+            "skills": ai24_skills,
+            "skill_list_key": "skills",
+            "system_analysis_capabilities": AI24_SYSTEM_ANALYSIS_CAPABILITIES,
+            "explicit_prohibitions": AI24_EXPLICIT_PROHIBITIONS,
+            "qualified_boundaries": AI24_QUALIFIED_BOUNDARIES,
+            "gate": AI24_GATE,
         },
     )
 
@@ -1095,6 +1153,24 @@ def validate_skill_package(
         for term in AI23_PROHIBITED_SECURITY_DETAIL:
             if term not in lower_text:
                 errors.append(f"{name}: missing AI-23 prohibited security detail {term}")
+    if expected_package["family"] == AI24_FAMILY:
+        lower_text = text.lower()
+        for term in AI24_SYSTEM_ANALYSIS_CAPABILITIES:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-24 system-analysis capability {term}")
+        for term in AI24_EXPLICIT_PROHIBITIONS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-24 explicit prohibition {term}")
+        for term in AI24_QUALIFIED_BOUNDARIES:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-24 qualified boundary {term}")
+        if expected_package["sensitivity"] == "INTRUSIVE" and "INTRUSIVE_GATE_REQUIRED" not in text:
+            errors.append(f"{name}: missing AI-24 intrusive routing gate")
+        if expected_package["sensitivity"] == "CERTIFICATION_BOUNDARY":
+            if "CERTIFICATION_ESCALATION" not in text:
+                errors.append(f"{name}: missing AI-24 certification escalation routing gate")
+            if "qualified review" not in lower_text:
+                errors.append(f"{name}: missing AI-24 qualified review boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -1263,6 +1339,18 @@ def validate_scenario_suite(
     if expected_prohibited_security_detail is not None:
         if set(data.get("prohibited_security_detail", [])) != set(expected_prohibited_security_detail):
             errors.append(f"{label}: prohibited_security_detail mismatch")
+    expected_system_analysis_capabilities = suite.get("system_analysis_capabilities")
+    if expected_system_analysis_capabilities is not None:
+        if set(data.get("system_analysis_capabilities", [])) != set(expected_system_analysis_capabilities):
+            errors.append(f"{label}: system_analysis_capabilities mismatch")
+    expected_explicit_prohibitions = suite.get("explicit_prohibitions")
+    if expected_explicit_prohibitions is not None:
+        if set(data.get("explicit_prohibitions", [])) != set(expected_explicit_prohibitions):
+            errors.append(f"{label}: explicit_prohibitions mismatch")
+    expected_qualified_boundaries = suite.get("qualified_boundaries")
+    if expected_qualified_boundaries is not None:
+        if set(data.get("qualified_boundaries", [])) != set(expected_qualified_boundaries):
+            errors.append(f"{label}: qualified_boundaries mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -1305,6 +1393,10 @@ def validate_scenario_suite(
     observed_ai23_composition_targets: set[str] = set()
     observed_ai23_boundary_terms: set[str] = set()
     observed_ai23_prohibited_security_detail: set[str] = set()
+    has_ai24_system_analysis_capabilities = False
+    observed_ai24_system_analysis_capabilities: set[str] = set()
+    has_ai24_explicit_prohibition = False
+    observed_ai24_explicit_prohibitions: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -1458,6 +1550,23 @@ def validate_scenario_suite(
         for term in AI23_PROHIBITED_SECURITY_DETAIL:
             if term in scenario.get("test_classes", []):
                 observed_ai23_prohibited_security_detail.add(term)
+        if "system analysis capabilities" in scenario.get("test_classes", []):
+            has_ai24_system_analysis_capabilities = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for term in AI24_SYSTEM_ANALYSIS_CAPABILITIES:
+                if term not in scenario_text:
+                    errors.append(f"{scenario_id}: missing AI-24 system-analysis capability {term}")
+        for term in AI24_SYSTEM_ANALYSIS_CAPABILITIES:
+            if term in scenario.get("test_classes", []):
+                observed_ai24_system_analysis_capabilities.add(term)
+        if "explicit prohibition" in scenario.get("test_classes", []):
+            has_ai24_explicit_prohibition = True
+        for term in AI24_EXPLICIT_PROHIBITIONS:
+            if term in scenario.get("test_classes", []):
+                observed_ai24_explicit_prohibitions.add(term)
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -1534,6 +1643,15 @@ def validate_scenario_suite(
             errors.append(f"{label}: AI-23 boundary term coverage mismatch")
         if observed_ai23_prohibited_security_detail != AI23_PROHIBITED_SECURITY_DETAIL:
             errors.append(f"{label}: AI-23 prohibited security detail coverage mismatch")
+    if suite.get("gate") == AI24_GATE:
+        if not has_ai24_system_analysis_capabilities:
+            errors.append(f"{label}: missing system analysis capabilities scenario")
+        if observed_ai24_system_analysis_capabilities != AI24_SYSTEM_ANALYSIS_CAPABILITIES:
+            errors.append(f"{label}: AI-24 system-analysis capability coverage mismatch")
+        if not has_ai24_explicit_prohibition:
+            errors.append(f"{label}: missing explicit prohibition scenario")
+        if observed_ai24_explicit_prohibitions != AI24_EXPLICIT_PROHIBITIONS:
+            errors.append(f"{label}: AI-24 explicit prohibition coverage mismatch")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -1553,6 +1671,7 @@ def validate(repo_root: Path) -> list[str]:
     ai21_skills = security_operations_skills(taxonomy_by_name)
     ai22_skills = incident_communication_skills(taxonomy_by_name)
     ai23_skills = physical_security_skills(taxonomy_by_name)
+    ai24_skills = security_systems_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -1571,6 +1690,7 @@ def validate(repo_root: Path) -> list[str]:
         ai21_skills,
         ai22_skills,
         ai23_skills,
+        ai24_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -1588,7 +1708,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-23 physical security skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-24 security systems skills.")
     return 0
 
 

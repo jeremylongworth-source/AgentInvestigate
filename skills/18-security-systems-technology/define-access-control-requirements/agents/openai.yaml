@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Access Control Requirements"
+  short_description: "Define access requirements"
+  default_prompt: "Use $define-access-control-requirements to define access-control requirements."
+policy:
+  allow_implicit_invocation: true

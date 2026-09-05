@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Security System Failure"
+  short_description: "Identify system failures"
+  default_prompt: "Use $identify-security-system-failure to identify possible security-system failure categories."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Intrusion Detection Requirements"
+  short_description: "Define intrusion requirements"
+  default_prompt: "Use $define-intrusion-detection-requirements to define intrusion detection requirements."
+policy:
+  allow_implicit_invocation: true

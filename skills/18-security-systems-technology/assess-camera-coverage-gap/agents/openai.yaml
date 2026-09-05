@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Camera Coverage Gap"
+  short_description: "Assess camera coverage"
+  default_prompt: "Use $assess-camera-coverage-gap to assess supplied camera coverage gaps."
+policy:
+  allow_implicit_invocation: true

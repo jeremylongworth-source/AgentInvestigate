@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Video Surveillance Requirements"
+  short_description: "Define video requirements"
+  default_prompt: "Use $define-video-surveillance-requirements to define video surveillance requirements."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Security System Requirements Summary"
+  short_description: "Prepare system summaries"
+  default_prompt: "Use $prepare-security-system-requirements-summary to prepare a security-system requirements summary."
+policy:
+  allow_implicit_invocation: true

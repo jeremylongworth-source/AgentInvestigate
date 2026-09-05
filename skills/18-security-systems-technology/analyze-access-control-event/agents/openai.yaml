@@ -1,0 +1,6 @@
+interface:
+  display_name: "Analyze Access Control Event"
+  short_description: "Analyze access events"
+  default_prompt: "Use $analyze-access-control-event to analyze this access-control event."
+policy:
+  allow_implicit_invocation: true

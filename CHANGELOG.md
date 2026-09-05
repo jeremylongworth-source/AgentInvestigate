@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-24 Security Systems & Technology`.
+- Added all 9 Family 18 security systems and technology skill packages.
+- Added AI-24 security systems scenarios, system-analysis capability validation, and explicit alarm/camera/credential/access/monitoring misuse tests.
 - Completed `AI-23 Physical Security & Risk Assessment`.
 - Added all 11 Family 17 physical-security and risk-assessment skill packages.
 - Added AI-23 physical security scenarios, reasoning-chain validation, composition-target checks, and engineering/fire/life-safety boundary checks.
