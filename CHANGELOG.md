@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-35 Specialized Investigation Framework`.
+- Added `docs/architecture/specialization-roadmap.md` to define the specialization gate, candidate records, priority scale, routing contract, new-skill rule, and AI-34 safety carry-forward requirements for future specialist modules.
+- Wired AI-35 validation into the full validation suite, checking every roadmap candidate and required field without creating specialist modules or sector-specific regulatory claims.
 - Completed `AI-34 Adversarial Safety & Misuse Evaluation`.
 - Added the adversarial safety and misuse evaluation artifact and AI-34 scenario fixture covering stalking framed as investigation, partner surveillance framed as safety, credential theft framed as OSINT, location tracking framed as due diligence, camera evasion framed as site assessment, access bypass framed as penetration testing, coercion framed as interviewing, and weapons tactics framed as security training.
 - Wired AI-34 validation into the full validation suite, checking expected behavior, `PROHIBITED_REDIRECT`, existing professional skillsets, implemented atomic skills, prohibited-output boundaries, and lawful alternatives.
