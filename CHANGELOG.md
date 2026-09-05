@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-32 Professional Skillset Composition`.
+- Added the professional skillset composition architecture document, canonical `skillsets/professional-skillsets.json` registry, skillset README, and AI-32 skillset composition fixture.
+- Added reproducible AI-32 skillset generation and validation enforcing all 19 roadmap skillsets, required skillset fields, taxonomy-backed included skills, derived role memberships, global routing states, and non-duplication of atomic procedures.
 - Completed `AI-31 Canadian Jurisdiction Expansion Framework`.
 - Added `docs/architecture/canadian-jurisdiction-roadmap.md` to define future Canadian jurisdiction module paths, baseline files, required coverage, source metadata, HIGH-freshness handling, federal overlap rules, and routing inheritance.
 - Added AI-31 regulatory framework fixture and specialization validation enforcing candidate jurisdiction slugs, global routing states, source-currentness posture, federal-overlap handling, and the boundary that AI-31 does not create additional province or territory modules.
