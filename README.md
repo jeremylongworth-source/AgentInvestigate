@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, the Research, OSINT & Public Records skill family, the Identity, Entity & Timeline Analysis skill family, the Interviewing, Witnesses & Statements skill family, the Evidence & Chain of Custody skill family, the Investigative Analysis skill family, the Reporting, Findings & Case Presentation skill family, the Observation & Surveillance Governance skill family, the Corporate & Workplace Investigations skill family, the Background Screening & Due Diligence skill family, the Security Operations, Access & Patrol skill family, the Incident Response and Communication & De-escalation skill families, the Physical Security & Risk Assessment skill family, the Security Systems & Technology skill family, the Loss Prevention & Asset Protection skill family, and the Investigation & Security Program Management skill family.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, the Research, OSINT & Public Records skill family, the Identity, Entity & Timeline Analysis skill family, the Interviewing, Witnesses & Statements skill family, the Evidence & Chain of Custody skill family, the Investigative Analysis skill family, the Reporting, Findings & Case Presentation skill family, the Observation & Surveillance Governance skill family, the Corporate & Workplace Investigations skill family, the Background Screening & Due Diligence skill family, the Security Operations, Access & Patrol skill family, the Incident Response and Communication & De-escalation skill families, the Physical Security & Risk Assessment skill family, the Security Systems & Technology skill family, the Loss Prevention & Asset Protection skill family, the Investigation & Security Program Management skill family, and the Canadian Federal Regulatory Foundation specialization.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-26 Investigation & Security Program Management`
-- Recommended next wave: `AI-27 Canadian Federal Regulatory Foundation`
+- Latest completed wave: `AI-27 Canadian Federal Regulatory Foundation`
+- Recommended next wave: `AI-28 Ontario Investigation & Security Module`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -63,7 +63,9 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Security systems scenarios: `tests/reference-skills/AI-24-security-systems-scenarios.json`
 - Loss prevention scenarios: `tests/reference-skills/AI-25-loss-prevention-scenarios.json`
 - Program management scenarios: `tests/reference-skills/AI-26-program-management-scenarios.json`
-- Latest handoff: `docs/development/handoffs/AI-26-final-handoff.md`
+- Canada federal specialization: `specializations/canada/federal/README.md`
+- Canada federal regulatory scenarios: `tests/regulatory/AI-27-canada-federal-specialization.json`
+- Latest handoff: `docs/development/handoffs/AI-27-final-handoff.md`
 
 ## Development Approach
 

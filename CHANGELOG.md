@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-27 Canadian Federal Regulatory Foundation`.
+- Added the first jurisdiction specialization at `specializations/canada/federal/` with HIGH-freshness federal privacy, criminal-law, evidence, human-rights, information-handling, and federally regulated organization references.
+- Added AI-27 regulatory fixture and specialization validation enforcing the boundary that federal rules alone do not authorize private investigative or security work.
 - Completed `AI-26 Investigation & Security Program Management`.
 - Added all 13 Family 20 investigation and security program management skill packages.
 - Added AI-26 program management scenarios, program-element validation, composition-target validation, and legal/licensing/compliance/policy/force/weapons/audit boundary checks.
