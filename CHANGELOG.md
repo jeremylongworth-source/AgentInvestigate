@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-37 v1 Release Candidate Audit`.
+- Added `docs/evaluation/v1-release-candidate-audit.md`, AI-37 release audit fixture, and validator with the verdict `V1_PARTIALLY_READY`.
+- Wired AI-37 validation into the full suite, checking all 17 roadmap audit dimensions, possible verdicts, selected verdict, readiness conditions, and work not performed before unconditional v1 readiness.
 - Completed `AI-36 Public Documentation & Repository Readiness`.
 - Reworked `README.md` for public use with audience, supported domains, skill examples, sensitivity model, jurisdiction model, installation/use, validation, limitations, prohibited capabilities, repository structure, contribution process, and public file set.
 - Added public-readiness validation to the full suite, checking required public files and the README coverage required by the roadmap.

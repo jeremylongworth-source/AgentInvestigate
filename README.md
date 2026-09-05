@@ -155,7 +155,7 @@ The suite validates:
 - adversarial safety scenarios;
 - specialization roadmap candidates.
 
-The latest validated handoff is `docs/development/handoffs/AI-36-final-handoff.md`.
+The latest validated handoff is `docs/development/handoffs/AI-37-final-handoff.md`.
 
 ## Limitations
 
@@ -195,10 +195,12 @@ scripts/                   Repository validators and generators
 
 ## Current Status
 
-- Latest completed wave: `AI-36 Public Documentation & Repository Readiness`
-- Recommended next wave: `AI-37 v1 Release Candidate Audit`
+- Latest completed wave: `AI-37 v1 Release Candidate Audit`
+- Current v1 audit verdict: `V1_PARTIALLY_READY`
+- Recommended next step: Post-v1 candidate tracks require separate review before roadmap admission.
 - Roadmap: `ROADMAP.md`
-- Latest handoff: `docs/development/handoffs/AI-36-final-handoff.md`
+- v1 release candidate audit: `docs/evaluation/v1-release-candidate-audit.md`
+- Latest handoff: `docs/development/handoffs/AI-37-final-handoff.md`
 - Changelog: `CHANGELOG.md`
 
 ## Contributing

@@ -52,8 +52,8 @@ README_REQUIRED_TEXT = (
     "docs/architecture/prohibited-capabilities.md",
     "docs/architecture/canadian-jurisdiction-roadmap.md",
     "docs/architecture/specialization-roadmap.md",
-    "Latest completed wave: `AI-36 Public Documentation & Repository Readiness`",
-    "Recommended next wave: `AI-37 v1 Release Candidate Audit`",
+    "Latest completed wave: `AI-37 v1 Release Candidate Audit`",
+    "Recommended next step: Post-v1 candidate tracks require separate review",
 )
 
 ROUTING_STATES = (

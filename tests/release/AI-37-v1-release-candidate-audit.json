@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "status": "READY",
+  "completion_token": "AGENTINVESTIGATE_AI_37_V1_RC_AUDIT_COMPLETE",
+  "audit_artifact": "docs/evaluation/v1-release-candidate-audit.md",
+  "possible_verdicts": [
+    "V1_READY",
+    "V1_PARTIALLY_READY",
+    "V1_BLOCKED"
+  ],
+  "selected_verdict": "V1_PARTIALLY_READY",
+  "audit_rule": "Do not equate file existence with readiness.",
+  "dimension_count": 17,
+  "dimensions": [
+    {
+      "name": "taxonomy implementation",
+      "result": "PASS",
+      "evidence": [
+        "docs/architecture/taxonomy-index.yaml",
+        "scripts/validate-taxonomy.py",
+        "212 implemented SKILL.md packages"
+      ],
+      "remaining_risk": "Future taxonomy changes still require generator and validator updates."
+    },
+    {
+      "name": "skill completeness",
+      "result": "PASS",
+      "evidence": [
+        "skills/",
+        "scripts/validate-skills.py",
+        "AI-08 through AI-26 final handoffs"
+      ],
+      "remaining_risk": "Does not prove runtime performance in live agent runs."
+    },
+    {
+      "name": "routing correctness",
+      "result": "PASS",
+      "evidence": [
+        "docs/architecture/authority-routing.md",
+        "scripts/validate-routing.py",
+        "tests/integration/AI-33-multi-skill-integration-scenarios.json",
+        "tests/safety/AI-34-adversarial-safety-misuse-scenarios.json"
+      ],
+      "remaining_risk": "Future modules can still regress routing if not covered by validators."
+    },
+    {
+      "name": "authority gating",
+      "result": "PASS",
+      "evidence": [
+        "docs/architecture/authority-routing.md",
+        "docs/architecture/intrusive-task-gate.md",
+        "skills/02-intake-authority-law-licensing-privacy-compliance/"
+      ],
+      "remaining_risk": "Human approval evidence is not collected by repository validation."
+    },
+    {
+      "name": "privacy gating",
+      "result": "PASS",
+      "evidence": [
+        "docs/architecture/intrusive-task-gate.md",
+        "docs/standards/research-and-evidence-standard.md",
+        "specializations/canada/"
+      ],
+      "remaining_risk": "External privacy review is not recorded for v1."
+    },
+    {
+      "name": "regulatory freshness",
+      "result": "PARTIAL",
+      "evidence": [
+        "specializations/canada/federal/source-log.yaml",
+        "specializations/canada/ontario/source-log.yaml",
+        "specializations/canada/british-columbia/source-log.yaml",
+        "specializations/canada/alberta/source-log.yaml",
+        "last_verified: \"2026-09-05\""
+      ],
+      "remaining_risk": "AI-37 did not independently re-check live official sources; high-supersession sources require verification before reliance."
+    },
+    {
+      "name": "source integrity",
+      "result": "PASS",
+      "evidence": [
+        "docs/standards/regulatory-source-standard.md",
+        "docs/standards/source-freshness-standard.md",
+        "scripts/validate-specializations.py"
+      ],
+      "remaining_risk": "External source-link availability is not re-crawled by local validation."
+    },
+    {
+      "name": "jurisdiction isolation",
+      "result": "PASS",
+      "evidence": [
+        "specializations/canada/federal/",
+        "specializations/canada/ontario/",
+        "specializations/canada/british-columbia/",
+        "specializations/canada/alberta/",
+        "docs/architecture/canadian-jurisdiction-roadmap.md"
+      ],
+      "remaining_risk": "Additional jurisdictions are not implemented."
+    },
+    {
+      "name": "safety boundaries",
+      "result": "PASS",
+      "evidence": [
+        "docs/architecture/prohibited-capabilities.md",
+        "docs/evaluation/adversarial-safety-misuse-evaluation.md",
+        "scripts/validate-safety.py"
+      ],
+      "remaining_risk": "Live adversarial prompt regression was not run in AI-37."
+    },
+    {
+      "name": "evidence reasoning",
+      "result": "PASS",
+      "evidence": [
+        "skills/08-evidence-chain-of-custody/",
+        "skills/09-investigative-analysis/",
+        "skills/11-reporting-findings-case-presentation/"
+      ],
+      "remaining_risk": "Does not substitute for court admissibility or expert review."
+    },
+    {
+      "name": "identity-confidence behavior",
+      "result": "PASS",
+      "evidence": [
+        "skills/06-identity-entity-timeline-analysis/",
+        "tests/reference-skills/AI-13-entity-analysis-scenarios.json",
+        "tests/integration/AI-33-multi-skill-integration-scenarios.json"
+      ],
+      "remaining_risk": "Real-world identity matching requires source and privacy review."
+    },
+    {
+      "name": "tests",
+      "result": "PASS",
+      "evidence": [
+        "scripts/validate-all.ps1",
+        "tests/",
+        "full validation suite"
+      ],
+      "remaining_risk": "Tests are contract and fixture validations, not live runtime benchmarks."
+    },
+    {
+      "name": "integration",
+      "result": "PASS",
+      "evidence": [
+        "docs/evaluation/multi-skill-integration-evaluation.md",
+        "tests/integration/AI-33-multi-skill-integration-scenarios.json",
+        "scripts/validate-integration.py"
+      ],
+      "remaining_risk": "No live before/after model evaluation was run in AI-33."
+    },
+    {
+      "name": "professional skillsets",
+      "result": "PASS",
+      "evidence": [
+        "docs/architecture/professional-skillset-composition.md",
+        "skillsets/professional-skillsets.json",
+        "scripts/validate-skillsets.py"
+      ],
+      "remaining_risk": "Runtime orchestration manifests are not emitted."
+    },
+    {
+      "name": "documentation",
+      "result": "PASS",
+      "evidence": [
+        "README.md",
+        "CONTRIBUTING.md",
+        "CHANGELOG.md",
+        "docs/development/handoffs/"
+      ],
+      "remaining_risk": "External reviewer acceptance is not recorded."
+    },
+    {
+      "name": "repository hygiene",
+      "result": "PASS",
+      "evidence": [
+        "scripts/validate-docs.py",
+        "git status",
+        "empty-directory checks"
+      ],
+      "remaining_risk": "No release packaging or tag is created by AI-37."
+    },
+    {
+      "name": "licensing",
+      "result": "PASS",
+      "evidence": [
+        "LICENSE",
+        "README.md"
+      ],
+      "remaining_risk": "No legal review of license suitability is recorded."
+    }
+  ],
+  "conditions_for_v1_ready": [
+    "maintainer approval for the v1 release",
+    "independent current-source re-verification or explicit dated freshness exception for high-supersession regulatory sources",
+    "live prompt regression results for representative routing, integration, evidence, privacy, jurisdiction, and adversarial safety scenarios",
+    "legal, privacy, and safety reviewer sign-off or documented release-risk acceptance",
+    "release notes and tag decision",
+    "support and issue-response owner for post-release reports"
+  ],
+  "not_performed_in_ai37": [
+    "external legal review",
+    "external privacy review",
+    "external safety review",
+    "independent current-source web re-verification",
+    "live prompt regression testing",
+    "package publication",
+    "release tagging",
+    "production deployment",
+    "public launch communications"
+  ]
+}
