@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Evidentiary Support"
+  short_description: "Assess evidentiary support"
+  default_prompt: "Use $assess-evidentiary-support to assess evidentiary support for this workplace matter."
+policy:
+  allow_implicit_invocation: true

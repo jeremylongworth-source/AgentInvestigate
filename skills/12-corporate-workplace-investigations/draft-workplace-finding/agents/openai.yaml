@@ -1,0 +1,6 @@
+interface:
+  display_name: "Draft Workplace Finding"
+  short_description: "Draft workplace findings"
+  default_prompt: "Use $draft-workplace-finding to draft an evidence-bounded workplace finding."
+policy:
+  allow_implicit_invocation: true

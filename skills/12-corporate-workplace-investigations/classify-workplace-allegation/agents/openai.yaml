@@ -1,0 +1,6 @@
+interface:
+  display_name: "Classify Workplace Allegation"
+  short_description: "Classify workplace allegations"
+  default_prompt: "Use $classify-workplace-allegation to classify this workplace allegation."
+policy:
+  allow_implicit_invocation: true

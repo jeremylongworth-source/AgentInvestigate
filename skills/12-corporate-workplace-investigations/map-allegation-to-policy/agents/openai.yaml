@@ -1,0 +1,6 @@
+interface:
+  display_name: "Map Allegation To Policy"
+  short_description: "Map allegations to policy"
+  default_prompt: "Use $map-allegation-to-policy to map this allegation to supplied workplace policy."
+policy:
+  allow_implicit_invocation: true

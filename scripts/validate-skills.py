@@ -21,6 +21,7 @@ TOKENS = {
     "AI-16": "AGENTINVESTIGATE_AI_16_INVESTIGATIVE_ANALYSIS_READY",
     "AI-17": "AGENTINVESTIGATE_AI_17_REPORTING_READY",
     "AI-18": "AGENTINVESTIGATE_AI_18_OBSERVATION_GOVERNANCE_READY",
+    "AI-19": "AGENTINVESTIGATE_AI_19_WORKPLACE_INVESTIGATIONS_READY",
 }
 
 AI10_FAMILIES = {
@@ -240,6 +241,30 @@ AI18_PROHIBITED_OPERATIONAL_SKILLS = {
 }
 
 AI18_GATE = "Observation governance skills must be intrusive, jurisdiction-gated, and human-review-gated without operational surveillance tactics."
+
+AI19_FAMILY = "12-corporate-workplace-investigations"
+
+AI19_WORKFLOW_STEPS = {
+    "allegation",
+    "scope",
+    "allegations matrix",
+    "policy mapping",
+    "interview planning",
+    "evidence analysis",
+    "statement comparison",
+    "evidentiary support",
+    "findings",
+    "report",
+}
+
+AI19_PROHIBITED_DECISIONS = {
+    "discipline",
+    "termination",
+    "legal liability",
+    "criminal guilt",
+}
+
+AI19_GATE = "End-to-end workplace investigation flow must not decide discipline, termination, legal liability, or criminal guilt."
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -514,6 +539,20 @@ def observation_governance_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -
     return skills
 
 
+def workplace_investigation_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI19_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -527,6 +566,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **investigative_analysis_skills(taxonomy_by_name),
         **reporting_skills(taxonomy_by_name),
         **observation_governance_skills(taxonomy_by_name),
+        **workplace_investigation_skills(taxonomy_by_name),
     }
 
 
@@ -540,6 +580,7 @@ def scenario_suites(
     ai16_skills: dict[str, dict[str, str]],
     ai17_skills: dict[str, dict[str, str]],
     ai18_skills: dict[str, dict[str, str]],
+    ai19_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -641,6 +682,16 @@ def scenario_suites(
             "prohibited_operational_skills": AI18_PROHIBITED_OPERATIONAL_SKILLS,
             "gate": AI18_GATE,
         },
+        {
+            "label": "AI-19-workplace-investigations-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-19-workplace-investigations-scenarios.json",
+            "token": TOKENS["AI-19"],
+            "skills": ai19_skills,
+            "skill_list_key": "skills",
+            "workflow_steps": AI19_WORKFLOW_STEPS,
+            "prohibited_decisions": AI19_PROHIBITED_DECISIONS,
+            "gate": AI19_GATE,
+        },
     )
 
 
@@ -735,6 +786,16 @@ def validate_skill_package(
                 errors.append(f"{name}: missing AI-18 prohibited operational term {term}")
         if "operational surveillance tactics" not in lower_text:
             errors.append(f"{name}: missing AI-18 operational surveillance tactics boundary")
+    if expected_package["family"] == AI19_FAMILY:
+        lower_text = text.lower()
+        for step in AI19_WORKFLOW_STEPS:
+            if step not in lower_text:
+                errors.append(f"{name}: missing AI-19 workflow step {step}")
+        for decision in AI19_PROHIBITED_DECISIONS:
+            if decision not in lower_text:
+                errors.append(f"{name}: missing AI-19 prohibited decision {decision}")
+        if "qualified human review" not in lower_text and "qualified review" not in lower_text:
+            errors.append(f"{name}: missing AI-19 qualified review boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -843,6 +904,14 @@ def validate_scenario_suite(
     if expected_prohibited_operational_skills is not None:
         if set(data.get("prohibited_operational_skills", [])) != set(expected_prohibited_operational_skills):
             errors.append(f"{label}: prohibited_operational_skills mismatch")
+    expected_workflow_steps = suite.get("workflow_steps")
+    if expected_workflow_steps is not None:
+        if set(data.get("workflow_steps", [])) != set(expected_workflow_steps):
+            errors.append(f"{label}: workflow_steps mismatch")
+    expected_prohibited_decisions = suite.get("prohibited_decisions")
+    if expected_prohibited_decisions is not None:
+        if set(data.get("prohibited_decisions", [])) != set(expected_prohibited_decisions):
+            errors.append(f"{label}: prohibited_decisions mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -863,6 +932,8 @@ def validate_scenario_suite(
     has_testimony_boundary = False
     has_mandatory_properties = False
     observed_prohibited_operational_skills: set[str] = set()
+    has_workplace_flow = False
+    has_prohibited_workplace_decision = False
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -937,6 +1008,20 @@ def validate_scenario_suite(
             for term in AI18_PROHIBITED_OPERATIONAL_SKILLS:
                 if term in scenario.get("test_classes", []):
                     observed_prohibited_operational_skills.add(term)
+        if "end-to-end workplace flow" in scenario.get("test_classes", []):
+            has_workplace_flow = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for step in AI19_WORKFLOW_STEPS:
+                if step not in scenario_text:
+                    errors.append(f"{scenario_id}: missing workplace workflow step {step}")
+            for decision in AI19_PROHIBITED_DECISIONS:
+                if decision not in scenario_text:
+                    errors.append(f"{scenario_id}: missing prohibited workplace decision {decision}")
+        if "prohibited decision" in scenario.get("test_classes", []):
+            has_prohibited_workplace_decision = True
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -964,6 +1049,11 @@ def validate_scenario_suite(
             errors.append(f"{label}: missing mandatory properties scenario")
         if observed_prohibited_operational_skills != AI18_PROHIBITED_OPERATIONAL_SKILLS:
             errors.append(f"{label}: prohibited operational skill coverage mismatch")
+    if suite.get("gate") == AI19_GATE:
+        if not has_workplace_flow:
+            errors.append(f"{label}: missing end-to-end workplace flow scenario")
+        if not has_prohibited_workplace_decision:
+            errors.append(f"{label}: missing prohibited workplace decision scenario coverage")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -978,6 +1068,7 @@ def validate(repo_root: Path) -> list[str]:
     ai16_skills = investigative_analysis_skills(taxonomy_by_name)
     ai17_skills = reporting_skills(taxonomy_by_name)
     ai18_skills = observation_governance_skills(taxonomy_by_name)
+    ai19_skills = workplace_investigation_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -991,6 +1082,7 @@ def validate(repo_root: Path) -> list[str]:
         ai16_skills,
         ai17_skills,
         ai18_skills,
+        ai19_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -1008,7 +1100,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-18 observation governance skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-19 workplace investigation skills.")
     return 0
 
 

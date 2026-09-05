@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-19 Corporate & Workplace Investigations`.
+- Added all 10 Family 12 corporate and workplace investigation skill packages.
+- Added AI-19 workplace scenarios, end-to-end flow validation, and prohibited outcome-decision gate checks.
 - Completed `AI-18 Observation & Surveillance Governance`.
 - Added the remaining seven Family 10 observation-governance skill packages and upgraded `assess-observation-proportionality`.
 - Added AI-18 observation-governance scenarios, intrusive mandatory-property validation, and prohibited operational surveillance gate checks.

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Workplace Evidence Sources"
+  short_description: "Identify workplace evidence"
+  default_prompt: "Use $identify-workplace-evidence-sources to identify bounded workplace evidence sources."
+policy:
+  allow_implicit_invocation: true

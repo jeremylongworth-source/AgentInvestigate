@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Workplace Interview Plan"
+  short_description: "Prepare workplace interviews"
+  default_prompt: "Use $prepare-workplace-interview-plan to prepare a neutral workplace interview plan."
+policy:
+  allow_implicit_invocation: true

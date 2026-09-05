@@ -1,0 +1,6 @@
+interface:
+  display_name: "Plan Workplace Investigation"
+  short_description: "Plan workplace investigations"
+  default_prompt: "Use $plan-workplace-investigation to plan a bounded workplace investigation."
+policy:
+  allow_implicit_invocation: true

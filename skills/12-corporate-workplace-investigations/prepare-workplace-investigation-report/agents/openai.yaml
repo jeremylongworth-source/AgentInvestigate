@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Workplace Investigation Report"
+  short_description: "Prepare workplace reports"
+  default_prompt: "Use $prepare-workplace-investigation-report to prepare a workplace investigation report."
+policy:
+  allow_implicit_invocation: true

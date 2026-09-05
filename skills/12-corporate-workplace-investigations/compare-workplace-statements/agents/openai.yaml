@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compare Workplace Statements"
+  short_description: "Compare workplace statements"
+  default_prompt: "Use $compare-workplace-statements to compare these workplace statements neutrally."
+policy:
+  allow_implicit_invocation: true
