@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Report Limitations"
+  short_description: "Identify report limits"
+  default_prompt: "Use $identify-report-limitations to identify limitations in this report material."
+policy:
+  allow_implicit_invocation: true

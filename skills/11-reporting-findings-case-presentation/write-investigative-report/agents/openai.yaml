@@ -1,0 +1,6 @@
+interface:
+  display_name: "Write Investigative Report"
+  short_description: "Draft investigative reports"
+  default_prompt: "Use $write-investigative-report to draft a scoped investigative report."
+policy:
+  allow_implicit_invocation: true

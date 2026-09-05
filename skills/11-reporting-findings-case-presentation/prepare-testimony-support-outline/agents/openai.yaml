@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Testimony Support Outline"
+  short_description: "Prepare testimony outlines"
+  default_prompt: "Use $prepare-testimony-support-outline to prepare a bounded testimony-support outline."
+policy:
+  allow_implicit_invocation: true

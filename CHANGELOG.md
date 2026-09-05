@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-17 Reporting, Findings & Case Presentation`.
+- Added all 10 Family 11 reporting, findings, and case-presentation skill packages.
+- Added AI-17 reporting scenarios, report-field validation, and testimony-boundary gate checks.
 - Completed `AI-16 Investigative Analysis`.
 - Added the remaining 10 Family 09 investigative-analysis skill packages and upgraded `build-evidence-matrix`.
 - Added AI-16 investigative-analysis scenarios, hard-reasoning-rule validation, and disconfirming-evidence gate checks.

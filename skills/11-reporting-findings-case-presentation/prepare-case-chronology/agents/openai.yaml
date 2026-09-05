@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Case Chronology"
+  short_description: "Prepare case chronologies"
+  default_prompt: "Use $prepare-case-chronology to prepare a report-ready case chronology."
+policy:
+  allow_implicit_invocation: true

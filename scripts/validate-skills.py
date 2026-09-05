@@ -19,6 +19,7 @@ TOKENS = {
     "AI-14": "AGENTINVESTIGATE_AI_14_INTERVIEWING_READY",
     "AI-15": "AGENTINVESTIGATE_AI_15_EVIDENCE_READY",
     "AI-16": "AGENTINVESTIGATE_AI_16_INVESTIGATIVE_ANALYSIS_READY",
+    "AI-17": "AGENTINVESTIGATE_AI_17_REPORTING_READY",
 }
 
 AI10_FAMILIES = {
@@ -182,6 +183,33 @@ AI16_REQUIRED_CAPABILITIES = {
 }
 
 AI16_GATE = "Integration tests must include plausible but incorrect hypotheses and disconfirming evidence."
+
+AI17_FAMILY = "11-reporting-findings-case-presentation"
+
+AI17_REQUIRED_OUTPUTS = {
+    "investigative reports",
+    "incident reports",
+    "chronology",
+    "evidence summaries",
+    "findings matrices",
+    "executive summaries",
+    "report QA",
+    "case presentations",
+    "testimony-support outlines",
+    "report limitations",
+}
+
+AI17_REQUIRED_REPORT_FIELDS = {
+    "facts",
+    "sources",
+    "evidence",
+    "inference",
+    "limitations",
+    "unresolved questions",
+    "confidence",
+}
+
+AI17_GATE = "Reports must identify facts, sources, evidence, inference, limitations, unresolved questions, and confidence."
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -423,6 +451,20 @@ def investigative_analysis_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -
     return skills
 
 
+def reporting_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI17_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -434,6 +476,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **interviewing_skills(taxonomy_by_name),
         **evidence_skills(taxonomy_by_name),
         **investigative_analysis_skills(taxonomy_by_name),
+        **reporting_skills(taxonomy_by_name),
     }
 
 
@@ -445,6 +488,7 @@ def scenario_suites(
     ai14_skills: dict[str, dict[str, str]],
     ai15_skills: dict[str, dict[str, str]],
     ai16_skills: dict[str, dict[str, str]],
+    ai17_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -526,6 +570,16 @@ def scenario_suites(
             "reasoning_categories": AI16_REASONING_CATEGORIES,
             "gate": AI16_GATE,
         },
+        {
+            "label": "AI-17-reporting-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-17-reporting-scenarios.json",
+            "token": TOKENS["AI-17"],
+            "skills": ai17_skills,
+            "skill_list_key": "skills",
+            "required_outputs": AI17_REQUIRED_OUTPUTS,
+            "required_report_fields": AI17_REQUIRED_REPORT_FIELDS,
+            "gate": AI17_GATE,
+        },
     )
 
 
@@ -603,6 +657,13 @@ def validate_skill_package(
             errors.append(f"{name}: missing AI-16 disconfirming evidence gate")
         if "plausible but incorrect hypotheses" not in text:
             errors.append(f"{name}: missing AI-16 plausible incorrect hypothesis gate")
+    if expected_package["family"] == AI17_FAMILY:
+        lower_text = text.lower()
+        for field in AI17_REQUIRED_REPORT_FIELDS:
+            if field not in lower_text:
+                errors.append(f"{name}: missing AI-17 report field {field}")
+        if "coach testimony" not in lower_text:
+            errors.append(f"{name}: missing AI-17 testimony coaching boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -695,6 +756,14 @@ def validate_scenario_suite(
     if expected_reasoning_categories is not None:
         if set(data.get("reasoning_categories", [])) != set(expected_reasoning_categories):
             errors.append(f"{label}: reasoning_categories mismatch")
+    expected_required_outputs = suite.get("required_outputs")
+    if expected_required_outputs is not None:
+        if set(data.get("required_outputs", [])) != set(expected_required_outputs):
+            errors.append(f"{label}: required_outputs mismatch")
+    expected_required_report_fields = suite.get("required_report_fields")
+    if expected_required_report_fields is not None:
+        if set(data.get("required_report_fields", [])) != set(expected_required_report_fields):
+            errors.append(f"{label}: required_report_fields mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -711,6 +780,8 @@ def validate_scenario_suite(
     has_representative_continuity = False
     has_plausible_incorrect_hypothesis = False
     has_disconfirming_evidence = False
+    has_report_field_coverage = False
+    has_testimony_boundary = False
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -761,6 +832,17 @@ def validate_scenario_suite(
                     errors.append(f"{scenario_id}: missing reasoning category {category}")
         if "disconfirming evidence" in scenario.get("test_classes", []):
             has_disconfirming_evidence = True
+        if "report field coverage" in scenario.get("test_classes", []):
+            has_report_field_coverage = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for report_field in AI17_REQUIRED_REPORT_FIELDS:
+                if report_field not in scenario_text:
+                    errors.append(f"{scenario_id}: missing report field {report_field}")
+        if "testimony boundary" in scenario.get("test_classes", []):
+            has_testimony_boundary = True
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -778,6 +860,11 @@ def validate_scenario_suite(
             errors.append(f"{label}: missing plausible incorrect hypothesis scenario coverage")
         if not has_disconfirming_evidence:
             errors.append(f"{label}: missing disconfirming evidence scenario coverage")
+    if suite.get("gate") == AI17_GATE:
+        if not has_report_field_coverage:
+            errors.append(f"{label}: missing report field coverage scenario")
+        if not has_testimony_boundary:
+            errors.append(f"{label}: missing testimony boundary scenario")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -790,6 +877,7 @@ def validate(repo_root: Path) -> list[str]:
     ai14_skills = interviewing_skills(taxonomy_by_name)
     ai15_skills = evidence_skills(taxonomy_by_name)
     ai16_skills = investigative_analysis_skills(taxonomy_by_name)
+    ai17_skills = reporting_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -801,6 +889,7 @@ def validate(repo_root: Path) -> list[str]:
         ai14_skills,
         ai15_skills,
         ai16_skills,
+        ai17_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -818,7 +907,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-16 investigative analysis skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-17 reporting skills.")
     return 0
 
 

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Summarize Evidence"
+  short_description: "Summarize report evidence"
+  default_prompt: "Use $summarize-evidence to summarize supplied evidence for a report."
+policy:
+  allow_implicit_invocation: true

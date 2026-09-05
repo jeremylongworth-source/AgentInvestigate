@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Case Presentation"
+  short_description: "Prepare case presentations"
+  default_prompt: "Use $prepare-case-presentation to prepare a case presentation from this reviewed report."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Write Incident Report"
+  short_description: "Draft incident reports"
+  default_prompt: "Use $write-incident-report to draft an incident report from this material."
+policy:
+  allow_implicit_invocation: true

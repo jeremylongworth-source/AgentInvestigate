@@ -1,0 +1,6 @@
+interface:
+  display_name: "Write Executive Summary"
+  short_description: "Draft executive summaries"
+  default_prompt: "Use $write-executive-summary to draft an evidence-bounded executive summary."
+policy:
+  allow_implicit_invocation: true

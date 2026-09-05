@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Report Quality"
+  short_description: "Review report quality"
+  default_prompt: "Use $review-report-quality to review this investigative report for quality and boundaries."
+policy:
+  allow_implicit_invocation: true
