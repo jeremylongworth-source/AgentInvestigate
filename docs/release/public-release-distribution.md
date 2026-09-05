@@ -42,6 +42,7 @@ Required state:
 
 - visibility: `PUBLIC`
 - wiki: `enabled`
+- wiki publication: `verified`
 - topic: `agent-skills`
 - secret scanning: requested through GitHub CLI
 - secret scanning push protection: requested through GitHub CLI
@@ -53,6 +54,13 @@ Wiki URL:
 ```text
 https://github.com/jeremylongworth-source/AgentInvestigate/wiki
 ```
+
+Publication verification:
+
+- wiki repository: `https://github.com/jeremylongworth-source/AgentInvestigate.wiki.git`
+- published wiki commit: `c22ba77`
+- HTTP verification: `200`
+- verified page content: `AgentInvestigate Wiki`
 
 Wiki source pages:
 
@@ -109,6 +117,7 @@ AI-38 validation checks:
 
 - repository-side public distribution artifact exists;
 - wiki source pages exist;
+- published GitHub Wiki URL is recorded as HTTP-verified;
 - README documents GitHub Wiki and `gh skill install`;
 - validation scripts include AI-38;
 - release fixture records repository visibility, wiki, skill dry-run, and distribution verdict.

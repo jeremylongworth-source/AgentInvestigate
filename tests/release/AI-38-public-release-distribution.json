@@ -14,6 +14,10 @@
   },
   "wiki": {
     "url": "https://github.com/jeremylongworth-source/AgentInvestigate/wiki",
+    "wiki_repository_url": "https://github.com/jeremylongworth-source/AgentInvestigate.wiki.git",
+    "published_to_github_wiki": true,
+    "publication_verified_http_200": true,
+    "published_wiki_commit": "c22ba77",
     "source_pages": [
       "docs/wiki/Home.md",
       "docs/wiki/_Sidebar.md",

@@ -48,6 +48,20 @@ GitHub repository visibility verified as PUBLIC.
 
 GitHub Wiki verified as enabled.
 
+GitHub Wiki repository populated from `docs/wiki/` and pushed to `https://github.com/jeremylongworth-source/AgentInvestigate.wiki.git`.
+
+Published wiki commit:
+
+```text
+c22ba77
+```
+
+Public wiki URL verified with HTTP 200:
+
+```text
+https://github.com/jeremylongworth-source/AgentInvestigate/wiki
+```
+
 GitHub repository topic `agent-skills` verified as present.
 
 GitHub secret scanning and secret scanning push protection were requested through GitHub CLI.
@@ -85,6 +99,7 @@ AI-38 validation confirms:
 - the public release distribution artifact exists;
 - the release fixture exists;
 - wiki source pages exist and are non-empty;
+- the published GitHub Wiki URL is recorded as HTTP-verified;
 - README documents GitHub Wiki and Copilot skill install commands;
 - the release artifact records public visibility, enabled wiki, `agent-skills` topic, and `PUBLIC_RELEASE_READY`;
 - repository validation covers AI-38.

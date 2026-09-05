@@ -84,6 +84,15 @@ def validate(repo_root: Path) -> list[str]:
             wiki = fixture.get("wiki", {})
             if not isinstance(wiki, dict) or set(wiki.get("source_pages", [])) != set(WIKI_PAGES):
                 errors.append("AI-38 fixture wiki source pages mismatch")
+            if isinstance(wiki, dict):
+                if wiki.get("wiki_repository_url") != "https://github.com/jeremylongworth-source/AgentInvestigate.wiki.git":
+                    errors.append("AI-38 fixture wiki repository URL mismatch")
+                if wiki.get("published_to_github_wiki") is not True:
+                    errors.append("AI-38 fixture must record published GitHub Wiki")
+                if wiki.get("publication_verified_http_200") is not True:
+                    errors.append("AI-38 fixture must record HTTP 200 wiki verification")
+                if wiki.get("published_wiki_commit") != "c22ba77":
+                    errors.append("AI-38 fixture published wiki commit mismatch")
             distribution = fixture.get("copilot_skill_distribution", {})
             if not isinstance(distribution, dict):
                 errors.append("AI-38 fixture copilot_skill_distribution must be an object")
@@ -99,7 +108,12 @@ def validate(repo_root: Path) -> list[str]:
             VERDICT,
             "visibility: `PUBLIC`",
             "wiki: `enabled`",
+            "wiki publication: `verified`",
             "topic: `agent-skills`",
+            "wiki repository: `https://github.com/jeremylongworth-source/AgentInvestigate.wiki.git`",
+            "published wiki commit: `c22ba77`",
+            "HTTP verification: `200`",
+            "verified page content: `AgentInvestigate Wiki`",
             "gh skill publish --dry-run",
             "gh skill preview jeremylongworth-source/AgentInvestigate classify-request-type",
             "gh skill install jeremylongworth-source/AgentInvestigate classify-request-type",
@@ -127,6 +141,9 @@ def validate(repo_root: Path) -> list[str]:
             "scripts/validate-public-release-distribution.py",
             "GitHub repository visibility verified as PUBLIC",
             "GitHub Wiki verified as enabled",
+            "GitHub Wiki repository populated from `docs/wiki/`",
+            "c22ba77",
+            "Public wiki URL verified with HTTP 200",
             "gh skill publish --dry-run",
             "Post-v1 candidate tracks require separate review before roadmap admission.",
             *WIKI_PAGES,
