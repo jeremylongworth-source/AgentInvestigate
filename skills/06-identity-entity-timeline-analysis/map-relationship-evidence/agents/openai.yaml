@@ -1,0 +1,6 @@
+interface:
+  display_name: "Map Relationship Evidence"
+  short_description: "Map relationship evidence"
+  default_prompt: "Use $map-relationship-evidence to map supplied relationship evidence with confidence limits."
+policy:
+  allow_implicit_invocation: true

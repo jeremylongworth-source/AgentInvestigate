@@ -1,0 +1,6 @@
+interface:
+  display_name: "Differentiate Same Name Individuals"
+  short_description: "Differentiate same-name people"
+  default_prompt: "Use $differentiate-same-name-individuals to compare same-name records without overclaiming identity."
+policy:
+  allow_implicit_invocation: true

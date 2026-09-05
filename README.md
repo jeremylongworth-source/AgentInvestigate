@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, and the Research, OSINT & Public Records skill family.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, the Research, OSINT & Public Records skill family, and the Identity, Entity & Timeline Analysis skill family.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-12 Research, OSINT & Public Records`
-- Recommended next wave: `AI-13 Identity, Entity & Timeline Analysis`
+- Latest completed wave: `AI-13 Identity, Entity & Timeline Analysis`
+- Recommended next wave: `AI-14 Interviewing, Witnesses & Statements`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -49,7 +49,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Authority and compliance scenarios: `tests/reference-skills/AI-10-authority-compliance-scenarios.json`
 - Case management scenarios: `tests/reference-skills/AI-11-case-management-scenarios.json`
 - Research and OSINT scenarios: `tests/reference-skills/AI-12-research-osint-scenarios.json`
-- Latest handoff: `docs/development/handoffs/AI-12-final-handoff.md`
+- Entity analysis scenarios: `tests/reference-skills/AI-13-entity-analysis-scenarios.json`
+- Latest handoff: `docs/development/handoffs/AI-13-final-handoff.md`
 
 ## Development Approach
 

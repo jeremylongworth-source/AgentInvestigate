@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-13 Identity, Entity & Timeline Analysis`.
+- Added all 10 Family 06 identity, entity, and timeline analysis skill packages.
+- Added AI-13 entity-analysis scenarios, confidence-model validation, and identity-overclaiming gate checks.
 - Completed `AI-12 Research, OSINT & Public Records`.
 - Added all 14 Family 05 research, OSINT, and public-records skill packages.
 - Added AI-12 research scenarios and hard-boundary validation for unauthorized access, credentials, private accounts, and deceptive protected-record acquisition.

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Construct Subject Timeline"
+  short_description: "Construct subject timelines"
+  default_prompt: "Use $construct-subject-timeline to construct a source-bounded subject timeline."
+policy:
+  allow_implicit_invocation: true

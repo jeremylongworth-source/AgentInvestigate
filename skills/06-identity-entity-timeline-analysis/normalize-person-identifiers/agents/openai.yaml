@@ -1,0 +1,6 @@
+interface:
+  display_name: "Normalize Person Identifiers"
+  short_description: "Normalize person identifiers"
+  default_prompt: "Use $normalize-person-identifiers to normalize supplied person identifiers for this matter."
+policy:
+  allow_implicit_invocation: true

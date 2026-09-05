@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Timeline Gap"
+  short_description: "Identify timeline gaps"
+  default_prompt: "Use $identify-timeline-gap to identify gaps and disputed dates in this timeline."
+policy:
+  allow_implicit_invocation: true

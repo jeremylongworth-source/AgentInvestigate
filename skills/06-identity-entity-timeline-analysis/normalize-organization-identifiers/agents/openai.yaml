@@ -1,0 +1,6 @@
+interface:
+  display_name: "Normalize Organization Identifiers"
+  short_description: "Normalize organization IDs"
+  default_prompt: "Use $normalize-organization-identifiers to normalize supplied organization identifiers."
+policy:
+  allow_implicit_invocation: true

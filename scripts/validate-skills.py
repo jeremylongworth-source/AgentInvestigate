@@ -15,6 +15,7 @@ TOKENS = {
     "AI-10": "AGENTINVESTIGATE_AI_10_AUTHORITY_COMPLIANCE_READY",
     "AI-11": "AGENTINVESTIGATE_AI_11_CASE_MANAGEMENT_READY",
     "AI-12": "AGENTINVESTIGATE_AI_12_RESEARCH_OSINT_READY",
+    "AI-13": "AGENTINVESTIGATE_AI_13_ENTITY_ANALYSIS_READY",
 }
 
 AI10_FAMILIES = {
@@ -78,6 +79,27 @@ AI12_HARD_BOUNDARY_TESTS = {
     "credential acquisition",
     "private-account compromise",
     "protected-record acquisition through deception",
+}
+
+AI13_FAMILY = "06-identity-entity-timeline-analysis"
+
+AI13_REQUIRED_CAPABILITIES = {
+    "identity ambiguity",
+    "same-name differentiation",
+    "identifier normalization",
+    "subject timelines",
+    "relationship mapping",
+    "association evidence",
+    "timeline gaps",
+    "entity contradictions",
+}
+
+AI13_CONFIDENCE_MODEL = {
+    "POSSIBLE",
+    "PROBABLE",
+    "CORROBORATED",
+    "CONFIRMED",
+    "UNRESOLVED",
 }
 
 REFERENCE_SKILLS = {
@@ -263,6 +285,20 @@ def research_osint_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[s
     return skills
 
 
+def entity_analysis_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI13_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -270,6 +306,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **authority_compliance_skills(taxonomy_by_name),
         **case_management_skills(taxonomy_by_name),
         **research_osint_skills(taxonomy_by_name),
+        **entity_analysis_skills(taxonomy_by_name),
     }
 
 
@@ -277,6 +314,7 @@ def scenario_suites(
     ai10_skills: dict[str, dict[str, str]],
     ai11_skills: dict[str, dict[str, str]],
     ai12_skills: dict[str, dict[str, str]],
+    ai13_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -317,6 +355,16 @@ def scenario_suites(
             "skill_list_key": "skills",
             "research_topics": AI12_RESEARCH_TOPICS,
             "hard_boundary_tests": AI12_HARD_BOUNDARY_TESTS,
+        },
+        {
+            "label": "AI-13-entity-analysis-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-13-entity-analysis-scenarios.json",
+            "token": TOKENS["AI-13"],
+            "skills": ai13_skills,
+            "skill_list_key": "skills",
+            "required_capabilities": AI13_REQUIRED_CAPABILITIES,
+            "confidence_model": AI13_CONFIDENCE_MODEL,
+            "gate": "Tests must detect and penalize identity overclaiming.",
         },
     )
 
@@ -374,6 +422,10 @@ def validate_skill_package(
 
     if expected_package["sensitivity"] not in text:
         errors.append(f"{name}: missing sensitivity class in SKILL.md")
+    if expected_package["family"] == AI13_FAMILY:
+        for label in AI13_CONFIDENCE_MODEL:
+            if label not in text:
+                errors.append(f"{name}: missing AI-13 confidence label {label}")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -439,6 +491,17 @@ def validate_scenario_suite(
     if expected_hard_boundary_tests is not None:
         if set(data.get("hard_boundary_tests", [])) != set(expected_hard_boundary_tests):
             errors.append(f"{label}: hard_boundary_tests mismatch")
+    expected_required_capabilities = suite.get("required_capabilities")
+    if expected_required_capabilities is not None:
+        if set(data.get("required_capabilities", [])) != set(expected_required_capabilities):
+            errors.append(f"{label}: required_capabilities mismatch")
+    expected_confidence_model = suite.get("confidence_model")
+    if expected_confidence_model is not None:
+        if set(data.get("confidence_model", [])) != set(expected_confidence_model):
+            errors.append(f"{label}: confidence_model mismatch")
+    expected_gate = suite.get("gate")
+    if expected_gate is not None and data.get("gate") != expected_gate:
+        errors.append(f"{label}: gate mismatch")
 
     scenarios = data.get("scenarios")
     if not isinstance(scenarios, list):
@@ -447,6 +510,7 @@ def validate_scenario_suite(
 
     coverage: dict[str, set[str]] = defaultdict(set)
     scenario_ids: set[str] = set()
+    has_identity_overclaiming = False
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -469,12 +533,16 @@ def validate_scenario_suite(
         for field in ("test_classes", "required_checks", "blocked_outputs"):
             if not isinstance(scenario.get(field), list) or not scenario.get(field):
                 errors.append(f"{scenario_id}: {field} must be a non-empty list")
+        if "identity overclaiming" in scenario.get("test_classes", []):
+            has_identity_overclaiming = True
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
     for skill in expected_skills:
         if coverage[skill] != VALID_TEST_TYPES:
             errors.append(f"{skill}: must have positive and negative-routing scenarios in {label}")
+    if suite.get("gate") == "Tests must detect and penalize identity overclaiming." and not has_identity_overclaiming:
+        errors.append(f"{label}: missing identity overclaiming scenario coverage")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -483,10 +551,11 @@ def validate(repo_root: Path) -> list[str]:
     ai10_skills = authority_compliance_skills(taxonomy_by_name)
     ai11_skills = case_management_skills(taxonomy_by_name)
     ai12_skills = research_osint_skills(taxonomy_by_name)
+    ai13_skills = entity_analysis_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
-    for suite in scenario_suites(ai10_skills, ai11_skills, ai12_skills):
+    for suite in scenario_suites(ai10_skills, ai11_skills, ai12_skills, ai13_skills):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
 
@@ -503,7 +572,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-12 research OSINT skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-13 entity analysis skills.")
     return 0
 
 

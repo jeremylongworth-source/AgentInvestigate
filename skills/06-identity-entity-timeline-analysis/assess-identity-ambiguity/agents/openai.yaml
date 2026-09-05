@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Identity Ambiguity"
+  short_description: "Assess identity ambiguity"
+  default_prompt: "Use $assess-identity-ambiguity to assess identity ambiguity without overclaiming a match."
+policy:
+  allow_implicit_invocation: true

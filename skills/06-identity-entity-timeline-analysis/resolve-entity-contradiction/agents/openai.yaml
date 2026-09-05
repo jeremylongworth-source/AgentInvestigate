@@ -1,0 +1,6 @@
+interface:
+  display_name: "Resolve Entity Contradiction"
+  short_description: "Analyze entity contradictions"
+  default_prompt: "Use $resolve-entity-contradiction to analyze contradictions across supplied entity records."
+policy:
+  allow_implicit_invocation: true

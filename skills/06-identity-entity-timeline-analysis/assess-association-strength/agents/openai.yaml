@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Association Strength"
+  short_description: "Assess association support"
+  default_prompt: "Use $assess-association-strength to assess support for supplied association evidence."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "State Identity Confidence"
+  short_description: "State identity confidence"
+  default_prompt: "Use $state-identity-confidence to state bounded identity confidence from the supplied evidence."
+policy:
+  allow_implicit_invocation: true
