@@ -1,0 +1,6 @@
+interface:
+  display_name: "Audit Case File"
+  short_description: "Audit case file"
+  default_prompt: "Use $audit-case-file to audit this case file."
+policy:
+  allow_implicit_invocation: true

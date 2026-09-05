@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Security Procedure"
+  short_description: "Review security procedure"
+  default_prompt: "Use $review-security-procedure to review this security procedure."
+policy:
+  allow_implicit_invocation: true

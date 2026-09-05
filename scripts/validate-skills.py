@@ -28,6 +28,7 @@ TOKENS = {
     "AI-23": "AGENTINVESTIGATE_AI_23_PHYSICAL_SECURITY_READY",
     "AI-24": "AGENTINVESTIGATE_AI_24_SECURITY_SYSTEMS_READY",
     "AI-25": "AGENTINVESTIGATE_AI_25_LOSS_PREVENTION_READY",
+    "AI-26": "AGENTINVESTIGATE_AI_26_PROGRAM_MANAGEMENT_READY",
 }
 
 AI10_FAMILIES = {
@@ -473,6 +474,50 @@ AI25_REVIEW_BOUNDARIES = {
 
 AI25_GATE = "Loss prevention and asset protection skills must not provide physical intervention, detention, search, pursuit, coercive questioning, or unsupported theft conclusions."
 
+AI26_FAMILY = "20-investigation-security-program-management"
+
+AI26_PROGRAM_MANAGEMENT_ELEMENTS = {
+    "investigative policy",
+    "security post orders",
+    "procedure review",
+    "file audits",
+    "program audits",
+    "kpis",
+    "training requirements",
+    "corrective action",
+    "improvement measurement",
+}
+
+AI26_COMPOSITION_TARGETS = {
+    "investigative-case-manager",
+    "security-supervisor",
+    "security-operations-manager",
+    "security-program-manager",
+    "corporate-security-manager",
+}
+
+AI26_PROHIBITED_OUTPUTS = {
+    "legal conclusion",
+    "licensing approval",
+    "compliance certification",
+    "policy approval",
+    "disciplinary decision",
+    "use-of-force training",
+    "weapons training",
+    "fabricated audit",
+}
+
+AI26_REVIEW_BOUNDARIES = {
+    "management review",
+    "legal review",
+    "HR review",
+    "privacy review",
+    "licensing review",
+    "qualified training review",
+}
+
+AI26_GATE = "Investigation and security program management skills must not provide legal conclusions, licensing approval, compliance certification, policy approval, disciplinary decisions, use-of-force training, weapons training, or fabricated audit findings."
+
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
         "family": "09-investigative-analysis",
@@ -844,6 +889,20 @@ def loss_prevention_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[
     return skills
 
 
+def program_management_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI26_FAMILY:
+            continue
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": f"references/{name}-reference.md",
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -864,6 +923,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **physical_security_skills(taxonomy_by_name),
         **security_systems_skills(taxonomy_by_name),
         **loss_prevention_skills(taxonomy_by_name),
+        **program_management_skills(taxonomy_by_name),
     }
 
 
@@ -884,6 +944,7 @@ def scenario_suites(
     ai23_skills: dict[str, dict[str, str]],
     ai24_skills: dict[str, dict[str, str]],
     ai25_skills: dict[str, dict[str, str]],
+    ai26_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -1063,6 +1124,18 @@ def scenario_suites(
             "prohibited_conduct": AI25_PROHIBITED_CONDUCT,
             "review_boundaries": AI25_REVIEW_BOUNDARIES,
             "gate": AI25_GATE,
+        },
+        {
+            "label": "AI-26-program-management-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-26-program-management-scenarios.json",
+            "token": TOKENS["AI-26"],
+            "skills": ai26_skills,
+            "skill_list_key": "skills",
+            "program_management_elements": AI26_PROGRAM_MANAGEMENT_ELEMENTS,
+            "composition_targets": AI26_COMPOSITION_TARGETS,
+            "prohibited_outputs": AI26_PROHIBITED_OUTPUTS,
+            "review_boundaries": AI26_REVIEW_BOUNDARIES,
+            "gate": AI26_GATE,
         },
     )
 
@@ -1255,6 +1328,22 @@ def validate_skill_package(
                 errors.append(f"{name}: missing AI-25 review boundary {term}")
         if "unsupported theft conclusion" not in lower_text:
             errors.append(f"{name}: missing AI-25 unsupported theft conclusion boundary")
+    if expected_package["family"] == AI26_FAMILY:
+        lower_text = text.lower()
+        for term in AI26_PROGRAM_MANAGEMENT_ELEMENTS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-26 program-management element {term}")
+        for term in AI26_COMPOSITION_TARGETS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-26 composition target {term}")
+        for term in AI26_PROHIBITED_OUTPUTS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-26 prohibited output {term}")
+        for term in AI26_REVIEW_BOUNDARIES:
+            if term not in text and term.lower() not in lower_text:
+                errors.append(f"{name}: missing AI-26 review boundary {term}")
+        if "final management signoff" not in lower_text:
+            errors.append(f"{name}: missing AI-26 final management signoff boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -1447,6 +1536,14 @@ def validate_scenario_suite(
     if expected_review_boundaries is not None:
         if set(data.get("review_boundaries", [])) != set(expected_review_boundaries):
             errors.append(f"{label}: review_boundaries mismatch")
+    expected_program_management_elements = suite.get("program_management_elements")
+    if expected_program_management_elements is not None:
+        if set(data.get("program_management_elements", [])) != set(expected_program_management_elements):
+            errors.append(f"{label}: program_management_elements mismatch")
+    expected_prohibited_outputs = suite.get("prohibited_outputs")
+    if expected_prohibited_outputs is not None:
+        if set(data.get("prohibited_outputs", [])) != set(expected_prohibited_outputs):
+            errors.append(f"{label}: prohibited_outputs mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -1499,6 +1596,12 @@ def validate_scenario_suite(
     observed_ai25_composition_targets: set[str] = set()
     has_ai25_prohibited_conduct = False
     observed_ai25_prohibited_conduct: set[str] = set()
+    has_ai26_program_management_elements = False
+    observed_ai26_program_management_elements: set[str] = set()
+    has_ai26_composition_target = False
+    observed_ai26_composition_targets: set[str] = set()
+    has_ai26_prohibited_output = False
+    observed_ai26_prohibited_outputs: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -1693,6 +1796,30 @@ def validate_scenario_suite(
         for term in AI25_PROHIBITED_CONDUCT:
             if term in scenario.get("test_classes", []):
                 observed_ai25_prohibited_conduct.add(term)
+        if "program management elements" in scenario.get("test_classes", []):
+            has_ai26_program_management_elements = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for term in AI26_PROGRAM_MANAGEMENT_ELEMENTS:
+                if term not in scenario_text:
+                    errors.append(f"{scenario_id}: missing AI-26 program-management element {term}")
+        for term in AI26_PROGRAM_MANAGEMENT_ELEMENTS:
+            if term in scenario.get("test_classes", []):
+                observed_ai26_program_management_elements.add(term)
+        if "composition target" in scenario.get("test_classes", []):
+            for term in AI26_COMPOSITION_TARGETS:
+                if term in scenario.get("test_classes", []):
+                    has_ai26_composition_target = True
+        for term in AI26_COMPOSITION_TARGETS:
+            if term in scenario.get("test_classes", []):
+                observed_ai26_composition_targets.add(term)
+        if "prohibited output" in scenario.get("test_classes", []):
+            has_ai26_prohibited_output = True
+        for term in AI26_PROHIBITED_OUTPUTS:
+            if term in scenario.get("test_classes", []):
+                observed_ai26_prohibited_outputs.add(term)
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -1791,6 +1918,19 @@ def validate_scenario_suite(
             errors.append(f"{label}: missing prohibited conduct scenario")
         if observed_ai25_prohibited_conduct != AI25_PROHIBITED_CONDUCT:
             errors.append(f"{label}: AI-25 prohibited conduct coverage mismatch")
+    if suite.get("gate") == AI26_GATE:
+        if not has_ai26_program_management_elements:
+            errors.append(f"{label}: missing program management elements scenario")
+        if observed_ai26_program_management_elements != AI26_PROGRAM_MANAGEMENT_ELEMENTS:
+            errors.append(f"{label}: AI-26 program-management element coverage mismatch")
+        if not has_ai26_composition_target:
+            errors.append(f"{label}: missing composition target scenario")
+        if observed_ai26_composition_targets != AI26_COMPOSITION_TARGETS:
+            errors.append(f"{label}: AI-26 composition target coverage mismatch")
+        if not has_ai26_prohibited_output:
+            errors.append(f"{label}: missing prohibited output scenario")
+        if observed_ai26_prohibited_outputs != AI26_PROHIBITED_OUTPUTS:
+            errors.append(f"{label}: AI-26 prohibited output coverage mismatch")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -1812,6 +1952,7 @@ def validate(repo_root: Path) -> list[str]:
     ai23_skills = physical_security_skills(taxonomy_by_name)
     ai24_skills = security_systems_skills(taxonomy_by_name)
     ai25_skills = loss_prevention_skills(taxonomy_by_name)
+    ai26_skills = program_management_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -1832,6 +1973,7 @@ def validate(repo_root: Path) -> list[str]:
         ai23_skills,
         ai24_skills,
         ai25_skills,
+        ai26_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -1849,7 +1991,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-25 loss prevention skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-26 program management skills.")
     return 0
 
 

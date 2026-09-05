@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Program Governance Gap"
+  short_description: "Find governance gaps"
+  default_prompt: "Use $identify-program-governance-gap to identify program governance gaps."
+policy:
+  allow_implicit_invocation: true

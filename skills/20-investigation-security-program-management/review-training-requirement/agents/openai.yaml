@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Training Requirement"
+  short_description: "Review training need"
+  default_prompt: "Use $review-training-requirement to review this training requirement."
+policy:
+  allow_implicit_invocation: true

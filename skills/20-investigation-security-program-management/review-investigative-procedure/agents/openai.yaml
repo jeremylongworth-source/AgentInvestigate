@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Investigative Procedure"
+  short_description: "Review PI procedure"
+  default_prompt: "Use $review-investigative-procedure to review this investigative procedure."
+policy:
+  allow_implicit_invocation: true

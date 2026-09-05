@@ -1,0 +1,6 @@
+interface:
+  display_name: "Audit Security Program"
+  short_description: "Audit security program"
+  default_prompt: "Use $audit-security-program to audit this security program."
+policy:
+  allow_implicit_invocation: true

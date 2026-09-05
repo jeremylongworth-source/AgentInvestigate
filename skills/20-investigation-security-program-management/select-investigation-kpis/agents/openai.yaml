@@ -1,0 +1,6 @@
+interface:
+  display_name: "Select Investigation KPIs"
+  short_description: "Select PI KPIs"
+  default_prompt: "Use $select-investigation-kpis to select investigation KPIs."
+policy:
+  allow_implicit_invocation: true

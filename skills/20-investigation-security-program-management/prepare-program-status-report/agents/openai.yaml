@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Program Status Report"
+  short_description: "Prepare program status"
+  default_prompt: "Use $prepare-program-status-report to prepare a program status report."
+policy:
+  allow_implicit_invocation: true

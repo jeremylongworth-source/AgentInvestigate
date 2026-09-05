@@ -1,0 +1,6 @@
+interface:
+  display_name: "Measure Improvement Result"
+  short_description: "Measure improvement"
+  default_prompt: "Use $measure-improvement-result to measure improvement results."
+policy:
+  allow_implicit_invocation: true

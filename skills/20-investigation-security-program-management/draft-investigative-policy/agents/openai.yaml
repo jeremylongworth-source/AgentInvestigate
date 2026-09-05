@@ -1,0 +1,6 @@
+interface:
+  display_name: "Draft Investigative Policy"
+  short_description: "Draft investigative policy"
+  default_prompt: "Use $draft-investigative-policy to draft investigative policy."
+policy:
+  allow_implicit_invocation: true

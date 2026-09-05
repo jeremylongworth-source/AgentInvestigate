@@ -1,0 +1,6 @@
+interface:
+  display_name: "Select Security KPIs"
+  short_description: "Select security KPIs"
+  default_prompt: "Use $select-security-kpis to select security KPIs."
+policy:
+  allow_implicit_invocation: true

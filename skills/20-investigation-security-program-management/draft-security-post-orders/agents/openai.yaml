@@ -1,0 +1,6 @@
+interface:
+  display_name: "Draft Security Post Orders"
+  short_description: "Draft post orders"
+  default_prompt: "Use $draft-security-post-orders to draft security post orders."
+policy:
+  allow_implicit_invocation: true

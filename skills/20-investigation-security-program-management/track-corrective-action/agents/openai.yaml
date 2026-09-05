@@ -1,0 +1,6 @@
+interface:
+  display_name: "Track Corrective Action"
+  short_description: "Track corrective action"
+  default_prompt: "Use $track-corrective-action to track corrective action."
+policy:
+  allow_implicit_invocation: true
