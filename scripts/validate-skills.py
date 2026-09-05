@@ -20,6 +20,7 @@ TOKENS = {
     "AI-15": "AGENTINVESTIGATE_AI_15_EVIDENCE_READY",
     "AI-16": "AGENTINVESTIGATE_AI_16_INVESTIGATIVE_ANALYSIS_READY",
     "AI-17": "AGENTINVESTIGATE_AI_17_REPORTING_READY",
+    "AI-18": "AGENTINVESTIGATE_AI_18_OBSERVATION_GOVERNANCE_READY",
 }
 
 AI10_FAMILIES = {
@@ -210,6 +211,35 @@ AI17_REQUIRED_REPORT_FIELDS = {
 }
 
 AI17_GATE = "Reports must identify facts, sources, evidence, inference, limitations, unresolved questions, and confidence."
+
+AI18_FAMILY = "10-observation-surveillance-governance"
+
+AI18_IMPLEMENTED_SKILLS = {
+    "assess-observation-authorization",
+    "assess-observation-necessity",
+    "assess-observation-proportionality",
+    "define-observation-purpose",
+    "plan-lawful-observation-assignment",
+    "record-field-observation",
+    "minimize-third-party-information",
+    "review-observation-record-for-compliance",
+}
+
+AI18_MANDATORY_PROPERTIES = {
+    "sensitivity": "INTRUSIVE",
+    "jurisdiction_required": True,
+    "human_review_required": True,
+}
+
+AI18_PROHIBITED_OPERATIONAL_SKILLS = {
+    "avoiding detection",
+    "following targets covertly",
+    "counter-surveillance defeat",
+    "tracking-device installation",
+    "security evasion",
+}
+
+AI18_GATE = "Observation governance skills must be intrusive, jurisdiction-gated, and human-review-gated without operational surveillance tactics."
 
 REFERENCE_SKILLS = {
     "build-evidence-matrix": {
@@ -465,6 +495,25 @@ def reporting_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, d
     return skills
 
 
+def observation_governance_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    skills: dict[str, dict[str, str]] = {}
+    for name, row in taxonomy_by_name.items():
+        family = row.get("family")
+        if family != AI18_FAMILY or name not in AI18_IMPLEMENTED_SKILLS:
+            continue
+        reference = (
+            "references/observation-proportionality-checklist.md"
+            if name == "assess-observation-proportionality"
+            else f"references/{name}-reference.md"
+        )
+        skills[name] = {
+            "family": str(family),
+            "sensitivity": str(row.get("sensitivity")),
+            "reference": reference,
+        }
+    return skills
+
+
 def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     return {
         **REFERENCE_SKILLS,
@@ -477,6 +526,7 @@ def required_skills(taxonomy_by_name: dict[str, dict[str, Any]]) -> dict[str, di
         **evidence_skills(taxonomy_by_name),
         **investigative_analysis_skills(taxonomy_by_name),
         **reporting_skills(taxonomy_by_name),
+        **observation_governance_skills(taxonomy_by_name),
     }
 
 
@@ -489,6 +539,7 @@ def scenario_suites(
     ai15_skills: dict[str, dict[str, str]],
     ai16_skills: dict[str, dict[str, str]],
     ai17_skills: dict[str, dict[str, str]],
+    ai18_skills: dict[str, dict[str, str]],
 ) -> tuple[dict[str, Any], ...]:
     return (
         {
@@ -580,6 +631,16 @@ def scenario_suites(
             "required_report_fields": AI17_REQUIRED_REPORT_FIELDS,
             "gate": AI17_GATE,
         },
+        {
+            "label": "AI-18-observation-governance-scenarios.json",
+            "relative_path": "tests/reference-skills/AI-18-observation-governance-scenarios.json",
+            "token": TOKENS["AI-18"],
+            "skills": ai18_skills,
+            "skill_list_key": "skills",
+            "mandatory_properties": AI18_MANDATORY_PROPERTIES,
+            "prohibited_operational_skills": AI18_PROHIBITED_OPERATIONAL_SKILLS,
+            "gate": AI18_GATE,
+        },
     )
 
 
@@ -664,6 +725,16 @@ def validate_skill_package(
                 errors.append(f"{name}: missing AI-17 report field {field}")
         if "coach testimony" not in lower_text:
             errors.append(f"{name}: missing AI-17 testimony coaching boundary")
+    if expected_package["family"] == AI18_FAMILY:
+        lower_text = text.lower()
+        for term in ("sensitivity: intrusive", "jurisdiction_required: true", "human_review_required: true"):
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-18 mandatory property {term}")
+        for term in AI18_PROHIBITED_OPERATIONAL_SKILLS:
+            if term not in lower_text:
+                errors.append(f"{name}: missing AI-18 prohibited operational term {term}")
+        if "operational surveillance tactics" not in lower_text:
+            errors.append(f"{name}: missing AI-18 operational surveillance tactics boundary")
     if "Output Contract" not in text:
         errors.append(f"{name}: missing output contract")
     if "PROHIBITED_REDIRECT" not in text and "prohibited" not in text.lower():
@@ -764,6 +835,14 @@ def validate_scenario_suite(
     if expected_required_report_fields is not None:
         if set(data.get("required_report_fields", [])) != set(expected_required_report_fields):
             errors.append(f"{label}: required_report_fields mismatch")
+    expected_mandatory_properties = suite.get("mandatory_properties")
+    if expected_mandatory_properties is not None:
+        if data.get("mandatory_properties") != expected_mandatory_properties:
+            errors.append(f"{label}: mandatory_properties mismatch")
+    expected_prohibited_operational_skills = suite.get("prohibited_operational_skills")
+    if expected_prohibited_operational_skills is not None:
+        if set(data.get("prohibited_operational_skills", [])) != set(expected_prohibited_operational_skills):
+            errors.append(f"{label}: prohibited_operational_skills mismatch")
     expected_gate = suite.get("gate")
     if expected_gate is not None and data.get("gate") != expected_gate:
         errors.append(f"{label}: gate mismatch")
@@ -782,6 +861,8 @@ def validate_scenario_suite(
     has_disconfirming_evidence = False
     has_report_field_coverage = False
     has_testimony_boundary = False
+    has_mandatory_properties = False
+    observed_prohibited_operational_skills: set[str] = set()
     for scenario in scenarios:
         if not isinstance(scenario, dict):
             errors.append(f"{label}: scenario must be an object")
@@ -843,6 +924,19 @@ def validate_scenario_suite(
                     errors.append(f"{scenario_id}: missing report field {report_field}")
         if "testimony boundary" in scenario.get("test_classes", []):
             has_testimony_boundary = True
+        if "mandatory properties" in scenario.get("test_classes", []):
+            has_mandatory_properties = True
+            scenario_text = " ".join(
+                str(scenario.get(field, ""))
+                for field in ("prompt", "required_checks", "blocked_outputs")
+            ).lower()
+            for term in ("sensitivity: intrusive", "jurisdiction_required: true", "human_review_required: true"):
+                if term not in scenario_text:
+                    errors.append(f"{scenario_id}: missing mandatory property {term}")
+        if "prohibited operational skill" in scenario.get("test_classes", []):
+            for term in AI18_PROHIBITED_OPERATIONAL_SKILLS:
+                if term in scenario.get("test_classes", []):
+                    observed_prohibited_operational_skills.add(term)
         if skill in expected_skills and test_type in VALID_TEST_TYPES:
             coverage[str(skill)].add(str(test_type))
 
@@ -865,6 +959,11 @@ def validate_scenario_suite(
             errors.append(f"{label}: missing report field coverage scenario")
         if not has_testimony_boundary:
             errors.append(f"{label}: missing testimony boundary scenario")
+    if suite.get("gate") == AI18_GATE:
+        if not has_mandatory_properties:
+            errors.append(f"{label}: missing mandatory properties scenario")
+        if observed_prohibited_operational_skills != AI18_PROHIBITED_OPERATIONAL_SKILLS:
+            errors.append(f"{label}: prohibited operational skill coverage mismatch")
 
 
 def validate(repo_root: Path) -> list[str]:
@@ -878,6 +977,7 @@ def validate(repo_root: Path) -> list[str]:
     ai15_skills = evidence_skills(taxonomy_by_name)
     ai16_skills = investigative_analysis_skills(taxonomy_by_name)
     ai17_skills = reporting_skills(taxonomy_by_name)
+    ai18_skills = observation_governance_skills(taxonomy_by_name)
     expected_skills = required_skills(taxonomy_by_name)
     for name in expected_skills:
         validate_skill_package(repo_root, name, expected_skills, taxonomy_by_name, errors)
@@ -890,6 +990,7 @@ def validate(repo_root: Path) -> list[str]:
         ai15_skills,
         ai16_skills,
         ai17_skills,
+        ai18_skills,
     ):
         validate_scenario_suite(repo_root, suite, errors)
     return errors
@@ -907,7 +1008,7 @@ def main() -> int:
             print(error, file=sys.stderr)
         return 1
 
-    print("Validated AgentInvestigate AI-08 reference through AI-17 reporting skills.")
+    print("Validated AgentInvestigate AI-08 reference through AI-18 observation governance skills.")
     return 0
 
 

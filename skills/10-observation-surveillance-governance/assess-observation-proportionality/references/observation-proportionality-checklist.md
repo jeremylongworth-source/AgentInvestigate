@@ -4,6 +4,12 @@
 
 Read this reference before using `assess-observation-proportionality`.
 
+## Mandatory Properties
+
+- sensitivity: INTRUSIVE
+- jurisdiction_required: true
+- human_review_required: true
+
 ## Required Gate Inputs
 
 - Jurisdiction.
@@ -13,7 +19,7 @@ Read this reference before using `assess-observation-proportionality`.
 - Collection basis.
 - Necessity assessment.
 - Less-intrusive alternatives.
-- Human approval.
+- Human review or approval.
 - Approved scope and stop conditions.
 
 ## Proportionality Factors
@@ -29,6 +35,14 @@ Read this reference before using `assess-observation-proportionality`.
 ## Prohibited Details
 
 Do not provide routes, schedules, concealment, evasion, device placement, confrontation, bypass, or tracking instructions.
+
+Do not provide support for:
+
+- `avoiding detection`
+- `following targets covertly`
+- `counter-surveillance defeat`
+- `tracking-device installation`
+- `security evasion`
 
 ## Output Label
 

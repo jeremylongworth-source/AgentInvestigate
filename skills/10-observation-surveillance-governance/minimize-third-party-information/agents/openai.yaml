@@ -1,0 +1,6 @@
+interface:
+  display_name: "Minimize Third Party Information"
+  short_description: "Minimize third-party info"
+  default_prompt: "Use $minimize-third-party-information to review observation notes for third-party minimization."
+policy:
+  allow_implicit_invocation: true

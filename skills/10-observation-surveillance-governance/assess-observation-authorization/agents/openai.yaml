@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Observation Authorization"
+  short_description: "Review observation authorization"
+  default_prompt: "Use $assess-observation-authorization to review observation authorization gates."
+policy:
+  allow_implicit_invocation: true

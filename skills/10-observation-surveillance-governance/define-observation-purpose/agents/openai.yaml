@@ -1,0 +1,6 @@
+interface:
+  display_name: "Define Observation Purpose"
+  short_description: "Define observation purpose"
+  default_prompt: "Use $define-observation-purpose to define a bounded observation purpose."
+policy:
+  allow_implicit_invocation: true

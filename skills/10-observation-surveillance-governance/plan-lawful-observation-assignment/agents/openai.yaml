@@ -1,0 +1,6 @@
+interface:
+  display_name: "Plan Lawful Observation Assignment"
+  short_description: "Prepare observation briefs"
+  default_prompt: "Use $plan-lawful-observation-assignment to prepare a governance-focused observation assignment brief."
+policy:
+  allow_implicit_invocation: true

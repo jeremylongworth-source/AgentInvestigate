@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-18 Observation & Surveillance Governance`.
+- Added the remaining seven Family 10 observation-governance skill packages and upgraded `assess-observation-proportionality`.
+- Added AI-18 observation-governance scenarios, intrusive mandatory-property validation, and prohibited operational surveillance gate checks.
 - Completed `AI-17 Reporting, Findings & Case Presentation`.
 - Added all 10 Family 11 reporting, findings, and case-presentation skill packages.
 - Added AI-17 reporting scenarios, report-field validation, and testimony-boundary gate checks.

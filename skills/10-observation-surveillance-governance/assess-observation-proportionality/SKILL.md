@@ -12,16 +12,24 @@ Assess proportionality for proposed observation or surveillance-governance work.
 
 The skill does not create operational surveillance plans. It supports gate review, less-intrusive alternatives, documentation, and escalation.
 
+Mandatory properties:
+
+- sensitivity: INTRUSIVE
+- jurisdiction_required: true
+- human_review_required: true
+
 ## Triggers
 
 - User asks whether proposed observation is proportionate.
 - User asks to compare observation scope against purpose, authority, privacy, time, place, or alternatives.
 - User supplies an approved observation concept and wants a review-ready proportionality assessment.
+- User needs non-operational observation support that avoids tactics, evasion, tracking-device installation, or covert following instructions.
 
 ## Non-Triggers
 
 - Raw requests to follow, track, monitor, surveil, or observe a person route through earlier intrusive gates first.
-- Requests for tactics, routes, schedules, concealment, evasion, tracker placement, camera defeat, or stalking route to `PROHIBITED_REDIRECT`.
+- Requests for avoiding detection, following targets covertly, counter-surveillance defeat, tracking-device installation, or security evasion route to `PROHIBITED_REDIRECT`.
+- Requests for tactics, routes, schedules, concealment, evasion, tracker placement, camera defeat, alarm defeat, forced entry, access-control bypass, or stalking route to `PROHIBITED_REDIRECT`.
 - Legal, privacy, employment, or licensing determinations route to qualified regulated review.
 
 ## Required Inputs
@@ -36,6 +44,7 @@ The skill does not create operational surveillance plans. It supports gate revie
 - Necessity assessment.
 - Less-intrusive alternatives considered.
 - Human approval status.
+- Human review status.
 
 ## Optional Inputs
 
@@ -50,6 +59,7 @@ The skill does not create operational surveillance plans. It supports gate revie
 - Do not assume authority, consent, privacy basis, necessity, proportionality, or human approval.
 - Do not infer lawful purpose from suspicion alone.
 - Missing gates require stop or escalation, not operational planning.
+- Do not provide operational tactics for avoiding detection, following targets covertly, counter-surveillance defeat, tracking-device installation, or security evasion.
 
 ## Dependencies
 
@@ -63,12 +73,13 @@ If dependencies are not implemented or the user has not supplied equivalent revi
 ## Core Procedure
 
 1. Check for prohibited conduct before evaluating proportionality.
-2. Confirm jurisdiction, role, authority, lawful purpose, privacy basis, collection basis, necessity, alternatives, and human approval.
-3. If any required gate is missing, stop and list the missing gates.
-4. Compare proposed observation scope to the stated purpose.
-5. Identify overbroad subject, location, time, method, retention, or reporting elements.
-6. Identify less-intrusive alternatives and whether they were considered.
-7. Produce a review-ready proportionality assessment with limitations.
+2. Confirm the mandatory properties: sensitivity: INTRUSIVE, jurisdiction_required: true, human_review_required: true.
+3. Confirm jurisdiction, role, authority, lawful purpose, privacy basis, collection basis, necessity, alternatives, and human review.
+4. If any required gate is missing, stop and list the missing gates.
+5. Compare proposed observation scope to the stated purpose.
+6. Identify overbroad subject, location, time, method, retention, reporting, third-party, or sensitive-information elements.
+7. Identify less-intrusive alternatives and whether they were considered.
+8. Produce a review-ready proportionality assessment with limitations and no operational surveillance tactics.
 
 ## Evidence Requirements
 
@@ -86,18 +97,21 @@ Jurisdiction is required before substantive proportionality assessment. If juris
 
 ## Authority Checks
 
-Authority, lawful purpose, privacy basis, collection basis, necessity, less-intrusive alternatives, and human approval are required before any bounded proportionality assessment. Missing authority or approval routes to `INTRUSIVE_GATE_REQUIRED`.
+Authority, lawful purpose, privacy basis, collection basis, necessity, less-intrusive alternatives, and human review are required before any bounded proportionality assessment. Missing authority or approval routes to `INTRUSIVE_GATE_REQUIRED`.
 
 ## Sensitivity Handling
 
 Default class: `INTRUSIVE`.
 
-Use `INTRUSIVE_GATE_REQUIRED` until all gates are satisfied. Route legal, privacy, employment, or licensing determinations to `REGULATED_RESEARCH_ONLY` or qualified review. Route prohibited tracking, stalking, bypass, evasion, or covert device placement to `PROHIBITED_REDIRECT`.
+Use `INTRUSIVE_GATE_REQUIRED` until all gates are satisfied. Human review is required before use. Route legal, privacy, employment, or licensing determinations to `REGULATED_RESEARCH_ONLY` or qualified review. Route prohibited tracking, stalking, bypass, evasion, covert following, or tracking-device installation to `PROHIBITED_REDIRECT`.
 
 ## Output Contract
 
 Return:
 
+- sensitivity: INTRUSIVE;
+- jurisdiction_required: true;
+- human_review_required: true;
 - scope reviewed;
 - gate status table;
 - proportionality factors;
@@ -107,11 +121,11 @@ Return:
 - human-review or approval need;
 - limitations.
 
-Do not return observation routes, schedules, concealment, evasion guidance, tracker placement, or confrontation tactics.
+Do not return observation routes, schedules, concealment, evasion guidance, avoiding detection, following targets covertly, counter-surveillance defeat, tracking-device installation, security evasion, tracker placement, camera defeat, alarm defeat, or confrontation tactics.
 
 ## Limitations
 
-This skill does not authorize observation, certify legality, decide privacy compliance, approve employment action, replace counsel, replace a licensed investigator, or provide surveillance tactics.
+This skill does not authorize observation, certify legality, decide privacy compliance, approve employment action, replace counsel, replace a licensed investigator, or provide surveillance tactics, tracking-device installation, covert-following guidance, counter-surveillance defeat, or security evasion.
 
 ## Escalation
 
@@ -133,3 +147,5 @@ Must pass AI-08 scenarios for:
 - raw intrusive observation request;
 - prohibited tracking or stalking;
 - output omits operational surveillance tactics.
+
+Must also pass AI-18 scenarios for sensitivity: INTRUSIVE, jurisdiction_required: true, human_review_required: true, and prohibited operational requests for avoiding detection, following targets covertly, counter-surveillance defeat, tracking-device installation, and security evasion.

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Assess Observation Necessity"
+  short_description: "Assess observation necessity"
+  default_prompt: "Use $assess-observation-necessity to assess whether proposed observation is necessary."
+policy:
+  allow_implicit_invocation: true

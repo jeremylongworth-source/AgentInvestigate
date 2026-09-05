@@ -1,0 +1,6 @@
+interface:
+  display_name: "Record Field Observation"
+  short_description: "Record field observations"
+  default_prompt: "Use $record-field-observation to structure supplied field observation notes."
+policy:
+  allow_implicit_invocation: true
