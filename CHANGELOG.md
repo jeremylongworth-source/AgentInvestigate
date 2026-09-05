@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-30 Alberta Investigation & Security Module`.
+- Added Alberta specialization at `specializations/canada/alberta/` with HIGH-freshness investigator, security service worker, security business, training/examination, conduct, authority/restrictions, privacy/access/reporting, security operations, body-armour, and provincial law references.
+- Added AI-30 regulatory fixture and specialization validation enforcing Alberta-specific SSIA, POPA/ATIA privacy transition, operational restriction, certification, and federal-overlap boundaries.
 - Completed `AI-29 British Columbia Investigation & Security Module`.
 - Added British Columbia specialization at `specializations/canada/british-columbia/` with HIGH-freshness security worker, private investigator, security guard, security business, training/conduct, authority/restrictions, privacy/reporting, security operations, dog, body-armour, and provincial law references.
 - Added AI-29 regulatory fixture and specialization validation enforcing BC-specific licensing, Security Services Act, privacy, operational restriction, certification, and federal-overlap boundaries.

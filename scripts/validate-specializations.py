@@ -9,6 +9,7 @@ from pathlib import Path
 AI27_TOKEN = "AGENTINVESTIGATE_AI_27_CANADA_FEDERAL_READY"
 AI28_TOKEN = "AGENTINVESTIGATE_AI_28_ONTARIO_READY"
 AI29_TOKEN = "AGENTINVESTIGATE_AI_29_BRITISH_COLUMBIA_READY"
+AI30_TOKEN = "AGENTINVESTIGATE_AI_30_ALBERTA_READY"
 
 AI27_FILES = (
     "specializations/canada/federal/README.md",
@@ -43,6 +44,18 @@ AI29_FILES = (
     "specializations/canada/british-columbia/provincial-laws-map.md",
     "specializations/canada/british-columbia/routing-boundaries.md",
     "tests/regulatory/AI-29-british-columbia-specialization.json",
+)
+
+AI30_FILES = (
+    "specializations/canada/alberta/README.md",
+    "specializations/canada/alberta/source-log.yaml",
+    "specializations/canada/alberta/licensing-and-registration.md",
+    "specializations/canada/alberta/training-examination-and-conduct.md",
+    "specializations/canada/alberta/authority-restrictions-and-security-operations.md",
+    "specializations/canada/alberta/privacy-reporting-and-records.md",
+    "specializations/canada/alberta/provincial-laws-map.md",
+    "specializations/canada/alberta/routing-boundaries.md",
+    "tests/regulatory/AI-30-alberta-specialization.json",
 )
 
 AI27_RESEARCH_AREAS = {
@@ -148,6 +161,60 @@ AI29_SOURCE_IDS = {
     "bc-body-armour-possession-guidance",
 }
 
+AI30_REQUIRED_COVERAGE = {
+    "investigator licensing",
+    "security service worker licensing",
+    "security business licensing",
+    "training",
+    "provincial examinations",
+    "professional conduct",
+    "permitted authorities",
+    "restrictions",
+    "privacy interaction",
+    "reporting",
+    "security operations",
+    "body armour",
+    "provincial laws materially relevant to scoped skills",
+}
+
+AI30_SOURCE_IDS = {
+    "alberta-ssia-act",
+    "alberta-ssia-regulation",
+    "alberta-ssia-ministerial-regulation",
+    "alberta-security-licences-permits-guidance",
+    "alberta-security-service-worker-licence-guidance",
+    "alberta-investigator-licence-guidance",
+    "alberta-security-licences-registries-guidance",
+    "alberta-security-investigation-locksmith-business-resources",
+    "alberta-ssia-policy-manual",
+    "alberta-approved-training-courses",
+    "alberta-provincial-examination-process",
+    "alberta-guidelines-code-conduct",
+    "alberta-guidelines-licensing-training-courses",
+    "alberta-body-armour-permit-guidance",
+    "alberta-body-armour-control-act",
+    "alberta-body-armour-control-regulation",
+    "alberta-pipa",
+    "alberta-pipa-regulation",
+    "alberta-popa",
+    "alberta-protection-of-privacy-act-guidance",
+    "alberta-atia",
+    "alberta-access-to-information-act-guidance",
+    "alberta-hia",
+    "alberta-health-information-act-guidance",
+    "alberta-oipc-video-surveillance-private",
+    "alberta-oipc-privacy-laws-overview",
+    "alberta-oipc-privacy-impact-assessments",
+    "alberta-human-rights-act",
+    "alberta-human-rights-commission",
+    "alberta-ohs-act",
+    "alberta-ohs-act-regulation-code-guidance",
+    "alberta-employment-standards-code",
+    "alberta-employment-standards-guidance",
+    "alberta-trespass-to-premises-act",
+    "alberta-petty-trespass-act",
+}
+
 AI27_BOUNDARY_TERMS = {
     "Federal rules alone do not determine whether private investigative or security work is authorized",
     "Occupational licensing is often provincial or territorial",
@@ -168,6 +235,16 @@ AI28_BOUNDARY_TERMS = {
 
 AI29_BOUNDARY_TERMS = {
     "British Columbia sources can identify provincial issue areas, but they do not by themselves authorize private investigative or security work without current security worker licence status, security business licence status, role, purpose, authority, and qualified review",
+    "Federal privacy, criminal-law, evidence, human-rights, federally regulated workplace, or labour issues may also apply",
+    "REGULATED_RESEARCH_ONLY",
+    "INTRUSIVE_GATE_REQUIRED",
+    "CERTIFICATION_ESCALATION",
+    "PROHIBITED_REDIRECT",
+    "freshness: `HIGH`",
+}
+
+AI30_BOUNDARY_TERMS = {
+    "Alberta sources can identify provincial issue areas, but they do not by themselves authorize private investigative or security work without current individual licence status, business licence status, role, purpose, authority, and qualified review",
     "Federal privacy, criminal-law, evidence, human-rights, federally regulated workplace, or labour issues may also apply",
     "REGULATED_RESEARCH_ONLY",
     "INTRUSIVE_GATE_REQUIRED",
@@ -474,8 +551,119 @@ def validate_ai29(repo_root: Path) -> list[str]:
     return errors
 
 
+def validate_ai30(repo_root: Path) -> list[str]:
+    errors: list[str] = []
+    for relative in AI30_FILES:
+        path = repo_root / relative
+        if not path.is_file():
+            errors.append(f"Missing AI-30 file: {relative}")
+
+    combined_text = ""
+    for relative in AI30_FILES:
+        path = repo_root / relative
+        if path.is_file() and path.suffix.lower() != ".json":
+            combined_text += "\n" + path.read_text(encoding="utf-8-sig")
+
+    if AI30_TOKEN not in combined_text:
+        errors.append("AI-30 specialization files missing completion token")
+
+    for term in AI30_REQUIRED_COVERAGE:
+        if term not in combined_text:
+            errors.append(f"AI-30 specialization missing required coverage: {term}")
+    for term in AI30_BOUNDARY_TERMS:
+        if term not in combined_text:
+            errors.append(f"AI-30 specialization missing boundary term: {term}")
+
+    source_log = repo_root / "specializations/canada/alberta/source-log.yaml"
+    if source_log.is_file():
+        source_text = source_log.read_text(encoding="utf-8-sig")
+        for source_id in AI30_SOURCE_IDS:
+            if source_id not in source_text:
+                errors.append(f"AI-30 source log missing source id: {source_id}")
+        for field in REGULATORY_METADATA_FIELDS:
+            if field not in source_text:
+                errors.append(f"AI-30 source log missing metadata field: {field}")
+        if source_text.count("source_id:") != len(AI30_SOURCE_IDS):
+            errors.append("AI-30 source log source count mismatch")
+        for url in (
+            "https://open.alberta.ca/publications/s04p7",
+            "https://open.alberta.ca/publications/2010_052",
+            "https://open.alberta.ca/publications/2010_055",
+            "https://www.alberta.ca/security-profession-licences-permits",
+            "https://www.alberta.ca/security-service-worker-licence",
+            "https://www.alberta.ca/investigator-licence",
+            "https://www.alberta.ca/security-licences-registries",
+            "https://www.alberta.ca/security-investigation-locksmith-business-resources",
+            "https://open.alberta.ca/publications/security-services-and-investigators-act-security-programs-policy-manual",
+            "https://open.alberta.ca/publications/security-services-and-investigators-act-approved-training-courses",
+            "https://open.alberta.ca/publications/security-services-and-investigators-act-provincial-examination-process",
+            "https://open.alberta.ca/publications/security-services-and-investigators-act-guidelines-for-developing-code-of-conduct",
+            "https://open.alberta.ca/publications/security-services-and-investigators-act-guidelines-for-licensing-training-courses",
+            "https://www.alberta.ca/body-armour-permit",
+            "https://open.alberta.ca/publications/b04p8",
+            "https://open.alberta.ca/publications/2012_032",
+            "https://open.alberta.ca/publications/p06p5",
+            "https://open.alberta.ca/publications/2003_366",
+            "https://open.alberta.ca/publications/p28p5",
+            "https://www.alberta.ca/protection-of-privacy-act",
+            "https://open.alberta.ca/publications/a01p4",
+            "https://www.alberta.ca/access-to-information-act",
+            "https://open.alberta.ca/publications/h05",
+            "https://www.alberta.ca/health-information-act",
+            "https://oipc.ab.ca/resource/video-surveillance/",
+            "https://oipc.ab.ca/overview-privacy-laws/",
+            "https://oipc.ab.ca/resources/privacy-impact-assessments/",
+            "https://open.alberta.ca/publications/a25p5",
+            "https://albertahumanrights.ab.ca/",
+            "https://open.alberta.ca/publications/o02p2",
+            "https://www.alberta.ca/ohs-act-regulation-code",
+            "https://open.alberta.ca/publications/e09",
+            "https://www.alberta.ca/employment-standards",
+            "https://open.alberta.ca/publications/t07",
+            "https://open.alberta.ca/publications/p11",
+        ):
+            if url not in source_text:
+                errors.append(f"AI-30 source log missing source URL: {url}")
+
+    fixture_path = repo_root / "tests/regulatory/AI-30-alberta-specialization.json"
+    if fixture_path.is_file():
+        try:
+            fixture = load_json(fixture_path)
+        except json.JSONDecodeError as exc:
+            errors.append(f"AI-30 regulatory fixture invalid JSON: {exc}")
+            fixture = None
+        if isinstance(fixture, dict):
+            if fixture.get("completion_token") != AI30_TOKEN:
+                errors.append("AI-30 regulatory fixture missing completion token")
+            if fixture.get("specialization_path") != "specializations/canada/alberta/":
+                errors.append("AI-30 regulatory fixture has wrong specialization path")
+            if fixture.get("jurisdiction") != "Alberta":
+                errors.append("AI-30 regulatory fixture has wrong jurisdiction")
+            if fixture.get("freshness") != "HIGH":
+                errors.append("AI-30 regulatory fixture must be HIGH freshness")
+            if set(fixture.get("required_coverage", [])) != AI30_REQUIRED_COVERAGE:
+                errors.append("AI-30 regulatory fixture required coverage mismatch")
+            if set(fixture.get("required_sources", [])) != AI30_SOURCE_IDS:
+                errors.append("AI-30 regulatory fixture source id mismatch")
+            routing_tests = fixture.get("routing_tests")
+            if not isinstance(routing_tests, list) or len(routing_tests) < 7:
+                errors.append("AI-30 regulatory fixture must include at least 7 routing tests")
+            else:
+                seen_states = {str(test.get("expected_routing_state")) for test in routing_tests if isinstance(test, dict)}
+                for state in (
+                    "REGULATED_RESEARCH_ONLY",
+                    "INTRUSIVE_GATE_REQUIRED",
+                    "CERTIFICATION_ESCALATION",
+                    "PROHIBITED_REDIRECT",
+                ):
+                    if state not in seen_states:
+                        errors.append(f"AI-30 fixture missing {state} routing test")
+
+    return errors
+
+
 def validate(repo_root: Path) -> list[str]:
-    return validate_ai27(repo_root) + validate_ai28(repo_root) + validate_ai29(repo_root)
+    return validate_ai27(repo_root) + validate_ai28(repo_root) + validate_ai29(repo_root) + validate_ai30(repo_root)
 
 
 def main() -> int:
@@ -488,7 +676,7 @@ def main() -> int:
         for error in errors:
             print(error, file=sys.stderr)
         return 1
-    print("Validated AgentInvestigate AI-27 Canada federal through AI-29 British Columbia specializations.")
+    print("Validated AgentInvestigate AI-27 Canada federal through AI-30 Alberta specializations.")
     return 0
 
 
