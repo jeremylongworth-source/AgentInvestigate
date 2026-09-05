@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-33 Multi-Skill Integration Evaluation`.
+- Added the multi-skill integration evaluation artifact, AI-33 scenario fixture, and integration validator covering workplace allegation, background-screening discrepancy, physical-security concern, security incident, authorized and insufficient-authority intrusive observation, and identity ambiguity paths.
+- Wired AI-33 validation into the full validation suite, checking that integration scenarios reference existing professional skillsets, implemented atomic skills, required workflow steps, rubric dimensions, routing states, and blocked-output boundaries.
 - Completed `AI-32 Professional Skillset Composition`.
 - Added the professional skillset composition architecture document, canonical `skillsets/professional-skillsets.json` registry, skillset README, and AI-32 skillset composition fixture.
 - Added reproducible AI-32 skillset generation and validation enforcing all 19 roadmap skillsets, required skillset fields, taxonomy-backed included skills, derived role memberships, global routing states, and non-duplication of atomic procedures.

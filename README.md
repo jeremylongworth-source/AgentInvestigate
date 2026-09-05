@@ -2,7 +2,7 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional work in private investigation, investigative research, evidence management, corporate and workplace investigations, background screening and due diligence, private security operations, incident response, physical security, loss prevention, and security program management.
 
-The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, the Research, OSINT & Public Records skill family, the Identity, Entity & Timeline Analysis skill family, the Interviewing, Witnesses & Statements skill family, the Evidence & Chain of Custody skill family, the Investigative Analysis skill family, the Reporting, Findings & Case Presentation skill family, the Observation & Surveillance Governance skill family, the Corporate & Workplace Investigations skill family, the Background Screening & Due Diligence skill family, the Security Operations, Access & Patrol skill family, the Incident Response and Communication & De-escalation skill families, the Physical Security & Risk Assessment skill family, the Security Systems & Technology skill family, the Loss Prevention & Asset Protection skill family, the Investigation & Security Program Management skill family, the Canadian Federal Regulatory Foundation specialization, the Ontario Investigation & Security Module specialization, the British Columbia Investigation & Security Module specialization, the Alberta Investigation & Security Module specialization, the Canadian Jurisdiction Expansion Framework, and the Professional Skillset Composition layer.
+The project has completed baseline setup, domain-boundary work, master taxonomy integration, sensitivity/authority routing, skill authoring standards, source-handling standards, the validation/evaluation framework, shared professional foundations, the four-class reference implementation, the Professional Core & Ethics skill family, the intake, authority, law, licensing, privacy, and compliance control layer, the Investigation Planning & Case Management skill family, the Research, OSINT & Public Records skill family, the Identity, Entity & Timeline Analysis skill family, the Interviewing, Witnesses & Statements skill family, the Evidence & Chain of Custody skill family, the Investigative Analysis skill family, the Reporting, Findings & Case Presentation skill family, the Observation & Surveillance Governance skill family, the Corporate & Workplace Investigations skill family, the Background Screening & Due Diligence skill family, the Security Operations, Access & Patrol skill family, the Incident Response and Communication & De-escalation skill families, the Physical Security & Risk Assessment skill family, the Security Systems & Technology skill family, the Loss Prevention & Asset Protection skill family, the Investigation & Security Program Management skill family, the Canadian Federal Regulatory Foundation specialization, the Ontario Investigation & Security Module specialization, the British Columbia Investigation & Security Module specialization, the Alberta Investigation & Security Module specialization, the Canadian Jurisdiction Expansion Framework, the Professional Skillset Composition layer, and the Multi-Skill Integration Evaluation layer.
 
 Core principles:
 
@@ -17,8 +17,8 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 ## Current Status
 
 - Roadmap: `ROADMAP.md`
-- Latest completed wave: `AI-32 Professional Skillset Composition`
-- Recommended next wave: `AI-33 Multi-Skill Integration Evaluation`
+- Latest completed wave: `AI-33 Multi-Skill Integration Evaluation`
+- Recommended next wave: `AI-34 Adversarial Safety & Misuse Evaluation`
 - Baseline audit: `docs/development/AI-00-baseline-audit.md`
 - Domain contract: `docs/architecture/domain-contract.md`
 - Scope boundaries: `docs/architecture/scope-boundaries.md`
@@ -76,7 +76,9 @@ AgentInvestigate does not confer investigator licensing, security licensing, law
 - Professional skillset composition: `docs/architecture/professional-skillset-composition.md`
 - Professional skillset registry: `skillsets/professional-skillsets.json`
 - Professional skillset scenarios: `tests/skillsets/AI-32-professional-skillset-composition.json`
-- Latest handoff: `docs/development/handoffs/AI-32-final-handoff.md`
+- Multi-skill integration evaluation: `docs/evaluation/multi-skill-integration-evaluation.md`
+- Multi-skill integration scenarios: `tests/integration/AI-33-multi-skill-integration-scenarios.json`
+- Latest handoff: `docs/development/handoffs/AI-33-final-handoff.md`
 
 ## Development Approach
 
