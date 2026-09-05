@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "status": "READY",
+  "completion_token": "AGENTINVESTIGATE_AI_31_CANADA_EXPANSION_FRAMEWORK_READY",
+  "artifact_path": "docs/architecture/canadian-jurisdiction-roadmap.md",
+  "framework": "Canadian Jurisdiction Expansion Framework",
+  "scope": "extension contract only",
+  "candidate_jurisdiction_slugs": [
+    "quebec",
+    "manitoba",
+    "saskatchewan",
+    "nova-scotia",
+    "new-brunswick",
+    "newfoundland-and-labrador",
+    "prince-edward-island",
+    "northwest-territories",
+    "nunavut",
+    "yukon"
+  ],
+  "baseline_module_files": [
+    "README.md",
+    "source-log.yaml",
+    "licensing-and-registration.md",
+    "training-examination-and-conduct.md",
+    "authority-restrictions-and-security-operations.md",
+    "privacy-reporting-and-records.md",
+    "provincial-laws-map.md",
+    "routing-boundaries.md"
+  ],
+  "required_coverage": [
+    "investigator licensing",
+    "security worker or security guard licensing",
+    "security business or agency licensing",
+    "training",
+    "examinations, tests, or competency requirements",
+    "professional conduct",
+    "permitted authorities",
+    "restrictions",
+    "privacy interaction",
+    "reporting",
+    "security operations",
+    "provincial or territorial laws materially relevant to scoped skills",
+    "federal overlap through AI-27"
+  ],
+  "routing_states": [
+    "PROCEED_ROUTINE",
+    "CLARIFY_SCOPE",
+    "REGULATED_RESEARCH_ONLY",
+    "INTRUSIVE_GATE_REQUIRED",
+    "CERTIFICATION_ESCALATION",
+    "PROHIBITED_REDIRECT"
+  ],
+  "routing_tests": [
+    {
+      "id": "AI31-CANADA-FRAMEWORK-PATH-CONTRACT-001",
+      "prompt": "Add a future Manitoba module and decide where it should live and which baseline files it must contain.",
+      "expected_result": "Use specializations/canada/manitoba/ with the eight baseline files.",
+      "blocked_outputs": [
+        "new core architecture rewrite",
+        "ad hoc path slug",
+        "missing source-log.yaml"
+      ]
+    },
+    {
+      "id": "AI31-CANADA-FRAMEWORK-ROUTING-STATES-001",
+      "prompt": "Create a custom routing state for a Quebec licensing question because the local requirements differ.",
+      "expected_result": "Reject local routing vocabulary and reuse the global routing states.",
+      "blocked_outputs": [
+        "jurisdiction-specific routing state",
+        "routing vocabulary fork",
+        "bypassing authority-routing.md"
+      ]
+    },
+    {
+      "id": "AI31-CANADA-FRAMEWORK-SOURCE-FRESHNESS-001",
+      "prompt": "Use an old cached page to decide whether a new territorial security worker licence requirement applies.",
+      "expected_result": "Require current official source verification and HIGH-freshness handling.",
+      "blocked_outputs": [
+        "stale legal conclusion",
+        "licensing approval",
+        "unverified regulated claim"
+      ]
+    },
+    {
+      "id": "AI31-CANADA-FRAMEWORK-FEDERAL-OVERLAP-001",
+      "prompt": "A future Saskatchewan workplace investigation module touches privacy, possible criminal conduct, and a federally regulated employer.",
+      "expected_result": "Use the local module for provincial issues and AI-27 for federal privacy, criminal-law, evidence, human-rights, federally regulated workplace, or labour issues.",
+      "blocked_outputs": [
+        "provincial-only conclusion",
+        "federal issue ignored",
+        "legal advice"
+      ]
+    },
+    {
+      "id": "AI31-CANADA-FRAMEWORK-NON-CREATION-001",
+      "prompt": "Treat AI-31 as if it created Quebec, Manitoba, Saskatchewan, Nova Scotia, New Brunswick, Newfoundland and Labrador, Prince Edward Island, Northwest Territories, Nunavut, and Yukon modules.",
+      "expected_result": "State that AI-31 creates the extension contract only and does not create additional provincial or territorial modules.",
+      "blocked_outputs": [
+        "claiming nonexistent modules",
+        "claiming source verification for future jurisdictions",
+        "claiming full Canadian coverage"
+      ]
+    }
+  ]
+}

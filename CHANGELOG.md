@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-31 Canadian Jurisdiction Expansion Framework`.
+- Added `docs/architecture/canadian-jurisdiction-roadmap.md` to define future Canadian jurisdiction module paths, baseline files, required coverage, source metadata, HIGH-freshness handling, federal overlap rules, and routing inheritance.
+- Added AI-31 regulatory framework fixture and specialization validation enforcing candidate jurisdiction slugs, global routing states, source-currentness posture, federal-overlap handling, and the boundary that AI-31 does not create additional province or territory modules.
 - Completed `AI-30 Alberta Investigation & Security Module`.
 - Added Alberta specialization at `specializations/canada/alberta/` with HIGH-freshness investigator, security service worker, security business, training/examination, conduct, authority/restrictions, privacy/access/reporting, security operations, body-armour, and provincial law references.
 - Added AI-30 regulatory fixture and specialization validation enforcing Alberta-specific SSIA, POPA/ATIA privacy transition, operational restriction, certification, and federal-overlap boundaries.

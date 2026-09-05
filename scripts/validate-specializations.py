@@ -10,6 +10,7 @@ AI27_TOKEN = "AGENTINVESTIGATE_AI_27_CANADA_FEDERAL_READY"
 AI28_TOKEN = "AGENTINVESTIGATE_AI_28_ONTARIO_READY"
 AI29_TOKEN = "AGENTINVESTIGATE_AI_29_BRITISH_COLUMBIA_READY"
 AI30_TOKEN = "AGENTINVESTIGATE_AI_30_ALBERTA_READY"
+AI31_TOKEN = "AGENTINVESTIGATE_AI_31_CANADA_EXPANSION_FRAMEWORK_READY"
 
 AI27_FILES = (
     "specializations/canada/federal/README.md",
@@ -56,6 +57,11 @@ AI30_FILES = (
     "specializations/canada/alberta/provincial-laws-map.md",
     "specializations/canada/alberta/routing-boundaries.md",
     "tests/regulatory/AI-30-alberta-specialization.json",
+)
+
+AI31_FILES = (
+    "docs/architecture/canadian-jurisdiction-roadmap.md",
+    "tests/regulatory/AI-31-canadian-jurisdiction-framework.json",
 )
 
 AI27_RESEARCH_AREAS = {
@@ -251,6 +257,55 @@ AI30_BOUNDARY_TERMS = {
     "CERTIFICATION_ESCALATION",
     "PROHIBITED_REDIRECT",
     "freshness: `HIGH`",
+}
+
+AI31_CANDIDATE_JURISDICTIONS = {
+    "quebec",
+    "manitoba",
+    "saskatchewan",
+    "nova-scotia",
+    "new-brunswick",
+    "newfoundland-and-labrador",
+    "prince-edward-island",
+    "northwest-territories",
+    "nunavut",
+    "yukon",
+}
+
+AI31_BASELINE_FILES = {
+    "README.md",
+    "source-log.yaml",
+    "licensing-and-registration.md",
+    "training-examination-and-conduct.md",
+    "authority-restrictions-and-security-operations.md",
+    "privacy-reporting-and-records.md",
+    "provincial-laws-map.md",
+    "routing-boundaries.md",
+}
+
+AI31_REQUIRED_COVERAGE = {
+    "investigator licensing",
+    "security worker or security guard licensing",
+    "security business or agency licensing",
+    "training",
+    "examinations, tests, or competency requirements",
+    "professional conduct",
+    "permitted authorities",
+    "restrictions",
+    "privacy interaction",
+    "reporting",
+    "security operations",
+    "provincial or territorial laws materially relevant to scoped skills",
+    "federal overlap through AI-27",
+}
+
+AI31_FRAMEWORK_TERMS = {
+    "This wave builds the extension contract. It does not create additional provincial or territorial modules.",
+    "specializations/canada/<jurisdiction-slug>/",
+    "HIGH-freshness claims",
+    "New modules must not create jurisdiction-specific routing states.",
+    "Federal privacy, criminal-law, evidence, human-rights, federally regulated workplace, or labour issues may also apply and must be checked against the Canada federal specialization.",
+    "No additional provincial or territorial modules beyond Ontario, British Columbia, and Alberta.",
 }
 
 REGULATORY_METADATA_FIELDS = {
@@ -662,8 +717,93 @@ def validate_ai30(repo_root: Path) -> list[str]:
     return errors
 
 
+def validate_ai31(repo_root: Path) -> list[str]:
+    errors: list[str] = []
+    for relative in AI31_FILES:
+        path = repo_root / relative
+        if not path.is_file():
+            errors.append(f"Missing AI-31 file: {relative}")
+
+    combined_text = ""
+    for relative in AI31_FILES:
+        path = repo_root / relative
+        if path.is_file():
+            combined_text += "\n" + path.read_text(encoding="utf-8-sig")
+
+    if AI31_TOKEN not in combined_text:
+        errors.append("AI-31 framework files missing completion token")
+
+    for slug in AI31_CANDIDATE_JURISDICTIONS:
+        if slug not in combined_text:
+            errors.append(f"AI-31 framework missing candidate jurisdiction: {slug}")
+    for filename in AI31_BASELINE_FILES:
+        if filename not in combined_text:
+            errors.append(f"AI-31 framework missing baseline module file: {filename}")
+    for term in AI31_REQUIRED_COVERAGE:
+        if term not in combined_text:
+            errors.append(f"AI-31 framework missing required coverage: {term}")
+    for term in AI31_FRAMEWORK_TERMS:
+        if term not in combined_text:
+            errors.append(f"AI-31 framework missing required term: {term}")
+    for state in (
+        "PROCEED_ROUTINE",
+        "CLARIFY_SCOPE",
+        "REGULATED_RESEARCH_ONLY",
+        "INTRUSIVE_GATE_REQUIRED",
+        "CERTIFICATION_ESCALATION",
+        "PROHIBITED_REDIRECT",
+    ):
+        if state not in combined_text:
+            errors.append(f"AI-31 framework missing routing state: {state}")
+
+    fixture_path = repo_root / "tests/regulatory/AI-31-canadian-jurisdiction-framework.json"
+    if fixture_path.is_file():
+        try:
+            fixture = load_json(fixture_path)
+        except json.JSONDecodeError as exc:
+            errors.append(f"AI-31 regulatory framework fixture invalid JSON: {exc}")
+            fixture = None
+        if isinstance(fixture, dict):
+            if fixture.get("completion_token") != AI31_TOKEN:
+                errors.append("AI-31 fixture missing completion token")
+            if fixture.get("artifact_path") != "docs/architecture/canadian-jurisdiction-roadmap.md":
+                errors.append("AI-31 fixture has wrong artifact path")
+            if fixture.get("framework") != "Canadian Jurisdiction Expansion Framework":
+                errors.append("AI-31 fixture has wrong framework name")
+            if fixture.get("scope") != "extension contract only":
+                errors.append("AI-31 fixture must remain extension contract only")
+            if set(fixture.get("candidate_jurisdiction_slugs", [])) != AI31_CANDIDATE_JURISDICTIONS:
+                errors.append("AI-31 fixture candidate jurisdictions mismatch")
+            if set(fixture.get("baseline_module_files", [])) != AI31_BASELINE_FILES:
+                errors.append("AI-31 fixture baseline module files mismatch")
+            if set(fixture.get("required_coverage", [])) != AI31_REQUIRED_COVERAGE:
+                errors.append("AI-31 fixture required coverage mismatch")
+            routing_states = set(fixture.get("routing_states", []))
+            expected_states = {
+                "PROCEED_ROUTINE",
+                "CLARIFY_SCOPE",
+                "REGULATED_RESEARCH_ONLY",
+                "INTRUSIVE_GATE_REQUIRED",
+                "CERTIFICATION_ESCALATION",
+                "PROHIBITED_REDIRECT",
+            }
+            if routing_states != expected_states:
+                errors.append("AI-31 fixture routing states mismatch")
+            routing_tests = fixture.get("routing_tests")
+            if not isinstance(routing_tests, list) or len(routing_tests) < 5:
+                errors.append("AI-31 framework fixture must include at least 5 routing tests")
+
+    return errors
+
+
 def validate(repo_root: Path) -> list[str]:
-    return validate_ai27(repo_root) + validate_ai28(repo_root) + validate_ai29(repo_root) + validate_ai30(repo_root)
+    return (
+        validate_ai27(repo_root)
+        + validate_ai28(repo_root)
+        + validate_ai29(repo_root)
+        + validate_ai30(repo_root)
+        + validate_ai31(repo_root)
+    )
 
 
 def main() -> int:
@@ -676,7 +816,7 @@ def main() -> int:
         for error in errors:
             print(error, file=sys.stderr)
         return 1
-    print("Validated AgentInvestigate AI-27 Canada federal through AI-30 Alberta specializations.")
+    print("Validated AgentInvestigate AI-27 Canada federal through AI-31 Canadian jurisdiction framework.")
     return 0
 
 
