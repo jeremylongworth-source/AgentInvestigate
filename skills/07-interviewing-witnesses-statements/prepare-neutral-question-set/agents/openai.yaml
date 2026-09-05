@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Neutral Question Set"
+  short_description: "Draft neutral interview questions"
+  default_prompt: "Use $prepare-neutral-question-set to draft neutral questions for this interview."
+policy:
+  allow_implicit_invocation: true

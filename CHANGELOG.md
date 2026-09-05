@@ -4,6 +4,9 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Completed `AI-14 Interviewing, Witnesses & Statements`.
+- Added all 10 Family 07 interviewing, witness, and statement skill packages.
+- Added AI-14 interviewing scenarios, required-emphasis validation, and prohibited behavioral-inference gate checks.
 - Completed `AI-13 Identity, Entity & Timeline Analysis`.
 - Added all 10 Family 06 identity, entity, and timeline analysis skill packages.
 - Added AI-13 entity-analysis scenarios, confidence-model validation, and identity-overclaiming gate checks.

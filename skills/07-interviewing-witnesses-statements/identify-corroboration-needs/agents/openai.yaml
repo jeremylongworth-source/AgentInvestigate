@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Corroboration Needs"
+  short_description: "Identify corroboration needs"
+  default_prompt: "Use $identify-corroboration-needs to identify corroboration needs for these statements."
+policy:
+  allow_implicit_invocation: true

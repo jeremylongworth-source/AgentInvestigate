@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Interview Bias Risk"
+  short_description: "Review interview bias risk"
+  default_prompt: "Use $review-interview-bias-risk to review this interview material for bias risk."
+policy:
+  allow_implicit_invocation: true

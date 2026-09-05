@@ -1,0 +1,6 @@
+interface:
+  display_name: "Identify Interview Information Gaps"
+  short_description: "Identify interview gaps"
+  default_prompt: "Use $identify-interview-information-gaps to identify gaps before this interview."
+policy:
+  allow_implicit_invocation: true

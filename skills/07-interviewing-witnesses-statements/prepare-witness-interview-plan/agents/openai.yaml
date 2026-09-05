@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Witness Interview Plan"
+  short_description: "Prepare witness interview plans"
+  default_prompt: "Use $prepare-witness-interview-plan to prepare a neutral witness interview plan."
+policy:
+  allow_implicit_invocation: true

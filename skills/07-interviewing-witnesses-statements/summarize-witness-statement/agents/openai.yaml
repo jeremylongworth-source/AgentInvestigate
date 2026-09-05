@@ -1,0 +1,6 @@
+interface:
+  display_name: "Summarize Witness Statement"
+  short_description: "Summarize witness statements"
+  default_prompt: "Use $summarize-witness-statement to summarize this supplied witness statement neutrally."
+policy:
+  allow_implicit_invocation: true

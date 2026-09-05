@@ -61,6 +61,8 @@ REQUIRED_FILES = (
     "docs/development/handoffs/AI-12-final-handoff.md",
     "tests/reference-skills/AI-13-entity-analysis-scenarios.json",
     "docs/development/handoffs/AI-13-final-handoff.md",
+    "tests/reference-skills/AI-14-interviewing-scenarios.json",
+    "docs/development/handoffs/AI-14-final-handoff.md",
     "scripts/validate-all.ps1",
     "scripts/validate-docs.py",
     "scripts/validate-taxonomy.py",
@@ -343,6 +345,21 @@ REQUIRED_TOKENS = {
         "resolve-entity-contradiction",
         "state-identity-confidence",
         "AI-14: Interviewing, Witnesses & Statements.",
+    ),
+    "tests/reference-skills/AI-14-interviewing-scenarios.json": (
+        "AGENTINVESTIGATE_AI_14_INTERVIEWING_READY",
+        "neutral questioning",
+        "body language",
+        "eye contact",
+        "unsupported behavioral stereotypes",
+    ),
+    "docs/development/handoffs/AI-14-final-handoff.md": (
+        "AGENTINVESTIGATE_AI_14_INTERVIEWING_READY",
+        "define-interview-objectives",
+        "prepare-neutral-question-set",
+        "summarize-witness-statement",
+        "review-interview-bias-risk",
+        "AI-15: Evidence & Chain of Custody.",
     ),
 }
 

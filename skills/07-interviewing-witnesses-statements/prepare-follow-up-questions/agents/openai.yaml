@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Follow Up Questions"
+  short_description: "Draft neutral follow-up questions"
+  default_prompt: "Use $prepare-follow-up-questions to draft neutral follow-up questions for this matter."
+policy:
+  allow_implicit_invocation: true

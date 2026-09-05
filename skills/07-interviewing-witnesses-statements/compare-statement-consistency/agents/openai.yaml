@@ -1,0 +1,6 @@
+interface:
+  display_name: "Compare Statement Consistency"
+  short_description: "Compare statement consistency"
+  default_prompt: "Use $compare-statement-consistency to compare these supplied statements neutrally."
+policy:
+  allow_implicit_invocation: true
