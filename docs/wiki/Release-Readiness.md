@@ -1,8 +1,8 @@
 # Release Readiness
 
-This page records the public distribution posture for AgentInvestigate.
+This page explains the current public distribution posture and the distinction between public availability and unconditional v1 readiness.
 
-## Public Repository
+## Current Public State
 
 Repository:
 
@@ -10,19 +10,27 @@ Repository:
 https://github.com/jeremylongworth-source/AgentInvestigate
 ```
 
-Required public state:
+Wiki:
 
 ```text
-visibility: PUBLIC
-wiki: enabled
+https://github.com/jeremylongworth-source/AgentInvestigate/wiki
 ```
+
+Recorded public state:
+
+- visibility: PUBLIC
+- wiki: enabled
+- repository visibility: `PUBLIC`;
+- GitHub Wiki: enabled and published;
+- repository topic: `agent-skills`;
+- public release distribution verdict: `PUBLIC_RELEASE_READY`.
 
 ## Copilot Skill Distribution
 
-GitHub CLI skill validation:
+Preview a skill:
 
 ```powershell
-gh skill publish --dry-run
+gh skill preview jeremylongworth-source/AgentInvestigate classify-request-type
 ```
 
 Install a skill:
@@ -37,29 +45,34 @@ Install for GitHub Copilot:
 gh skill install jeremylongworth-source/AgentInvestigate classify-request-type --agent github-copilot --scope user
 ```
 
-## Release State
+Validate publication readiness:
 
-AI-37 selected:
-
-```text
-V1_PARTIALLY_READY
+```powershell
+gh skill publish --dry-run
 ```
 
-AI-38 public distribution readiness uses:
+The `gh skill` command is a GitHub CLI preview feature and may change.
 
-```text
-PUBLIC_RELEASE_READY
-```
+## Readiness States
 
-This means the project is public, has a GitHub Wiki, validates against repository checks, and passes `gh skill publish --dry-run`. It does not replace maintainer judgment, external review, or current-source verification before relying on regulated content.
+| Record | Meaning |
+| --- | --- |
+| `PUBLIC_RELEASE_READY` | The repository is public, the wiki is enabled and published, distribution documentation exists, and repository validation covers the release-distribution record. |
+| `V1_PARTIALLY_READY` | The v1 release-candidate audit supports public use but still requires explicit maintainer and external review decisions. |
+| `V1_READY` | A future audit decision after all required maintainer, source, live evaluation, external review, release, and support conditions are recorded. |
 
-## Required Maintenance
+Public availability does not replace legal, privacy, safety, regulatory, professional, or current-source review.
 
-Before future release tags:
+## Maintainer Checklist
 
-- run the full validation suite;
+Before a future release tag:
+
+- run `.\scripts\validate-all.ps1`;
 - run `gh skill publish --dry-run`;
-- verify source freshness for high-supersession regulatory claims;
+- review high-supersession regulatory sources;
 - review open issues and security reports;
 - confirm release notes;
-- decide whether the release should remain partially ready, public-ready, or v1-ready.
+- record maintainer approval, release-risk acceptance, and support ownership;
+- decide the release posture explicitly.
+
+See the [v1 release-candidate audit](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/docs/evaluation/v1-release-candidate-audit.md) and [public distribution record](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/docs/release/public-release-distribution.md).

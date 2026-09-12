@@ -4,6 +4,7 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Reworked `README.md` and the versioned GitHub Wiki source for public use with a task-oriented quick start, clearer navigation, explicit routing and safety references, and tighter release-readiness guidance.
 - Completed `AI-38 Public Release Distribution`.
 - Made the GitHub repository public, enabled GitHub Wiki, added professional wiki source pages under `docs/wiki/`, and documented Copilot `gh skill` preview/install commands.
 - Added public release distribution validation covering wiki source pages, public distribution artifact, README install commands, and `PUBLIC_RELEASE_READY` status.

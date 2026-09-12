@@ -1,74 +1,71 @@
 # Getting Started
 
-This page explains how to inspect, validate, and install AgentInvestigate skills.
+Use this page to move from a public repository checkout to a verified skill installation.
 
-## Clone The Repository
+## Prerequisites
+
+You need:
+
+- Git;
+- GitHub CLI with an authenticated account;
+- a GitHub CLI version that provides the `gh skill` preview command;
+- an agent host that supports the installed skill format.
+
+The repository is public. Skill installation and preview still depend on the capabilities and authentication state of your local GitHub CLI.
+
+## 1. Clone And Validate
 
 ```powershell
 git clone https://github.com/jeremylongworth-source/AgentInvestigate.git
 cd AgentInvestigate
-```
-
-## Validate Locally
-
-Run:
-
-```powershell
 .\scripts\validate-all.ps1
 ```
 
-The validation suite checks public documentation, taxonomy structure, routing, standards, foundations, skill packages, Canadian regulatory specialization foundations, professional skillsets, integration scenarios, adversarial safety scenarios, specialization planning, public readiness, and release-candidate audit records.
+A passing validation run confirms repository contracts and fixtures. It does not certify legal correctness, privacy compliance, licensing eligibility, professional competence, emergency readiness, forensic admissibility, or live model behavior.
 
-## Install With GitHub Copilot Skill Tooling
+## 2. Preview A Skill
 
-GitHub CLI supports agent-skill preview, install, update, and publish commands.
-
-Preview a skill before installing:
+Start with the conservative request-routing skill:
 
 ```powershell
 gh skill preview jeremylongworth-source/AgentInvestigate classify-request-type
 ```
 
-Install a specific skill:
+The package is located at `skills/<family>/<skill>/SKILL.md`. Read its frontmatter, inputs, gates, output contract, limitations, and references before relying on it.
+
+## 3. Install A Skill
+
+For general agent-skill use:
 
 ```powershell
 gh skill install jeremylongworth-source/AgentInvestigate classify-request-type
 ```
 
-Install for GitHub Copilot explicitly:
+For GitHub Copilot:
 
 ```powershell
 gh skill install jeremylongworth-source/AgentInvestigate classify-request-type --agent github-copilot --scope user
 ```
 
-After installation, start or reload the agent session and ask the agent to list available skills.
+After installation, start or reload the agent session and confirm that the host can list the installed skill. The `gh skill` command is a preview feature and may change.
 
-## First Useful Skill Paths
+## 4. Use The Safe Request Path
 
-Start with conservative routing and safety skills:
+For a new task:
 
-- `classify-request-type`
-- `check-prohibited-capabilities`
-- `identify-jurisdiction`
-- `assess-lawful-purpose`
-- `validate-investigative-authority`
-- `identify-privacy-obligation`
-- `prepare-compliance-escalation`
+1. classify the request;
+2. check prohibited capabilities;
+3. identify sensitivity and jurisdiction;
+4. validate role, authority, lawful purpose, scope, source access, privacy basis, and human review when needed;
+5. use the narrowest relevant skill;
+6. preserve uncertainty, limitations, stop conditions, and escalation needs.
 
-## First Useful Documents
+Appropriate first tasks include organizing supplied records into an evidence matrix, preparing neutral interview questions, constructing a chronology, or drafting a documentation-gap review.
 
-- `README.md`
-- `ROADMAP.md`
-- `docs/architecture/domain-contract.md`
-- `docs/architecture/authority-routing.md`
-- `docs/architecture/prohibited-capabilities.md`
-- `tests/evaluation-rubric.json`
+## Where To Read Next
 
-## Safe Use Pattern
-
-1. Classify the request.
-2. Check prohibited capabilities.
-3. Identify jurisdiction if regulated or intrusive issues are present.
-4. Validate role, authority, lawful purpose, scope, source access, privacy basis, and human review.
-5. Use the narrowest relevant atomic skill.
-6. Preserve limitations and escalation needs.
+- [[Sensitivity And Routing]]
+- [[Safety Boundaries]]
+- [[Jurisdiction Model]]
+- [[Skill Catalog]]
+- [[Validation And Testing]]

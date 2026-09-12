@@ -1,17 +1,21 @@
 # Validation And Testing
 
-AgentInvestigate is validation-backed. The full validation suite is:
+AgentInvestigate uses repository contracts and scenario fixtures to make structural and safety expectations reviewable.
+
+## Full Gate
+
+From the repository root:
 
 ```powershell
 .\scripts\validate-all.ps1
 ```
 
-## What The Suite Checks
+The full gate checks:
 
-- baseline public documentation;
+- baseline documentation;
 - taxonomy integrity;
 - routing contracts;
-- authoring, evidence, source, and testing standards;
+- skill, evidence, source, testing, and evaluation standards;
 - shared foundations;
 - implemented skill packages;
 - Canadian regulatory specialization foundations;
@@ -20,34 +24,40 @@ AgentInvestigate is validation-backed. The full validation suite is:
 - adversarial safety scenarios;
 - specialization roadmap candidates;
 - public documentation readiness;
-- v1 release candidate audit;
+- v1 release-candidate records;
 - public release distribution readiness.
 
-## Important Limits
+## Focused Checks
 
-Most tests are repository contract and fixture checks. They confirm structure, required text, references, routing states, and safety gates.
+```powershell
+python scripts\validate-routing.py --repo-root .
+python scripts\validate-skills.py --repo-root .
+python scripts\validate-specializations.py --repo-root .
+python scripts\validate-skillsets.py --repo-root .
+python scripts\validate-integration.py --repo-root .
+python scripts\validate-safety.py --repo-root .
+```
 
-They do not prove:
+Use a focused check while iterating, then run the full gate before a pull request or release decision.
 
-- live model behavior;
-- legal correctness;
-- privacy compliance;
-- licensing eligibility;
-- professional competence;
-- emergency readiness;
-- forensic admissibility;
-- real-world operational safety.
+## What A Pass Means
+
+A passing run confirms required files, text contracts, metadata, references, routing states, fixture coverage, and safety boundaries are present and internally consistent.
+
+It does not prove live model behavior, legal correctness, privacy compliance, licensing eligibility, professional competence, emergency readiness, forensic admissibility, or real-world operational safety.
 
 ## Release Evidence
 
-The v1 release candidate audit is:
+The v1 release-candidate audit is:
 
 ```text
 docs/evaluation/v1-release-candidate-audit.md
 ```
 
-The AI-38 public distribution readiness artifact is:
+The public distribution record is:
 
 ```text
 docs/release/public-release-distribution.md
 ```
+
+A public distribution pass is not an unconditional v1 readiness decision.

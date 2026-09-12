@@ -1,59 +1,54 @@
 # Architecture Overview
 
-AgentInvestigate is organized as a validation-backed skill repository.
+AgentInvestigate is a validation-backed repository of atomic AI skills and professional compositions.
 
-## Main Components
+## Repository Layers
 
-- `skills/`: atomic skill packages, each with a `SKILL.md`.
-- `skillsets/`: professional role composition that references existing atomic skills.
-- `docs/architecture/`: domain, routing, boundary, taxonomy, jurisdiction, and specialization contracts.
-- `docs/standards/`: authoring, naming, output, source, testing, and evaluation standards.
-- `docs/foundations/`: shared vocabulary, schemas, and report contracts.
-- `docs/evaluation/`: integration, safety, and release-candidate evaluation artifacts.
-- `specializations/`: jurisdiction specialization foundations.
-- `tests/`: JSON scenario and audit fixtures.
-- `scripts/`: validators and generators.
+| Layer | Responsibility |
+| --- | --- |
+| `skills/` | Atomic skill packages. Each package contains a bounded `SKILL.md`. |
+| `skillsets/` | Professional role composition that references existing atomic skills. |
+| `specializations/` | Jurisdiction-specific foundations, currently Canada federal, Ontario, British Columbia, and Alberta. |
+| `docs/architecture/` | Domain, taxonomy, routing, boundary, jurisdiction, and extension contracts. |
+| `docs/standards/` | Skill authoring, naming, output, source, evidence, testing, and evaluation standards. |
+| `docs/foundations/` | Shared terminology, schemas, and report structures consumed by real skills. |
+| `tests/` | Routing, validation, integration, regulatory, and adversarial safety fixtures. |
+| `scripts/` | Reproducible validators and generators. |
 
-## Design Decisions
+## Core Design Decisions
 
-Atomic skills stay narrow. Professional roles are composed through `skillsets/professional-skillsets.json` rather than duplicated as large procedural skills.
+- Skills stay atomic and bounded.
+- Professional roles are composed in `skillsets/professional-skillsets.json`; role names do not justify broad omnibus skills.
+- Private investigation and private security remain distinct professional branches.
+- Jurisdiction modules isolate local regulatory claims.
+- Source, evidence, privacy, authority, human-review, certification, and prohibited-capability gates remain explicit.
+- A shared asset is added only when a real skill consumes it.
 
-Private investigation and private security remain structurally distinct. Hybrid skillsets may coordinate both branches, but they must not collapse one authority model into the other.
-
-Routing states are global and shared:
-
-```text
-PROCEED_ROUTINE
-CLARIFY_SCOPE
-REGULATED_RESEARCH_ONLY
-INTRUSIVE_GATE_REQUIRED
-CERTIFICATION_ESCALATION
-PROHIBITED_REDIRECT
-```
-
-Jurisdiction modules are isolated so local regulatory claims do not silently become global claims.
-
-## Control Flow
+## Request Control Flow
 
 ```text
 user request
-classify request type
-check prohibited capabilities
-identify sensitivity
-identify jurisdiction if needed
-validate authority and lawful purpose if needed
-check privacy and source-access basis if needed
-route to skill, skillset, escalation, or prohibited redirect
-produce bounded output
-record limitations and review needs
+  -> classify request type
+  -> check prohibited capabilities
+  -> identify sensitivity
+  -> identify jurisdiction when needed
+  -> validate authority and lawful purpose when needed
+  -> check privacy and source-access basis when needed
+  -> route to skill, skillset, clarification, escalation, or redirect
+  -> produce a bounded output with evidence and limitations
 ```
 
-## Extension Model
+Intrusive work cannot move directly from a raw request to execution. See [[Sensitivity And Routing]] and the repository contracts for [authority routing](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/docs/architecture/authority-routing.md) and [intrusive-task gating](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/docs/architecture/intrusive-task-gate.md).
 
-Future extensions should follow the active roadmap and latest handoff.
+## Extension Rules
 
-New jurisdiction modules follow `docs/architecture/canadian-jurisdiction-roadmap.md`.
+Before adding a capability:
 
-New specialist modules follow `docs/architecture/specialization-roadmap.md`.
+- read `ROADMAP.md` and the latest handoff;
+- confirm the capability is not already covered;
+- classify sensitivity, jurisdiction, authority, source freshness, and professional boundaries;
+- add tests and validator coverage with the behavior;
+- preserve the private investigation/private security distinction;
+- document known limitations and escalation requirements.
 
-No extension should weaken source, privacy, authority, safety, or prohibited-capability boundaries.
+New Canadian jurisdictions follow `docs/architecture/canadian-jurisdiction-roadmap.md`. Future specialist modules follow `docs/architecture/specialization-roadmap.md`.

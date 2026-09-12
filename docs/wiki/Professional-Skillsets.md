@@ -1,19 +1,12 @@
 # Professional Skillsets
 
-Professional skillsets compose existing atomic skills into role-level capabilities.
-
-The canonical registry is:
+Professional skillsets compose existing atomic skills into role-level capability bundles. The canonical registry is:
 
 ```text
 skillsets/professional-skillsets.json
 ```
 
-## Rule
-
-```text
-Skillsets compose skills.
-They must not duplicate underlying procedures.
-```
+A skillset is a composition record, not a second procedure library. It must preserve every underlying skill's routing, authority, privacy, source, evidence, certification, and escalation requirements.
 
 ## Investigation Skillsets
 
@@ -43,23 +36,23 @@ They must not duplicate underlying procedures.
 - `asset-protection-specialist`
 - `corporate-security-manager`
 
-## Required Role Boundaries
+Hybrid composition coordinates branches; it does not erase the different authority models.
 
-Skillset outputs must preserve:
+## Composition Contract
 
-- jurisdiction and authority requirements;
-- lawful purpose;
-- source and record access authority;
-- privacy basis;
-- sensitivity routing;
-- human review before intrusive work;
-- certification boundaries;
-- prohibited-capability boundaries.
+Every skillset must:
+
+- reference taxonomy-backed atomic skills;
+- declare its professional branch or branches;
+- retain global routing states;
+- identify role boundaries and escalation needs;
+- avoid duplicating atomic procedures;
+- remain subject to jurisdiction and current-source review.
 
 ## Validation
-
-Run:
 
 ```powershell
 python scripts\validate-skillsets.py --repo-root .
 ```
+
+For architecture details, see [professional skillset composition](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/docs/architecture/professional-skillset-composition.md).

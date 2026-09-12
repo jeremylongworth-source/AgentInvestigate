@@ -2,15 +2,38 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional investigation and private security support work.
 
-The project packages structured agent skills, architecture contracts, validation fixtures, professional skillsets, and safety boundaries for work such as investigative intake, lawful-purpose review, authority checks, public-source research, evidence organization, interviews, findings, reporting, private security operations, incident response, physical security, loss prevention, program management, and release evaluation.
+This wiki is the practical reference for maintainers, contributors, evaluators, and users. It explains how to find a skill, understand its routing requirements, validate repository changes, and keep professional boundaries intact.
 
-## Read This First
+## Start Here
 
-AgentInvestigate is not a licensed investigation service, private security company, law firm, regulator, emergency service, forensic lab, HR department, insurer, engineering firm, fire/life-safety authority, or training provider.
+| Goal | Page |
+| --- | --- |
+| Install or preview a skill | [[Getting Started]] |
+| Understand the repository design | [[Architecture Overview]] |
+| Find an atomic capability | [[Skill Catalog]] |
+| Compose a professional role | [[Professional Skillsets]] |
+| Route a regulated or sensitive request | [[Sensitivity And Routing]] |
+| Check jurisdiction handling | [[Jurisdiction Model]] |
+| Review prohibited boundaries | [[Safety Boundaries]] |
+| Run and interpret validation | [[Validation And Testing]] |
+| Contribute safely | [[Contributing Guide]] |
+| Review public-release posture | [[Release Readiness]] |
 
-Repository artifacts are support material. Outputs produced with these skills still require qualified human review when legal, licensing, privacy, employment, safety, emergency, evidence, professional, or operational consequences are present.
+## Project In One Minute
 
-## Core Principles
+AgentInvestigate packages:
+
+- atomic skills with bounded procedures and output contracts;
+- professional skillsets that compose existing skills;
+- authority, privacy, jurisdiction, and sensitivity gates;
+- evidence, source, and uncertainty requirements;
+- Canadian federal, Ontario, British Columbia, and Alberta foundations;
+- routing, integration, and adversarial safety fixtures;
+- validators that check repository contracts.
+
+The project keeps private investigation and private security as distinct branches. Shared concepts are reused only where their authority and safety assumptions remain compatible.
+
+## Non-Negotiable Principles
 
 ```text
 AUTHORITY BEFORE ACTION
@@ -18,33 +41,19 @@ EVIDENCE BEFORE CONCLUSION
 HUMAN CONTROL BEFORE INTRUSIVE WORK
 ```
 
-## Start Here
+AgentInvestigate is not a licensed investigation service, private security company, law firm, regulator, emergency service, forensic lab, HR department, insurer, engineering firm, fire/life-safety authority, or training provider. Its outputs require qualified human review when legal, licensing, privacy, employment, safety, emergency, evidence, professional, or operational consequences are present.
 
-- [[Getting Started]]
-- [[Architecture Overview]]
-- [[Skill Catalog]]
-- [[Professional Skillsets]]
-- [[Sensitivity And Routing]]
-- [[Jurisdiction Model]]
-- [[Safety Boundaries]]
-- [[Validation And Testing]]
-- [[Contributing Guide]]
-- [[Release Readiness]]
-
-## Current Release Posture
-
-The repository has completed roadmap waves AI-00 through AI-37 and adds AI-38 public release distribution work.
-
-Current readiness state:
+## Current Posture
 
 ```text
 PUBLIC_RELEASE_READY
 ```
 
-The v1 release candidate audit selected:
+The repository has completed AI-00 through AI-38. The v1 release-candidate audit remains `V1_PARTIALLY_READY`; public distribution readiness does not replace maintainer approval, current-source review, live prompt evaluation, external review, or accepted release risk.
 
-```text
-V1_PARTIALLY_READY
-```
+Canonical project records:
 
-The public release distribution wave makes the repository public, enables the GitHub Wiki, verifies `gh skill publish --dry-run`, and documents the Copilot install path. The v1 audit remains a conservative record: full `V1_READY` still depends on maintainer approval, release-risk acceptance, current-source review decisions, and any external review the maintainer requires.
+- [Repository README](https://github.com/jeremylongworth-source/AgentInvestigate#readme)
+- [Roadmap](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/ROADMAP.md)
+- [Release-candidate audit](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/docs/evaluation/v1-release-candidate-audit.md)
+- [Public distribution record](https://github.com/jeremylongworth-source/AgentInvestigate/blob/main/docs/release/public-release-distribution.md)

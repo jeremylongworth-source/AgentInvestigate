@@ -1,40 +1,54 @@
 # Contributing Guide
 
-Contributions must follow the active roadmap wave and the latest handoff.
+Contributions must follow the active roadmap wave and latest handoff. Repository quality depends on keeping scope, evidence, and safety boundaries explicit.
 
-## Basic Rules
+## Before You Change A File
 
-- Work from `ROADMAP.md` and the latest handoff.
-- Keep changes scoped to the active wave.
-- Do not create empty placeholder folders.
-- Keep private investigation and private security structurally distinct.
-- Do not add regulated or intrusive claims without authoritative sources and verification dates.
-- Do not add procedural content for prohibited capabilities.
-- Keep skills atomic.
-- Put professional role composition in `skillsets/`, not inside broad skills.
-- Update fixtures and validators with behavior changes.
+1. Read `ROADMAP.md` and the latest handoff.
+2. Verify the current repository and branch state.
+3. Define the bounded change and its acceptance criteria.
+4. Identify sensitivity, jurisdiction, authority, source freshness, and safety implications.
+5. Check whether an existing skill or shared asset already covers the need.
 
-## Before Opening A Pull Request
+Do not create empty placeholder folders or silently implement a future roadmap wave.
 
-Run:
+## Skill Authoring
+
+A new skill must:
+
+- remain atomic and bounded;
+- use valid frontmatter and the repository authoring standard;
+- state triggers and non-triggers;
+- define inputs, assumptions, dependencies, procedure, evidence, sources, authority checks, sensitivity handling, output contract, limitations, and escalation;
+- avoid prohibited procedural content;
+- include routing, negative, and output-format scenarios where applicable.
+
+Professional roles belong in `skillsets/`, not in broad procedural skills.
+
+## Documentation And Sources
+
+Use authoritative sources for regulated or safety-sensitive claims. Record source title, organization, jurisdiction, URL, publication and effective dates when available, access date, verification date, applicability, supersession risk, and consuming skills.
+
+Current-source verification is required before relying on high-supersession material.
+
+## Validation
 
 ```powershell
 .\scripts\validate-all.ps1
 ```
 
-Document:
+Run the full gate before opening a pull request.
 
-- roadmap wave;
-- files changed;
+## Pull Request Content
+
+Describe:
+
+- roadmap wave and bounded objective;
+- files added or changed;
+- behavior or documentation impact;
 - validation performed;
-- source evidence for regulated or safety-sensitive claims;
+- source evidence;
 - known limitations;
-- any release-risk acceptance required from a maintainer.
+- unresolved issues and release risk.
 
-## Skill Authoring
-
-A new skill must include a `SKILL.md` with valid frontmatter and bounded instructions.
-
-Do not duplicate procedures already covered by an existing atomic skill.
-
-Do not add scripts with broad shell permissions unless the script is reviewed, necessary, and safe.
+Preserve the private investigation/private security distinction and all authority, privacy, human-review, certification, and prohibited-capability gates.

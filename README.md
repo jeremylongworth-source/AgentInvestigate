@@ -2,7 +2,19 @@
 
 AgentInvestigate is an open-source AI skill repository for lawful professional investigation and private security support work.
 
-It helps agents produce bounded, reviewable outputs for intake, lawful-purpose checks, authority review, source handling, evidence organization, interviews, investigative analysis, reporting, security operations, incident response, physical security, loss prevention, program management, professional skillset composition, integration evaluation, adversarial safety evaluation, and future specialist-module planning.
+It gives general-purpose AI agents bounded procedures, routing gates, evidence discipline, source requirements, output contracts, and escalation rules for professional work. The repository contains atomic skills, composed professional skillsets, Canadian jurisdiction foundations, evaluation fixtures, and repository validators.
+
+```text
+AUTHORITY BEFORE ACTION
+EVIDENCE BEFORE CONCLUSION
+HUMAN CONTROL BEFORE INTRUSIVE WORK
+```
+
+Current public distribution:
+
+```text
+PUBLIC_RELEASE_READY
+```
 
 Public readiness token:
 
@@ -16,55 +28,69 @@ Public distribution token:
 AGENTINVESTIGATE_AI_38_PUBLIC_DISTRIBUTION_READY
 ```
 
-Core principles:
+## Installation And Use
 
-```text
-AUTHORITY BEFORE ACTION
-EVIDENCE BEFORE CONCLUSION
-HUMAN CONTROL BEFORE INTRUSIVE WORK
+Clone the repository and run its validation gate:
+
+```powershell
+git clone https://github.com/jeremylongworth-source/AgentInvestigate.git
+cd AgentInvestigate
+.\scripts\validate-all.ps1
 ```
 
-AgentInvestigate does not confer investigator licensing, security licensing, law-enforcement authority, legal authority, regulatory approval, use-of-force qualification, weapons qualification, emergency-response certification, engineering approval, fire or life-safety approval, privacy compliance certification, or professional certification.
+Preview a skill before installing it:
+
+```powershell
+gh skill preview jeremylongworth-source/AgentInvestigate classify-request-type
+```
+
+Install one skill for local agent-skill use:
+
+```powershell
+gh skill install jeremylongworth-source/AgentInvestigate classify-request-type
+```
+
+Install one skill for GitHub Copilot:
+
+```powershell
+gh skill install jeremylongworth-source/AgentInvestigate classify-request-type --agent github-copilot --scope user
+```
+
+These commands require GitHub CLI authentication and a GitHub CLI version that provides `gh skill`. The `gh skill` command is a preview feature and may change.
 
 ## Who It Is For
 
-AgentInvestigate is for:
-
-- maintainers building and reviewing investigative or security-oriented AI skills;
-- evaluators testing routing, safety, evidence discipline, and privacy behavior;
-- contributors adding roadmap-scoped skills, fixtures, validators, and documentation;
-- organizations that need reusable skill patterns for lawful investigation, case management, security operations, reporting, and escalation support.
+AgentInvestigate is for maintainers building investigation or security-oriented AI skills, evaluators testing routing and safety behavior, contributors adding roadmap-scoped content, and organizations that need reusable support patterns for lawful investigation, security operations, reporting, and escalation.
 
 It is not a substitute for counsel, regulators, licensed investigators, licensed security managers, privacy officers, HR, emergency services, qualified trainers, forensic experts, engineers, fire/life-safety professionals, or other qualified reviewers.
 
+## Choose A Path
+
+| Need | Start here |
+| --- | --- |
+| Understand the project | [GitHub Wiki](https://github.com/jeremylongworth-source/AgentInvestigate/wiki) and [Architecture Overview](docs/wiki/Architecture-Overview.md) |
+| Use a single capability | [Skill Catalog](docs/wiki/Skill-Catalog.md), then a skill's `SKILL.md` |
+| Build a role-oriented workflow | [Professional Skillsets](docs/wiki/Professional-Skillsets.md) |
+| Review a sensitive request | [Sensitivity And Routing](docs/wiki/Sensitivity-And-Routing.md) and [Safety Boundaries](docs/wiki/Safety-Boundaries.md) |
+| Add or change repository content | [CONTRIBUTING.md](CONTRIBUTING.md) and the [Contributing Guide](docs/wiki/Contributing-Guide.md) |
+
 ## Supported Domains
 
-Current repository coverage includes:
+AgentInvestigate supports two related but distinct professional branches.
 
-- private investigation and investigative research;
-- case intake, planning, scope, authority, and lawful-purpose review;
-- OSINT and public-records research within lawful source boundaries;
-- identity, entity, timeline, and evidence analysis;
-- interviewing, witness statements, findings, and case presentation;
-- evidence logs, chain of custody, and source provenance;
-- corporate and workplace investigations;
-- background screening and due diligence;
-- private security operations, patrol, access, and incident response;
-- communication, de-escalation, and escalation documentation;
-- physical security and risk assessment;
-- security systems and technology governance;
-- loss prevention and asset protection;
-- investigation and security program management;
-- Canadian federal, Ontario, British Columbia, and Alberta regulatory specialization foundations;
-- professional role composition through skillsets;
-- multi-skill integration and adversarial safety evaluation;
-- specialization planning for future domains such as fraud, digital evidence, retail loss prevention, insurance investigations, and event security.
+Private investigation coverage includes intake and authority review, case planning, public-source research, public records, identity and entity analysis, interviewing, evidence organization, investigative analysis, reporting, corporate and workplace investigations, and background screening and due diligence.
+
+Private security coverage includes security operations, access and patrol, incident response, communication and de-escalation, physical security, risk assessment, security systems governance, loss prevention, asset protection, and investigation or security program management.
+
+The repository also includes Canadian federal, Ontario, British Columbia, and Alberta regulatory foundations, professional skillset composition, multi-skill integration evaluation, adversarial safety evaluation, and a framework for future specialist modules.
 
 ## Skill Examples
 
-Atomic skills live under `skills/<family>/<skill>/SKILL.md`. Examples include:
+Atomic skills live under `skills/<family>/<skill>/SKILL.md`. Representative skills include:
 
 - `classify-request-type`
+- `check-prohibited-capabilities`
+- `identify-jurisdiction`
 - `assess-lawful-purpose`
 - `validate-investigative-authority`
 - `plan-open-source-research`
@@ -79,124 +105,77 @@ Atomic skills live under `skills/<family>/<skill>/SKILL.md`. Examples include:
 - `identify-control-gaps`
 - `prepare-compliance-escalation`
 
-Professional skillsets compose existing atomic skills and live in `skillsets/professional-skillsets.json`. Examples include `private-investigator`, `workplace-investigator`, `background-screening-specialist`, `security-officer`, `security-supervisor`, `physical-security-analyst`, `incident-response-coordinator`, and `corporate-security-manager`.
+Professional roles compose atomic skills through `skillsets/professional-skillsets.json`. They do not duplicate the underlying procedures.
 
 ## Sensitivity Model
 
 AgentInvestigate uses six global routing states:
 
-- `PROCEED_ROUTINE`: routine work has enough scope and inputs.
-- `CLARIFY_SCOPE`: material facts are missing.
-- `REGULATED_RESEARCH_ONLY`: law, licensing, privacy, employment, records, or compliance issues require source-backed framing and no final determination.
-- `INTRUSIVE_GATE_REQUIRED`: surveillance, monitoring, screening, identity, personal information, or similar sensitive work must stop before operational execution until authority, privacy, necessity, proportionality, and human approval are satisfied.
-- `CERTIFICATION_ESCALATION`: emergency, force, weapons, restraints, alarm response, engineering, life safety, or qualified technical work may receive recognition, documentation, and escalation support only.
-- `PROHIBITED_REDIRECT`: prohibited requests are refused at the procedural level and redirected toward lawful alternatives.
+| State | Use |
+| --- | --- |
+| `PROCEED_ROUTINE` | The request is routine and has enough scope and inputs. |
+| `CLARIFY_SCOPE` | Material facts are missing, but the request is not prohibited. |
+| `REGULATED_RESEARCH_ONLY` | Legal, licensing, privacy, employment, records, or compliance issues require current source-backed framing and no final determination. |
+| `INTRUSIVE_GATE_REQUIRED` | Sensitive information, surveillance, monitoring, identity, or screening work must stop until authority, privacy, necessity, proportionality, and human approval are addressed. |
+| `CERTIFICATION_ESCALATION` | Emergency, force, weapons, restraints, alarm response, engineering, life-safety, or other qualified work requires professional recognition, documentation, and escalation only. |
+| `PROHIBITED_REDIRECT` | The requested conduct is outside the repository boundary and must be refused at the procedural level. |
 
-Core routing references:
-
-- `docs/architecture/sensitivity-model.md`
-- `docs/architecture/authority-routing.md`
-- `docs/architecture/intrusive-task-gate.md`
-- `docs/architecture/certification-boundaries.md`
-- `docs/architecture/prohibited-capabilities.md`
+Sensitive work must not route directly from a raw request to execution. See [docs/architecture/authority-routing.md](docs/architecture/authority-routing.md) and [docs/architecture/prohibited-capabilities.md](docs/architecture/prohibited-capabilities.md).
 
 ## Jurisdiction Model
 
-Jurisdiction is required when work depends on licensing, privacy, employment screening, workplace investigation, recording or monitoring, access to records, evidence handling rules, security authority, emergency boundaries, alarm response, use of force, weapons, restraints, fire, life safety, or other regulated requirements.
+Jurisdiction is required when an answer depends on licensing, privacy, employment screening, workplace investigations, recording or monitoring, record access, evidence handling, security authority, emergency boundaries, alarm response, force, weapons, restraints, fire, life safety, or other regulated requirements.
 
-Canadian specialization foundations currently exist for:
+Current Canadian foundations are organized under:
 
 - `specializations/canada/federal/`
 - `specializations/canada/ontario/`
 - `specializations/canada/british-columbia/`
 - `specializations/canada/alberta/`
 
-The future Canadian jurisdiction contract is in `docs/architecture/canadian-jurisdiction-roadmap.md`. Future sector specializations are governed by `docs/architecture/specialization-roadmap.md`.
+These are source-backed architecture foundations. They do not grant authority, licensing, legal advice, privacy compliance certification, or professional approval. Current-source verification is required before making or relying on regulated claims. See [Jurisdiction Model](docs/wiki/Jurisdiction-Model.md), [Canadian jurisdiction roadmap](docs/architecture/canadian-jurisdiction-roadmap.md), and [specialization roadmap](docs/architecture/specialization-roadmap.md).
 
-Regulatory, licensing, privacy, evidence, safety, and professional-requirement claims require current source-backed research before implementation or reliance.
+## Typical Use
 
-## Installation And Use
+Use the narrowest relevant skill and preserve the output's limitations.
 
-Clone the repository:
-
-```powershell
-git clone https://github.com/jeremylongworth-source/AgentInvestigate.git
-cd AgentInvestigate
+```text
+request
+  -> classify
+  -> check prohibited capabilities
+  -> identify sensitivity and jurisdiction
+  -> validate authority, purpose, privacy, and source access
+  -> use the bounded skill or escalate
+  -> record evidence, uncertainty, and review needs
 ```
 
-Run validation:
+Examples of appropriate use include building an evidence matrix from supplied records, preparing neutral interview questions, organizing a case chronology, reviewing a security incident for documentation gaps, or identifying questions for qualified legal or privacy review.
+
+## Validation
+
+Run the complete repository gate:
 
 ```powershell
 .\scripts\validate-all.ps1
 ```
 
-GitHub Wiki: `https://github.com/jeremylongworth-source/AgentInvestigate/wiki`
+The suite checks baseline documentation, taxonomy integrity, routing, authoring and source standards, shared foundations, skill packages, Canadian specialization foundations, professional skillsets, integration scenarios, adversarial safety scenarios, specialization planning, public documentation, v1 release-candidate records, and public release distribution readiness.
 
-Validate Copilot skill publishing:
+Validate Copilot skill publication readiness with:
 
 ```powershell
 gh skill publish --dry-run
 ```
 
-Preview a skill:
-
-```powershell
-gh skill preview jeremylongworth-source/AgentInvestigate classify-request-type
-```
-
-Install a skill:
-
-```powershell
-gh skill install jeremylongworth-source/AgentInvestigate classify-request-type
-```
-
-Install for GitHub Copilot:
-
-```powershell
-gh skill install jeremylongworth-source/AgentInvestigate classify-request-type --agent github-copilot --scope user
-```
-
-Use the repository by pointing an AI agent or reviewer at the relevant `SKILL.md`, architecture document, skillset registry, and test fixture for the task. Start with:
-
-- `ROADMAP.md`
-- `docs/architecture/domain-contract.md`
-- `docs/architecture/authority-routing.md`
-- `docs/architecture/prohibited-capabilities.md`
-- `skillsets/professional-skillsets.json`
-- `tests/evaluation-rubric.json`
-
-When adding work, follow the latest completed handoff and implement only the active roadmap wave.
-
-## Validation
-
-The full repository gate is:
-
-```powershell
-.\scripts\validate-all.ps1
-```
-
-The suite validates:
-
-- baseline public documentation;
-- taxonomy integrity;
-- routing, standards, tests, and foundations;
-- implemented skill families;
-- Canadian regulatory specialization foundations;
-- professional skillset composition;
-- multi-skill integration scenarios;
-- adversarial safety scenarios;
-- specialization roadmap candidates.
-- public release distribution readiness.
-
-The latest validated handoff is `docs/development/handoffs/AI-38-final-handoff.md`.
+The suite validates repository contracts and fixtures. It does not prove live model behavior, legal correctness, privacy compliance, licensing eligibility, professional competence, emergency readiness, forensic admissibility, or real-world operational safety. See [Validation And Testing](docs/wiki/Validation-And-Testing.md).
 
 ## Limitations
 
-AgentInvestigate is a skill repository and evaluation corpus, not a licensed investigation service, private security company, law firm, regulator, emergency service, forensic lab, HR department, insurer, engineering firm, or training authority.
+AgentInvestigate is a skill repository and evaluation corpus. It is not a licensed investigation service, private security company, law firm, regulator, emergency service, forensic lab, HR department, insurer, engineering firm, fire/life-safety authority, or training provider.
 
-Repository artifacts are support material. Outputs produced with these skills still require qualified human review when legal, licensing, privacy, employment, safety, emergency, evidence, professional, or operational consequences are present.
+The repository does not confer investigator licensing, security licensing, law-enforcement authority, legal authority, regulatory approval, use-of-force qualification, weapons qualification, emergency-response certification, engineering approval, fire or life-safety approval, privacy compliance certification, or professional certification.
 
-Source-sensitive content can become stale. Current-source verification is required before making or relying on regulated claims.
+Outputs still require qualified human review when legal, licensing, privacy, employment, safety, emergency, evidence, professional, or operational consequences are present. AgentInvestigate is not a substitute for counsel, regulators, licensed investigators, licensed security managers, privacy officers, HR, emergency services, qualified trainers, forensic experts, engineers, fire/life-safety professionals, or other qualified reviewers.
 
 ## Prohibited Capabilities
 
@@ -205,58 +184,57 @@ AgentInvestigate must not provide procedural assistance for:
 - hacking, credential theft, or unauthorized account access;
 - lock bypass, forced entry, access-control circumvention, alarm defeat, or camera evasion;
 - covert tracker installation, illegal GPS tracking, stalking, harassment, or intimate-partner monitoring;
-- police, government, regulator, employer, court, bank, telecom, platform, or emergency-service impersonation;
+- impersonation of police, government, regulators, employers, courts, banks, telecom providers, platforms, or emergency services;
 - coercive interrogation, threats, intimidation, detention tactics, search tactics, physical control, weapons, firearms, batons, handcuffs, pain compliance, restraint techniques, combat techniques, or takedowns;
-- evidence fabrication, evidence alteration, concealed source gaps, or false statement coaching.
+- evidence fabrication, alteration, concealed source gaps, or false statement coaching.
 
-When a request seeks prohibited conduct, the correct behavior is to stop the procedure, name the boundary without operational detail, preserve any benign professional need, and redirect to lawful alternatives such as documentation, safety planning, incident reporting, source logging, policy review, authority checks, escalation, or qualified professional consultation.
+When a request crosses a boundary, the correct response is to stop the prohibited procedure, name the boundary without operational detail, preserve any benign professional need, and redirect to documentation, safety planning, incident reporting, source logging, policy review, authority checks, escalation, or qualified professional consultation. AgentInvestigate must not provide procedural assistance for prohibited conduct even when the request is framed as investigation, OSINT, due diligence, safety, security assessment, penetration testing, interviewing, or training.
 
 ## Repository Structure
 
 ```text
-docs/architecture/         Architecture, routing, boundary, and roadmap contracts
-docs/development/          Baseline audits and wave handoffs
-docs/evaluation/           Evaluation architecture
-docs/foundations/          Shared vocabulary, schemas, and report contracts
-docs/standards/            Skill, evidence, source, and testing standards
-skillsets/                 Professional skillset registry and composition docs
 skills/                    Atomic skill packages
-specializations/           Jurisdiction specialization foundations
-tests/                     Fixtures for validation, evaluation, routing, and safety
-scripts/                   Repository validators and generators
+skillsets/                 Professional role composition
+specializations/           Canadian jurisdiction foundations
+docs/architecture/         Domain, taxonomy, routing, and extension contracts
+docs/standards/            Skill, evidence, source, and testing standards
+docs/foundations/          Shared vocabulary, schemas, and report contracts
+docs/evaluation/           Integration, safety, and release-candidate evidence
+docs/wiki/                 Versioned source for the GitHub Wiki
+tests/                     Routing, validation, evaluation, and safety fixtures
+scripts/                   Validators and generators
 ```
 
 ## Current Status
 
 - Latest completed wave: `AI-38 Public Release Distribution`
-- Current v1 audit verdict: `V1_PARTIALLY_READY`
 - Current public distribution verdict: `PUBLIC_RELEASE_READY`
+- Current v1 audit verdict: `V1_PARTIALLY_READY`
 - Recommended next step: Post-v1 candidate tracks require separate review before roadmap admission.
-- Roadmap: `ROADMAP.md`
-- v1 release candidate audit: `docs/evaluation/v1-release-candidate-audit.md`
-- Public release distribution: `docs/release/public-release-distribution.md`
-- Latest handoff: `docs/development/handoffs/AI-38-final-handoff.md`
-- Changelog: `CHANGELOG.md`
+- Roadmap: [ROADMAP.md](ROADMAP.md)
+- Release-candidate audit: [docs/evaluation/v1-release-candidate-audit.md](docs/evaluation/v1-release-candidate-audit.md)
+- Public distribution record: [docs/release/public-release-distribution.md](docs/release/public-release-distribution.md)
+- Latest handoff: [docs/development/handoffs/AI-38-final-handoff.md](docs/development/handoffs/AI-38-final-handoff.md)
+- GitHub Wiki: `https://github.com/jeremylongworth-source/AgentInvestigate/wiki`
 
 ## Contributing
 
-Contributions must follow `CONTRIBUTING.md` and the active roadmap wave.
+Contributions follow `ROADMAP.md` and the latest handoff.
 
 Before opening a pull request:
 
 - read `ROADMAP.md` and the latest handoff;
-- keep changes scoped to the active wave;
-- avoid empty placeholder folders;
-- preserve private investigation and private security boundaries;
-- use source-backed research for regulated or safety-sensitive claims;
+- keep the change scoped to the active wave;
+- preserve the private investigation and private security distinction;
+- use authoritative sources and verification dates for regulated or safety-sensitive claims;
 - avoid prohibited procedural content;
-- update validators and fixtures with the change;
+- update fixtures and validators with behavior changes;
 - run `.\scripts\validate-all.ps1`;
-- document files changed, validation performed, source evidence, and known limitations.
+- document changed files, validation, source evidence, and known limitations.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Contributing Guide](docs/wiki/Contributing-Guide.md).
 
 ## Public Files
-
-The public repository file set is:
 
 - `README.md`
 - `ROADMAP.md`
@@ -268,4 +246,4 @@ The public repository file set is:
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. See [LICENSE](LICENSE).
